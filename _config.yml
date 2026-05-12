@@ -1,0 +1,50 @@
+# Local project configuration. The base configuration is loaded from the
+# unaltraweb core gem by Makefile using: core/_config.yml,_config.yml
+
+title: unaltraweb template
+description: >
+  Academic website built with unaltraweb.
+footer_text: >
+  Powered by <a href="https://github.com/dosquartsdedocs/unaltraweb">unaltraweb</a>.
+keywords: academic website, research, jekyll
+
+lang: en
+default_lang: en
+languages: [en, es, ca]
+icon: "🧭"
+
+url: "https://dosquartsdedocs.github.io"
+baseurl: "/unaltraweb-template"
+
+theme: unaltraweb
+
+plugins:
+  - unaltraweb
+  - jekyll-3rd-party-libraries
+  - jekyll-archives-v2
+  - jekyll-cache-bust
+  - jekyll-email-protect
+  - jekyll-feed
+  - jekyll-get-json
+  - jekyll-imagemagick
+  - jekyll-jupyter-notebook
+  - jekyll-link-attributes
+  - jekyll-minifier
+  - jekyll-paginate-v2
+  - jekyll-regex-replace
+  - jekyll/scholar
+  - jekyll-sitemap
+  - jekyll-socials
+  - jekyll-tabs
+  - jekyll-toc
+  - jekyll-twitter-plugin
+  - jemoji
+
+unaltraweb:
+  site_type: project
+  features:
+    publications: true
+    metrics: true
+
+giscus:
+  repo: dosquartsdedocs/unaltraweb-template

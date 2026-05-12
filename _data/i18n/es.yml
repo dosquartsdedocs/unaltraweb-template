@@ -1,0 +1,35 @@
+header:
+  toggle_navigation: Alternar navegación
+  current: actual
+  search: Buscar
+  change_theme: Cambiar tema
+  language: Idioma
+
+bib:
+  abstract: Resumen
+  awarded: Premio
+  bib: Bib
+  website: Web
+  supp: Supp
+  video: Vídeo
+  blog: Blog
+  code: Código
+  poster: Póster
+  slides: Diapositivas
+  filter_placeholder: Filtrar publicaciones
+  filter_label: Filtrar publicaciones
+
+publications:
+  metrics:
+    title: Métricas bibliométricas
+    updated_on: Actualizado el
+    scimago_meta: Metadatos del emparejamiento Scimago
+    coverage: cobertura
+    stale_rejected: descartados por obsolescencia
+    max_year_gap: brecha máxima de años
+    not_available: n/d
+
+languages:
+  en: Inglés
+  es: Español
+  ca: Catalán

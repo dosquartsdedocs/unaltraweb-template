@@ -1,0 +1,35 @@
+header:
+  toggle_navigation: Alterna la navegació
+  current: actual
+  search: Cerca
+  change_theme: Canvia el tema
+  language: Idioma
+
+bib:
+  abstract: Resum
+  awarded: Premi
+  bib: Bib
+  website: Web
+  supp: Supp
+  video: Vídeo
+  blog: Blog
+  code: Codi
+  poster: Pòster
+  slides: Diapositives
+  filter_placeholder: Filtra publicacions
+  filter_label: Filtra publicacions
+
+publications:
+  metrics:
+    title: Mètriques bibliomètriques
+    updated_on: Actualitzat el
+    scimago_meta: Metadades de l'aparellament Scimago
+    coverage: cobertura
+    stale_rejected: descartats per obsolescència
+    max_year_gap: bretxa màxima d'anys
+    not_available: n/d
+
+languages:
+  en: Anglès
+  es: Castellà
+  ca: Català

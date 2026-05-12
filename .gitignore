@@ -1,0 +1,14 @@
+_site
+.bundle
+.cache/scimago/
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+.DS_store
+Gemfile.lock
+node_modules/
+tmp/metrics-report*.json
+tmp/metrics-unmatched*.tsv
+vendor
+__pycache__/
+*.pyc

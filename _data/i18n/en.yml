@@ -1,0 +1,35 @@
+header:
+  toggle_navigation: Toggle navigation
+  current: current
+  search: Search
+  change_theme: Change theme
+  language: Language
+
+bib:
+  abstract: Abs
+  awarded: Awarded
+  bib: Bib
+  website: Website
+  supp: Supp
+  video: Video
+  blog: Blog
+  code: Code
+  poster: Poster
+  slides: Slides
+  filter_placeholder: Filter publications
+  filter_label: Filter publications
+
+publications:
+  metrics:
+    title: Bibliometric metrics
+    updated_on: Updated on
+    scimago_meta: Scimago matching meta
+    coverage: coverage
+    stale_rejected: stale rejected
+    max_year_gap: max year gap
+    not_available: n/a
+
+languages:
+  en: English
+  es: Spanish
+  ca: Catalan
