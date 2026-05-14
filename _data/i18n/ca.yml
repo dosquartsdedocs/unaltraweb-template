@@ -34,6 +34,14 @@ profile:
   website: Web
   location: Ubicació
 
+outputs:
+  empty: Afegeix targetes a la col·lecció `_outputs` per emplenar aquesta secció.
+
+repositories:
+  github_users: Usuaris de GitHub
+  github_repositories: Repositoris de GitHub
+  empty: Afegeix usuaris o repositoris de GitHub a `_data/repositories.yml` per emplenar aquesta secció.
+
 languages:
   en: Anglès
   es: Castellà

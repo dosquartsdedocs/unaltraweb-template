@@ -105,6 +105,7 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator(".navbar")).toContainText("Readings");
   await expect(page.locator(".navbar .dropdown-toggle", { hasText: "Resources" })).toHaveCount(1);
   await expect(page.locator(".navbar .dropdown-menu .dropdown-item", { hasText: "Outputs" })).toHaveAttribute("href", /\/en\/outputs\/?$/);
+  await expect(page.locator(".navbar .dropdown-menu .dropdown-item", { hasText: "Repositories" })).toHaveAttribute("href", /\/en\/repositories\/?$/);
   await expect(page.locator(".navbar .dropdown-menu .dropdown-item", { hasText: "Readings" })).toHaveAttribute("href", /\/en\/readings\/?$/);
   await expect(page.locator(".navbar")).not.toContainText("Blog");
   await expect(page.locator(".navbar")).not.toContainText("CV");
@@ -126,16 +127,23 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expectImageLoaded(page.locator(".team-photo").first());
 
   await page.goto(siteUrl("/en/outputs/"));
-  await expect.poll(async () => page.locator(".project-card").count()).toBeGreaterThanOrEqual(2);
-  await expect.poll(async () => page.locator(".project-resource-pill", { hasText: "Zenodo dataset" }).count()).toBeGreaterThanOrEqual(1);
+  await expect.poll(async () => page.locator(".project-card").count()).toBeGreaterThanOrEqual(5);
+  await expect(page.locator(".post > article")).toContainText("Open geospatial dataset");
+  await expect(page.locator(".post > article")).toContainText("Interactive web map");
 
   await page.goto(siteUrl("/en/publications/"));
   await expect(page.locator(".publications")).toContainText("Goodchild");
   await expect(page.locator(".publications")).toContainText("Zaragozí");
 
-  await page.goto(siteUrl("/en/resources/"));
-  await expect(page.locator(".post > article")).toContainText("Zenodo dataset");
-  await expect(page.locator(".post > article")).toContainText("Land inventory layers");
+  await page.goto(siteUrl("/en/repositories/"));
+  await expect(page.locator(".post-title")).toContainText("Repositories");
+  await expect(page.locator(".post > article")).toContainText("GitHub repositories");
+  await expect(page.locator("a[href='https://github.com/jekyll/jekyll']")).toHaveCount(1);
+
+  await page.goto(siteUrl("/en/theses/"));
+  await expect(page.locator(".post-title")).toContainText("Theses");
+  await expect(page.locator(".post > article")).toContainText("Walter Christaller");
+  await expect(page.locator(".post > article")).toContainText("Defended");
 
   await page.goto(siteUrl("/en/readings/"));
   await expect(page.locator(".post-title")).toContainText("Readings");
