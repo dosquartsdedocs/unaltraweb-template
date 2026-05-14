@@ -1,12 +1,23 @@
 # Local project configuration. The base configuration is loaded from the
 # unaltraweb core gem by Makefile using: core/_config.yml,_config.yml
 
-title: unaltraweb template
+title: Roger Tomlinson
 description: >
-  Academic website built with unaltraweb.
+  Demo personal academic website built with unaltraweb.
 footer_text: >
   Powered by <a href="https://github.com/dosquartsdedocs/unaltraweb">unaltraweb</a>.
 keywords: academic website, research, jekyll
+
+author:
+  name: Roger Tomlinson
+  bio: Geographer and pioneer of geographic information systems. Demo profile for a personal academic site.
+  affiliation: Canada Geographic Information System
+  location: Ottawa, Canada
+  email: researcher@example.org
+  orcid: 0000-0002-1825-0097
+  google_scholar: demo
+  github: dosquartsdedocs
+  linkedin: roger-tomlinson-demo
 
 lang: en
 default_lang: en
@@ -27,7 +38,6 @@ plugins:
   - jekyll-feed
   - jekyll-get-json
   - jekyll-imagemagick
-  - jekyll-jupyter-notebook
   - jekyll-link-attributes
   - jekyll-minifier
   - jekyll-paginate-v2
@@ -40,9 +50,26 @@ plugins:
   - jekyll-twitter-plugin
   - jemoji
 
+external_sources: []
+
+pagination:
+  enabled: true
+  collection: posts
+  per_page: 4
+  permalink: /page/:num/
+  title: ":title - page :num"
+  sort_field: date
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
+
 unaltraweb:
-  site_type: project
+  site_profile: personal
   features:
+    blog: true
+    cv: true
+    projects: true
     publications: true
     metrics: true
 

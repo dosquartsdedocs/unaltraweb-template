@@ -29,6 +29,11 @@ publications:
     max_year_gap: bretxa màxima d'anys
     not_available: n/d
 
+profile:
+  email: Correu
+  website: Web
+  location: Ubicació
+
 languages:
   en: Anglès
   es: Castellà

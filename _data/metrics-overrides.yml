@@ -2,7 +2,7 @@
 #
 # Example:
 # papers:
-#   exampleResearchPaper2024:
+#   zaragoziHarnessingRooftopPhotovoltaic2025:
 #     x_gs_id: "cites:1234567890123456789"
 #     x_gs_cited_by: 10
 

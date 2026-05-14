@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract geospatial project image</title>
+  <desc id="desc">A pale map-like grid with blue routes and survey points.</desc>
+  <rect width="1200" height="800" fill="#e8f0f4"/>
+  <g fill="none" stroke="#b7c7d0" stroke-width="2" opacity="0.8">
+    <path d="M70 120h1060M70 240h1060M70 360h1060M70 480h1060M70 600h1060M70 720h1060"/>
+    <path d="M120 60v680M260 60v680M400 60v680M540 60v680M680 60v680M820 60v680M960 60v680M1100 60v680"/>
+  </g>
+  <path d="M70 530c120-95 210-130 310-105 92 23 144 99 235 96 128-5 169-155 296-170 83-10 143 43 219 105" fill="none" stroke="#2d7fb8" stroke-width="34" stroke-linecap="round" opacity="0.72"/>
+  <path d="M95 240c130 64 241 83 344 50 102-33 176-117 278-111 105 6 170 105 310 68" fill="none" stroke="#4ba36a" stroke-width="24" stroke-linecap="round" opacity="0.58"/>
+  <g fill="#1f5f8b" opacity="0.9">
+    <circle cx="380" cy="425" r="22"/>
+    <circle cx="615" cy="520" r="18"/>
+    <circle cx="912" cy="353" r="24"/>
+  </g>
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="380" cy="425" r="8"/>
+    <circle cx="615" cy="520" r="7"/>
+    <circle cx="912" cy="353" r="9"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Bibliometric dashboard placeholder</title>
+  <desc id="desc">A dashboard with cards, bars, and a line chart for publication metrics.</desc>
+  <rect width="1200" height="800" fill="#f1f3f8"/>
+  <g fill="#ffffff" stroke="#b9c2d3" stroke-width="6">
+    <rect x="95" y="90" width="300" height="160" rx="28"/>
+    <rect x="450" y="90" width="300" height="160" rx="28"/>
+    <rect x="805" y="90" width="300" height="160" rx="28"/>
+    <rect x="95" y="315" width="465" height="350" rx="28"/>
+    <rect x="625" y="315" width="480" height="350" rx="28"/>
+  </g>
+  <g fill="#4361a8">
+    <rect x="155" y="190" width="180" height="22" rx="8"/>
+    <rect x="510" y="190" width="180" height="22" rx="8"/>
+    <rect x="865" y="190" width="180" height="22" rx="8"/>
+    <rect x="160" y="570" width="52" height="60" rx="8"/>
+    <rect x="240" y="500" width="52" height="130" rx="8"/>
+    <rect x="320" y="430" width="52" height="200" rx="8"/>
+    <rect x="400" y="470" width="52" height="160" rx="8"/>
+  </g>
+  <path d="M690 570c70-95 140-150 220-130 70 17 98 88 160 45" fill="none" stroke="#c65f4a" stroke-width="20" stroke-linecap="round"/>
+  <g fill="#2d3748" font-family="Arial, sans-serif" font-size="46" font-weight="700">
+    <text x="155" y="165">Q1</text>
+    <text x="510" y="165">FWCI</text>
+    <text x="865" y="165">Cites</text>
+  </g>
+</svg>

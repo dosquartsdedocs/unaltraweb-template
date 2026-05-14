@@ -3,6 +3,8 @@ layout: page
 title: Publications
 lang: en
 ref: publications
+profiles: [personal]
+feature: publications
 permalink: /en/publications/
 nav: true
 nav_order: 5

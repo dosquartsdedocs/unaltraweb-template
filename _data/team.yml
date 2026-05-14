@@ -1,0 +1,89 @@
+- name: Roger
+  lastname: Tomlinson
+  position: GIS infrastructure lead
+  organization: unaltraweb Research Infrastructure Demo
+  department: Canada Geographic Information System
+  pic: user-placeholder.png
+  email:
+    - title: E-mail
+      url: roger.tomlinson@example.org
+      class: "fa-solid fa-envelope fa-2x"
+  social:
+    - title: ORCID
+      url: https://orcid.org/0000-0000-0000-1001
+      class: "ai ai-orcid ai-2x"
+    - title: Google Scholar
+      url: https://scholar.google.com/citations?user=tomlinson-template
+      class: "ai ai-google-scholar ai-2x"
+
+- name: Michael
+  lastname: Goodchild
+  position: GIScience advisor
+  organization: unaltraweb Research Infrastructure Demo
+  department: Spatial information theory
+  pic: user-placeholder.png
+  email:
+    - title: E-mail
+      url: michael.goodchild@example.org
+      class: "fa-solid fa-envelope fa-2x"
+  social:
+    - title: ORCID
+      url: https://orcid.org/0000-0000-0000-1002
+      class: "ai ai-orcid ai-2x"
+    - title: ResearchGate
+      url: https://www.researchgate.net/profile/Michael-Goodchild-Template
+      class: "ai ai-researchgate ai-2x"
+
+- name: Yi-Fu
+  lastname: Tuan
+  position: Human geography advisor
+  organization: unaltraweb Research Infrastructure Demo
+  department: Space, place and experience
+  pic: user-placeholder.png
+  email:
+    - title: E-mail
+      url: yifu.tuan@example.org
+      class: "fa-solid fa-envelope fa-2x"
+  social:
+    - title: ORCID
+      url: https://orcid.org/0000-0000-0000-1003
+      class: "ai ai-orcid ai-2x"
+    - title: Google Scholar
+      url: https://scholar.google.com/citations?user=tuan-template
+      class: "ai ai-google-scholar ai-2x"
+
+- name: David
+  lastname: Harvey
+  position: Urban theory advisor
+  organization: unaltraweb Research Infrastructure Demo
+  department: Spatial justice and political economy
+  pic: user-placeholder.png
+  email:
+    - title: E-mail
+      url: david.harvey@example.org
+      class: "fa-solid fa-envelope fa-2x"
+  social:
+    - title: ORCID
+      url: https://orcid.org/0000-0000-0000-1004
+      class: "ai ai-orcid ai-2x"
+    - title: Google Scholar
+      url: https://scholar.google.com/citations?user=harvey-template
+      class: "ai ai-google-scholar ai-2x"
+
+- name: Waldo
+  lastname: Tobler
+  position: Spatial modelling advisor
+  organization: unaltraweb Research Infrastructure Demo
+  department: Geographic laws and movement
+  pic: user-placeholder.png
+  email:
+    - title: E-mail
+      url: waldo.tobler@example.org
+      class: "fa-solid fa-envelope fa-2x"
+  social:
+    - title: ORCID
+      url: https://orcid.org/0000-0000-0000-1005
+      class: "ai ai-orcid ai-2x"
+    - title: Google Scholar
+      url: https://scholar.google.com/citations?user=tobler-template
+      class: "ai ai-google-scholar ai-2x"

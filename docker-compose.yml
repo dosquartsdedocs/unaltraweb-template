@@ -1,5 +1,8 @@
+name: unaltraweb-template
+
 services:
   jekyll:
+    container_name: unaltraweb-template-jekyll
     image: amirpourmand/al-folio:v0.16.1
     ports:
       - 4000:4000
