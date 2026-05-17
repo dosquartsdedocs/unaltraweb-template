@@ -63,8 +63,10 @@ profile-config:
 	  description="Demo $$profile website built with unaltraweb."; \
 	  if test "$$profile" = "personal"; then title="Roger Tomlinson"; description="Demo personal academic website built with unaltraweb."; fi; \
 	  if test "$$profile" = "project"; then title="unaltraweb project"; description="Demo research project website built with unaltraweb."; fi; \
+	  if test "$$profile" = "manual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
 	  printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
 	  if test "$$profile" = "project"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "manual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
 	else \
 	  rm -f "$(PROFILE_CONFIG)"; \
 	fi

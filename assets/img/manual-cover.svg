@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">
+  <title id="title">unaltremanual cover</title>
+  <desc id="desc">A clean academic manual cover with layered maps, chapter blocks and diagram lines.</desc>
+  <rect width="720" height="960" fill="#f7f7f5"/>
+  <rect x="72" y="74" width="576" height="812" rx="28" fill="#ffffff" stroke="#d8ddd4" stroke-width="4"/>
+  <path d="M118 238 C206 176 276 280 362 219 C456 151 526 227 602 172" fill="none" stroke="#1f8a70" stroke-width="16" stroke-linecap="round" opacity="0.88"/>
+  <path d="M112 318 C216 250 292 357 394 292 C472 242 531 301 610 248" fill="none" stroke="#3d6fb6" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
+  <g fill="#f0f5f3" stroke="#cfd9d5" stroke-width="3">
+    <rect x="118" y="408" width="214" height="118" rx="12"/>
+    <rect x="388" y="408" width="214" height="118" rx="12"/>
+    <rect x="118" y="562" width="214" height="118" rx="12"/>
+    <rect x="388" y="562" width="214" height="118" rx="12"/>
+  </g>
+  <g fill="#1f8a70">
+    <circle cx="164" cy="454" r="14"/>
+    <circle cx="434" cy="454" r="14"/>
+    <circle cx="164" cy="608" r="14"/>
+    <circle cx="434" cy="608" r="14"/>
+  </g>
+  <g stroke="#7b8794" stroke-width="5" stroke-linecap="round">
+    <path d="M190 454H292"/>
+    <path d="M460 454H562"/>
+    <path d="M190 608H292"/>
+    <path d="M460 608H562"/>
+  </g>
+  <text x="118" y="158" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700">unaltremanual</text>
+  <text x="118" y="202" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="24">academic manual profile</text>
+  <text x="118" y="782" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Manuals, chapters</text>
+  <text x="118" y="826" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">and teaching materials</text>
+</svg>

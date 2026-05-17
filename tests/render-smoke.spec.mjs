@@ -43,9 +43,12 @@ async function expectSepiaCoffeeAccent(page) {
   const themeVar = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--global-theme-color").trim().toLowerCase());
   expect(themeVar).toBe("#7a591b");
 
-  const activeNavColor = await page.locator(".navbar .nav-item.active > .nav-link").first().evaluate((link) => getComputedStyle(link).color);
-  expect(activeNavColor).toBe("rgb(122, 89, 27)");
-  expect(activeNavColor).not.toBe("rgb(26, 115, 232)");
+  const activeNav = page.locator(".navbar .nav-item.active > .nav-link").first();
+  if (await activeNav.count()) {
+    const activeNavColor = await activeNav.evaluate((link) => getComputedStyle(link).color);
+    expect(activeNavColor).toBe("rgb(122, 89, 27)");
+    expect(activeNavColor).not.toBe("rgb(26, 115, 232)");
+  }
 }
 
 test("profile page renders and supports theme modes", async ({ page }, testInfo) => {
@@ -158,8 +161,69 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator(".reading-biblio-actions")).toContainText("Bibliographic record");
 });
 
+
+test("manual profile renders a multilingual handbook", async ({ page }, testInfo) => {
+  test.skip(activeProfile !== "manual", "manual profile only");
+
+  await page.goto(siteUrl("/en/"));
+  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "manual");
+  await expect(page.locator("body")).toHaveClass(/site-profile-manual/);
+  await expect(page.locator(".navbar-brand")).toContainText("unaltremanual");
+  await expect(page.locator(".manual-cover h1")).toContainText("unaltremanual");
+  await expect(page.locator(".manual-sidebar")).toContainText("Contents");
+  await expect(page.locator(".manual-sidebar")).toContainText("How this manual works");
+  await expect(page.locator(".manual-sidebar")).toContainText("Assessment workflow");
+  await expect(page.locator(".manual-font-nav")).toHaveCount(1);
+  await expect(page.locator(".manual-teachers")).toContainText("Roger Tomlinson");
+  await expectImageLoaded(page.locator(".manual-cover-art img"));
+  await page.screenshot({ path: join(renderOut, `manual-home-${testInfo.project.name}.png`), fullPage: true });
+
+  await page.getByRole("link", { name: /How this manual works/ }).first().click();
+  await expect(page).toHaveURL(/\/en\/chapters\/orientation\/?$/);
+  await expect(page.locator(".manual-chapter-header h1")).toContainText("How this manual works");
+  await expect(page.locator(".manual-sidebar-item.active")).toContainText("How this manual works");
+  await expect(page.locator("[data-callout='info']")).toContainText("NOTE");
+  await expect(page.locator("[data-callout='objectives']")).toContainText("LEARNING OBJECTIVES");
+  await expect(page.locator(".manual-chapter-header h1 .hd-num")).toContainText("1");
+  await expect(page.locator(".manual-content h2 .hd-num").first()).toContainText("1.1");
+  await expect(page.locator(".manual-right-rail")).toBeVisible();
+  await expect(page.locator(".manual-page-toc")).toContainText("1.1 Reading path");
+  await expect(page.locator(".manual-page-toc-link").first()).toContainText("1.1 Reading path");
+  await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figure 1.");
+  await expect(page.locator(".md-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-figure.mermaid-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".manual-bibliography .manual-reference")).toContainText("Goodchild");
+  await expect(page.locator(".manual-bibliography")).not.toContainText("Bibliometrics");
+  await expect(page.locator(".manual-bibliography h2.bibliography").first()).toBeHidden();
+  await expect(page.locator(".altmetric-embed, .__dimensions_badge_embed__")).toHaveCount(0);
+
+  await page.locator("[data-manual-search]").fill("coordinate");
+  await expect(page.locator("[data-manual-search-results]")).toContainText("Data and tools");
+
+  const beforeFontSize = await page.locator(".manual-content").evaluate((node) => getComputedStyle(node).fontSize);
+  await page.locator("#navbarManualFontDropdown").click();
+  await page.locator(".manual-font-menu [data-manual-font='increase']").click();
+  const afterFontSize = await page.locator(".manual-content").evaluate((node) => getComputedStyle(node).fontSize);
+  expect(parseFloat(afterFontSize)).toBeGreaterThan(parseFloat(beforeFontSize));
+
+  await page.locator("[data-manual-sidebar-toggle]").click();
+  await expect(page.locator(".manual-layout")).toHaveClass(/manual-sidebar-collapsed/);
+  await expect(page.locator(".manual-sidebar")).toBeHidden();
+  await expect(page.locator(".manual-right-rail")).toBeHidden();
+  await page.locator("[data-manual-sidebar-toggle]").click();
+
+  await page.goto(siteUrl("/en/chapters/figures-diagrams/"));
+  await expect(page.locator(".md-subfigure-set")).toHaveCount(1);
+  await expect(page.locator(".md-subfigure")).toHaveCount(3);
+
+  await page.goto(siteUrl("/ca/chapters/orientacio/"));
+  await expect(page.locator("html")).toHaveAttribute("lang", "ca");
+  await expect(page.locator(".manual-chapter-header h1")).toContainText("Com funciona aquest manual");
+  await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figura 1.");
+});
+
 test("sepia mode uses coffee accents", async ({ page }) => {
-  await page.goto(siteUrl("/en/publications/"));
+  await page.goto(siteUrl(startPath));
   await page.evaluate(() => localStorage.setItem("theme", "sepia"));
   await page.reload();
 
@@ -184,6 +248,29 @@ test("theme toggle rotates through explicit modes", async ({ page }) => {
     const detail = await themeEvent;
     expect(detail.themeSetting).toBe(expected);
   }
+});
+
+test("callout shorthand upgrades nested blockquotes", async ({ page }) => {
+  await page.goto(siteUrl(startPath));
+
+  await page.evaluate(() => {
+    const article = document.querySelector(".post article, .manual-content, main");
+    const fixture = document.createElement("div");
+    fixture.setAttribute("data-callout-fixture", "true");
+    fixture.innerHTML = `
+      <blockquote><p>Plain quotation</p></blockquote>
+      <blockquote><blockquote><p>Info callout</p></blockquote></blockquote>
+      <blockquote><blockquote><blockquote><blockquote><blockquote><p>Learning goals</p></blockquote></blockquote></blockquote></blockquote></blockquote>
+    `;
+    article.appendChild(fixture);
+    document.dispatchEvent(new CustomEvent("unaltraweb:contentchange", { bubbles: true }));
+  });
+
+  await expect(page.locator("[data-callout-fixture] > blockquote").first()).not.toHaveClass(/uw-callout/);
+  await expect(page.locator("[data-callout-fixture] [data-callout='info']")).toContainText("NOTE");
+  await expect(page.locator("[data-callout-fixture] [data-callout='info']")).toContainText("Info callout");
+  await expect(page.locator("[data-callout-fixture] [data-callout='objectives']")).toContainText("LEARNING OBJECTIVES");
+  await expect(page.locator("[data-callout-fixture] [data-callout='objectives']")).toContainText("Learning goals");
 });
 
 test("multilingual profile and publications pages render", async ({ page }) => {
@@ -265,8 +352,16 @@ test("mobile profile render is usable", async ({ page }, testInfo) => {
 
 test("publication page does not overflow on mobile", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(siteUrl("/en/publications/"));
 
+  if (activeProfile === "manual") {
+    await page.goto(siteUrl("/en/"));
+    await expect(page.locator(".manual-layout")).toBeVisible();
+    await expectNoHorizontalOverflow(page);
+    await page.screenshot({ path: join(renderOut, `manual-mobile-${testInfo.project.name}.png`), fullPage: true });
+    return;
+  }
+
+  await page.goto(siteUrl("/en/publications/"));
   await expect(page.locator(".publications")).toContainText("Zaragozí");
   await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: join(renderOut, `publications-mobile-${testInfo.project.name}.png`), fullPage: true });

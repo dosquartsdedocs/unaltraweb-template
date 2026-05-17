@@ -72,6 +72,15 @@ unaltraweb:
     projects: true
     publications: true
     metrics: true
+    manual: true
+  manual:
+    collection: chapters
+    cover_image: /assets/img/manual-cover-cat.png
+    logo: /assets/img/brand/dosquartsdedocs-logo.svg
+    logo_inverse: /assets/img/brand/dosquartsdedocs-logo-white.svg
+  figure_captions:
+    enabled: true
+    collections: [chapters]
 
 giscus:
   repo: dosquartsdedocs/unaltraweb-template

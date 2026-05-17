@@ -1,0 +1,12 @@
+- name: Roger Tomlinson
+  role: Course coordinator
+  affiliation: Canada Geographic Information System
+  email: roger@example.org
+  url: https://example.org/roger-tomlinson
+  url_label: Profile
+- name: Michael Goodchild
+  role: Seminar teacher
+  affiliation: University of California, Santa Barbara
+  email: michael@example.org
+  url: https://example.org/michael-goodchild
+  url_label: Profile

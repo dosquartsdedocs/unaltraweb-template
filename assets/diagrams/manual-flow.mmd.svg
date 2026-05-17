@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">Chapter production workflow</title>
+  <desc id="desc">A Mermaid-generated workflow from course outline to manual build.</desc>
+  <rect width="720" height="180" rx="16" fill="#f8faf9"/>
+  <g font-family="Inter, Arial, sans-serif" font-size="16" text-anchor="middle">
+    <g fill="#ffffff" stroke="#1f8a70" stroke-width="3">
+      <rect x="24" y="54" width="118" height="70" rx="10"/><rect x="168" y="54" width="118" height="70" rx="10"/><rect x="312" y="54" width="118" height="70" rx="10"/><rect x="456" y="54" width="118" height="70" rx="10"/><rect x="600" y="54" width="96" height="70" rx="10"/>
+    </g>
+    <g fill="#202124">
+      <text x="83" y="84">Course</text><text x="83" y="105">outline</text>
+      <text x="227" y="84">Chapter</text><text x="227" y="105">draft</text>
+      <text x="371" y="84">Callouts</text><text x="371" y="105">figures</text>
+      <text x="515" y="84">Chapter</text><text x="515" y="105">bibliography</text>
+      <text x="648" y="84">Manual</text><text x="648" y="105">build</text>
+    </g>
+  </g>
+  <g stroke="#3d6fb6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M144 89h20"/><path d="M288 89h20"/><path d="M432 89h20"/><path d="M576 89h20"/>
+    <path d="M158 82l8 7-8 7"/><path d="M302 82l8 7-8 7"/><path d="M446 82l8 7-8 7"/><path d="M590 82l8 7-8 7"/>
+  </g>
+</svg>
