@@ -3,6 +3,7 @@ layout: post
 title: Bibliometrics without build-time fetching
 date: 2026-05-10 10:00:00 +0000
 lang: en
+locale: en
 description: Journal quartiles and article metrics should be prepared before the static build, not fetched while rendering the site.
 tags: [bibliometrics, scimago, publications]
 categories: [metrics]

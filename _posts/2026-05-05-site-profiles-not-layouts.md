@@ -3,6 +3,7 @@ layout: post
 title: Site profiles, not layouts
 date: 2026-05-05 10:00:00 +0000
 lang: en
+locale: en
 description: Why unaltraweb uses site profiles for prepared website families instead of overloading Jekyll layout terminology.
 tags: [site-profiles, jekyll, terminology]
 categories: [architecture]

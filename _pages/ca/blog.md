@@ -10,6 +10,7 @@ nav: true
 nav_order: 6
 pagination:
   enabled: true
+  locale: ca
 ---
 
 {% include blog-list.liquid %}

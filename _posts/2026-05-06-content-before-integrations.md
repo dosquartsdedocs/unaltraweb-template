@@ -3,6 +3,7 @@ layout: post
 title: Content before integrations
 date: 2026-05-06 10:00:00 +0000
 lang: en
+locale: en
 description: External integrations are useful, but the durable source of the site should remain local content.
 tags: [content, integrations, bibliography]
 categories: [workflow]

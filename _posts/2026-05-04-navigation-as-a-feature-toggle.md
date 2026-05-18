@@ -3,6 +3,7 @@ layout: post
 title: Navigation as a feature toggle
 date: 2026-05-04 10:00:00 +0000
 lang: en
+locale: en
 description: Feature-gated pages let a template include optional sections without forcing every site to publish them.
 tags: [navigation, features, template]
 categories: [development]

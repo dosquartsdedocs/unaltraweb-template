@@ -3,6 +3,7 @@ layout: post
 title: Building a reusable academic web template
 date: 2026-05-13 10:00:00 +0000
 lang: en
+locale: en
 description: Why this scaffold keeps content thin and moves reusable behavior into the unaltraweb core.
 tags: [unaltraweb, jekyll, template]
 categories: [development]

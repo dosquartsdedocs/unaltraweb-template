@@ -78,6 +78,8 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   await expect(page.locator("footer")).toContainText("Made with");
   await expect(page.locator("footer")).toContainText("unaltraweb");
   await expect(page.locator("footer")).toContainText("personal profile");
+  await expect(page.locator("footer")).toContainText("al-folio");
+  await expect(page.locator("footer")).not.toContainText("Powered by");
   await expect(page.locator("footer")).toContainText(/Last updated: [A-Z][a-z]+ \d{1,2}, \d{4}/);
   await expect(page.locator(".post-title")).toHaveCount(0);
   await expect(page.locator("#light-toggle-sepia")).toHaveCount(1);
@@ -314,6 +316,8 @@ test("multilingual profile and publications pages render", async ({ page }, test
     ["/es/", ["Roger Tomlinson", "profile-card"]],
     ["/ca/", ["Roger Tomlinson", "profile-card"]],
     ["/en/blog/", ["Building a reusable academic web template", "Minimal Mistakes", "al-folio", "Bibliometrics"]],
+    ["/ca/blog/", ["Construir una plantilla web acadèmica reutilitzable", "Minimal Mistakes", "al-folio", "Bibliometria"]],
+    ["/es/blog/", ["Construir una plantilla web académica reutilizable", "Minimal Mistakes", "al-folio", "Bibliometría"]],
     ["/en/cv/", ["ModernCV-style CV", "assets/pdf/cv.pdf", "make cv-preview"]],
     ["/en/projects/", ["unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor", "Journal and article statistics"]],
     ["/ca/projectes/", ["Projectes", "unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor"]],
@@ -332,6 +336,8 @@ test("multilingual profile and publications pages render", async ({ page }, test
     if (path === "/ca/") {
       await expect(page.locator("footer")).toContainText("Fet amb");
       await expect(page.locator("footer")).toContainText("perfil personal");
+      await expect(page.locator("footer")).toContainText("basat en");
+      await expect(page.locator("footer")).not.toContainText("Drets d'autor");
       await expect(page.locator("footer")).toContainText(/Darrera actualització: \d{2}\/\d{2}\/\d{4}/);
       await page.screenshot({ path: join(renderOut, `personal-ca-home-${testInfo.project.name}.png`), fullPage: true });
     }
@@ -342,14 +348,30 @@ test("blog archive paginates demo posts", async ({ page }) => {
   test.skip(activeProfile !== "personal", "personal profile only");
   await page.goto(siteUrl("/en/blog/"));
   await expect(page.locator(".blog-archive-item")).toHaveCount(4);
+  await expect(page.locator(".blog-archive-range")).toContainText("Posts from");
   await expect(page.locator(".blog-archive-meta time").first()).toContainText(/[A-Z][a-z]{2} \d{1,2}, \d{4}/);
   await expect(page.locator(".blog-archive-meta time").first()).not.toContainText(/^\d{4}-\d{2}-\d{2}$/);
   await expect(page.locator(".pagination")).toBeVisible();
   await expect(page.locator(".pagination .page-link", { hasText: "2" })).toHaveAttribute("href", /\/en\/blog\/page\/2\/?$/);
 
   await page.goto(siteUrl("/en/blog/page/2/"));
+  await expect(page.locator(".post-title")).toHaveText("Blog");
   await expect(page.locator(".blog-archive")).toContainText("Static sites and slower maintenance");
   await expect(page.locator(".blog-archive-item")).toHaveCount(4);
+
+  await page.goto(siteUrl("/ca/blog/"));
+  await expect(page.locator(".blog-archive-item")).toHaveCount(4);
+  await expect(page.locator(".blog-archive")).toContainText("Entrades del");
+  await expect(page.locator(".blog-archive")).toContainText("Construir una plantilla web acadèmica reutilitzable");
+  await expect(page.locator(".blog-archive")).not.toContainText("Building a reusable academic web template");
+  await expect(page.locator(".blog-archive-meta time").first()).toContainText(/\d{2}\/\d{2}\/\d{4}/);
+
+  await page.goto(siteUrl("/es/blog/"));
+  await expect(page.locator(".blog-archive-item")).toHaveCount(4);
+  await expect(page.locator(".blog-archive")).toContainText("Entradas del");
+  await expect(page.locator(".blog-archive")).toContainText("Construir una plantilla web académica reutilizable");
+  await expect(page.locator(".blog-archive")).not.toContainText("Building a reusable academic web template");
+  await expect(page.locator(".blog-archive-meta time").first()).toContainText(/\d{2}\/\d{2}\/\d{4}/);
 });
 
 test("CV preview and project cards link to rich project pages", async ({ page }) => {

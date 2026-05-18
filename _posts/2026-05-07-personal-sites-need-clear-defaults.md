@@ -3,6 +3,7 @@ layout: post
 title: Personal sites need clear defaults
 date: 2026-05-07 10:00:00 +0000
 lang: en
+locale: en
 description: Good defaults help a personal academic site stay readable before it grows into a larger archive.
 tags: [personal-sites, defaults, navigation]
 categories: [design]

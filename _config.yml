@@ -55,7 +55,8 @@ pagination:
   collection: posts
   per_page: 4
   permalink: /page/:num/
-  title: ":title - page :num"
+  title: ":title"
+  title_suffix: ""
   sort_field: date
   sort_reverse: true
   trail:

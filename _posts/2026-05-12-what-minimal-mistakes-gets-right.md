@@ -3,6 +3,7 @@ layout: post
 title: What Minimal Mistakes gets right for personal academic sites
 date: 2026-05-12 10:00:00 +0000
 lang: en
+locale: en
 description: A short note on the profile/sidebar pattern, archive pages, and why a personal site should not feel like a project landing page.
 tags: [minimal-mistakes, personal-site]
 categories: [design]

@@ -3,6 +3,7 @@ layout: post
 title: Lessons kept and removed from al-folio
 date: 2026-05-11 10:00:00 +0000
 lang: en
+locale: en
 description: al-folio has strong academic defaults, but unaltraweb should own its identity and avoid external build-time dependencies.
 tags: [al-folio, jekyll]
 categories: [development]

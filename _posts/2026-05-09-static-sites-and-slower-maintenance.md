@@ -3,6 +3,7 @@ layout: post
 title: Static sites and slower maintenance
 date: 2026-05-09 10:00:00 +0000
 lang: en
+locale: en
 description: Why a personal academic site benefits from predictable static builds and boring maintenance routines.
 tags: [static-sites, maintenance, workflow]
 categories: [development]
