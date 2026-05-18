@@ -4,6 +4,7 @@ PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
 SITE_PROFILE ?=
+VISUAL_PROFILES ?= personal project manual
 ifeq ($(SITE_PROFILE),project)
 START_PATH ?= /en/
 else
@@ -44,7 +45,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open serve serve-native build build-native test test-native down metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open serve serve-native build build-native test test-native screenshots screenshots-all down metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -187,6 +188,15 @@ test test-native render-smoke render-smoke-local: local-core-check
 	done; \
 	if test "$$ready" != "1"; then docker logs $$server_cid >&2 || true; exit 1; fi; \
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host --ipc=host -e BASE_URL="http://127.0.0.1:$(PORT)$(BASEURL)" -e RENDER_OUT="tmp/render-smoke" -e SITE_PROFILE="$(SITE_PROFILE)" -e START_PATH="$(START_PATH)" -v "$(CURDIR):/work" -w /work $(PLAYWRIGHT_IMAGE) bash -lc 'npm install --no-save --no-package-lock @playwright/test@1.56.1 >/tmp/playwright-npm.log && npx playwright test tests/render-smoke.spec.mjs --browser=chromium --output=tmp/render-smoke/test-results'
+
+screenshots screenshots-all: local-core-check
+	@mkdir -p tmp/render-smoke
+	@set -e; \
+	for profile in $(VISUAL_PROFILES); do \
+	  printf '\n== Visual review: %s ==\n' "$$profile"; \
+	  $(MAKE) render-smoke SITE_PROFILE="$$profile" LOCAL_CORE="$(LOCAL_CORE)" PORT="$(PORT)" BASEURL="$(BASEURL)"; \
+	done; \
+	printf '\nScreenshots written to tmp/render-smoke/\n'
 
 down docker-down:
 	-docker compose down --remove-orphans

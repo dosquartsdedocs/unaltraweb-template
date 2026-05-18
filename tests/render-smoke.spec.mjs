@@ -63,6 +63,7 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   await expect(page.locator(".profile-card-links a[aria-label='GitHub']")).toHaveCount(1);
   await expect(page.locator(".profile-card-links a[aria-label='ORCID']")).toHaveCount(1);
   const liveNavbar = page.locator(".navbar");
+  await expect(liveNavbar.locator(".navbar-nav .nav-item.active > .nav-link")).toContainText("Home");
   await expect(liveNavbar).not.toContainText("About");
   await expect(liveNavbar).toContainText("Blog");
   await expect(liveNavbar).toContainText("CV");
@@ -102,6 +103,7 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator("html")).toHaveAttribute("data-site-profile", "project");
   await expect(page.locator("body")).toHaveClass(/site-profile-project/);
   await expect(page.locator(".navbar-brand")).toContainText("unaltraweb project");
+  await expect(page.locator(".navbar .navbar-nav .nav-item.active > .nav-link")).toContainText("Home");
   await expect(page.locator(".navbar")).toContainText("Team");
   await expect(page.locator(".navbar")).toContainText("Outputs");
   await expect(page.locator(".navbar")).toContainText("Resources");
@@ -128,11 +130,13 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator(".post > article")).toContainText("Waldo Tobler");
   await expect.poll(async () => page.locator(".team-icons a[aria-label='ORCID']").count()).toBeGreaterThanOrEqual(5);
   await expectImageLoaded(page.locator(".team-photo").first());
+  await page.screenshot({ path: join(renderOut, `project-team-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/outputs/"));
   await expect.poll(async () => page.locator(".project-card").count()).toBeGreaterThanOrEqual(5);
   await expect(page.locator(".post > article")).toContainText("Open geospatial dataset");
   await expect(page.locator(".post > article")).toContainText("Interactive web map");
+  await page.screenshot({ path: join(renderOut, `project-outputs-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/publications/"));
   await expect(page.locator(".publications")).toContainText("Goodchild");
@@ -154,6 +158,7 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator(".reading-cover")).toHaveCount(2);
   await expect(page.locator(".reading-shelf")).toContainText("Project Geodata Handbook");
   await expect(page.locator(".reading-shelf")).toContainText("Spatial Data Quality Notes");
+  await page.screenshot({ path: join(renderOut, `project-readings-${testInfo.project.name}.png`), fullPage: true });
 
   await page.locator(".reading-cover-title", { hasText: "Project Geodata Handbook" }).click();
   await expect(page).toHaveURL(/\/en\/readings\/project-geodata-handbook\/?$/);
@@ -196,6 +201,7 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-bibliography")).not.toContainText("Bibliometrics");
   await expect(page.locator(".manual-bibliography h2.bibliography").first()).toBeHidden();
   await expect(page.locator(".altmetric-embed, .__dimensions_badge_embed__")).toHaveCount(0);
+  await page.screenshot({ path: join(renderOut, `manual-chapter-${testInfo.project.name}.png`), fullPage: true });
 
   await page.locator("[data-manual-search]").fill("coordinate");
   await expect(page.locator("[data-manual-search-results]")).toContainText("Data and tools");
@@ -215,11 +221,13 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await page.goto(siteUrl("/en/chapters/figures-diagrams/"));
   await expect(page.locator(".md-subfigure-set")).toHaveCount(1);
   await expect(page.locator(".md-subfigure")).toHaveCount(3);
+  await page.screenshot({ path: join(renderOut, `manual-figures-diagrams-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/ca/chapters/orientacio/"));
   await expect(page.locator("html")).toHaveAttribute("lang", "ca");
   await expect(page.locator(".manual-chapter-header h1")).toContainText("Com funciona aquest manual");
   await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figura 1.");
+  await page.screenshot({ path: join(renderOut, `manual-ca-chapter-${testInfo.project.name}.png`), fullPage: true });
 });
 
 test("sepia mode uses coffee accents", async ({ page }) => {
@@ -250,7 +258,7 @@ test("theme toggle rotates through explicit modes", async ({ page }) => {
   }
 });
 
-test("callout shorthand upgrades nested blockquotes", async ({ page }) => {
+test("callout shorthand upgrades nested blockquotes", async ({ page }, testInfo) => {
   await page.goto(siteUrl(startPath));
 
   await page.evaluate(() => {
@@ -271,9 +279,11 @@ test("callout shorthand upgrades nested blockquotes", async ({ page }) => {
   await expect(page.locator("[data-callout-fixture] [data-callout='info']")).toContainText("Info callout");
   await expect(page.locator("[data-callout-fixture] [data-callout='objectives']")).toContainText("LEARNING OBJECTIVES");
   await expect(page.locator("[data-callout-fixture] [data-callout='objectives']")).toContainText("Learning goals");
+  await page.locator("[data-callout-fixture]").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: join(renderOut, `callouts-${activeProfile}-${testInfo.project.name}.png`), fullPage: true });
 });
 
-test("multilingual profile and publications pages render", async ({ page }) => {
+test("multilingual profile and publications pages render", async ({ page }, testInfo) => {
   test.skip(activeProfile !== "personal", "personal profile only");
   const pages = [
     ["/en/", ["Roger Tomlinson", "profile-card"]],
@@ -292,6 +302,9 @@ test("multilingual profile and publications pages render", async ({ page }) => {
     const html = await page.content();
     for (const needle of needles) {
       expect(html).toContain(needle);
+    }
+    if (path === "/ca/") {
+      await page.screenshot({ path: join(renderOut, `personal-ca-home-${testInfo.project.name}.png`), fullPage: true });
     }
   }
 });

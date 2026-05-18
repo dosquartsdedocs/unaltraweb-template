@@ -81,6 +81,28 @@ make test SITE_PROFILE=project
 
 `make serve` also enables a local developer mode overlay that is not loaded by `make build`. The floating developer switcher reports the real build profile while you browse locally.
 
+## Visual review
+
+Use profile overlays to inspect a single profile quickly:
+
+```bash
+make serve SITE_PROFILE=personal
+make serve SITE_PROFILE=project
+make serve SITE_PROFILE=manual
+```
+
+Generate screenshots for all demo profiles and shared features:
+
+```bash
+make screenshots
+```
+
+The screenshots are written to `tmp/render-smoke/` and cover the profile column, color themes, multilingual pages, project team and output cards, manual structure, callouts, Mermaid-backed figures and subfigures. While developing the core theme locally, use:
+
+```bash
+make screenshots LOCAL_CORE=../unaltraweb
+```
+
 After replacing the demo CV PDF, regenerate the first-page preview used by the CV pages:
 
 ```bash
