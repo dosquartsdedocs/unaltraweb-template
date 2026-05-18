@@ -29,6 +29,22 @@ Keep version-specific advice short and close to the activity that needs it.
 
 Inline code such as `ST_Transform`, `sf::st_read()` or `Path("data")` should stay readable inside paragraphs. Longer examples use fenced code blocks with a language name so Rouge can apply syntax highlighting.
 
+### Linux shell
+
+```bash
+mkdir -p data/processed
+ogrinfo data/raw/roads.gpkg -so roads
+ogr2ogr -t_srs EPSG:25831 data/processed/roads_25831.gpkg data/raw/roads.gpkg roads
+```
+
+### Windows PowerShell
+
+```powershell
+New-Item -ItemType Directory -Force data\processed
+ogrinfo data\raw\roads.gpkg -so roads
+ogr2ogr -t_srs EPSG:25831 data\processed\roads_25831.gpkg data\raw\roads.gpkg roads
+```
+
 ### SQL and PostGIS
 
 ```sql

@@ -29,6 +29,22 @@ Las notas sobre versiones deben ser cortas y ligadas a la actividad.
 
 El codigo en linea como `ST_Transform`, `sf::st_read()` o `Path("data")` debe seguir siendo legible dentro de los parrafos. Los ejemplos mas largos usan bloques de codigo con el nombre del lenguaje para que Rouge aplique resaltado de sintaxis.
 
+### Terminal Linux
+
+```bash
+mkdir -p data/processed
+ogrinfo data/raw/roads.gpkg -so roads
+ogr2ogr -t_srs EPSG:25831 data/processed/roads_25831.gpkg data/raw/roads.gpkg roads
+```
+
+### Windows PowerShell
+
+```powershell
+New-Item -ItemType Directory -Force data\processed
+ogrinfo data\raw\roads.gpkg -so roads
+ogr2ogr -t_srs EPSG:25831 data\processed\roads_25831.gpkg data\raw\roads.gpkg roads
+```
+
 ### SQL y PostGIS
 
 ```sql

@@ -230,6 +230,10 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
 
   await page.goto(siteUrl("/en/chapters/data-tools/"));
   await expect(page.locator("code.language-plaintext.highlighter-rouge", { hasText: "ST_Transform" })).toHaveCount(1);
+  await expect(page.locator(".language-bash.highlighter-rouge")).toContainText("ogrinfo");
+  await expect(page.locator(".language-bash.highlighter-rouge")).toContainText("mkdir");
+  await expect(page.locator(".language-powershell.highlighter-rouge")).toContainText("New-Item");
+  await expect(page.locator(".language-powershell.highlighter-rouge")).toContainText("ogrinfo");
   await expect(page.locator(".language-sql.highlighter-rouge")).toContainText("ST_Area");
   await expect(page.locator(".language-sql.highlighter-rouge span.k").first()).toContainText("SELECT");
   await expect(page.locator(".language-python.highlighter-rouge")).toContainText("geopandas");
