@@ -28,6 +28,14 @@ This chapter is a compact smoke test for the pieces that come from `tig` and now
 
 The sidebar lists the cover and the chapters for the current language. The search box is useful when manuals grow past a dozen chapters.
 
+::: table "Manual components checked in this chapter"
+| Component | Purpose | Where to look |
+| --- | --- | --- |
+| Sidebar | Keeps the chapter sequence visible | Left rail |
+| Callouts | Highlights teaching notes and objectives | Main text |
+| References | Shows the lean manual bibliography | Chapter end |
+:::
+
 ![Reading path placeholder]({{ site.baseurl }}/assets/img/placeholders/manual-reading-path.svg "A reusable placeholder for chapter reading paths")
 
 ## Diagram workflow

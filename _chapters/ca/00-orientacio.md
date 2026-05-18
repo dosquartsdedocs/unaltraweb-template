@@ -22,6 +22,14 @@ Aquest capítol prova les peces que venen de `tig` i que ara queden disponibles 
 
 El menú lateral mostra la portada i els capítols de la llengua actual.
 
+::: table "Components del manual comprovats en aquest capítol"
+| Component | Funció | On mirar |
+| --- | --- | --- |
+| Menú lateral | Manté visible la seqüència de capítols | Rail esquerre |
+| Callouts | Destaca notes docents i objectius | Text principal |
+| Bibliografia | Mostra la bibliografia lleugera del manual | Final del capítol |
+:::
+
 ![Placeholder de ruta de lectura]({{ site.baseurl }}/assets/img/placeholders/manual-reading-path.svg "Un placeholder reutilitzable per a rutes de lectura")
 
 ## Diagrama de treball

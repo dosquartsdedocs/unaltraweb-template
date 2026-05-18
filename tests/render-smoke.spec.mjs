@@ -201,6 +201,10 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-page-toc")).toContainText("1.1 Reading path");
   await expect(page.locator(".manual-page-toc-link").first()).toContainText("1.1 Reading path");
   await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figure 1.");
+  await expect(page.locator(".md-table")).toHaveCount(1);
+  await expect(page.locator(".md-table-caption .figlabel").first()).toContainText("Table 1.");
+  await expect(page.locator(".md-table")).toContainText("Manual components checked in this chapter");
+  await expect(page.locator(".md-table")).toContainText("Sidebar");
   await expect(page.locator(".md-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
   await expect(page.locator(".md-figure.mermaid-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
   await expect(page.locator(".manual-bibliography .manual-reference")).toContainText("Goodchild");
@@ -233,6 +237,7 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator("html")).toHaveAttribute("lang", "ca");
   await expect(page.locator(".manual-chapter-header h1")).toContainText("Com funciona aquest manual");
   await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figura 1.");
+  await expect(page.locator(".md-table-caption .figlabel").first()).toContainText("Taula 1.");
   await page.screenshot({ path: join(renderOut, `manual-ca-chapter-${testInfo.project.name}.png`), fullPage: true });
 });
 
