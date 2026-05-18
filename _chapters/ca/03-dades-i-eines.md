@@ -25,3 +25,53 @@ Els sistemes de referència de coordenades són més fàcils d'explicar amb exem
 
 Les notes sobre versions han de ser curtes i lligades a l'activitat.
 
+## Blocs de codi i codi en línia
+
+El codi en línia com `ST_Transform`, `sf::st_read()` o `Path("data")` ha de continuar sent llegible dins dels paràgrafs. Els exemples més llargs fan servir blocs de codi amb el nom del llenguatge perquè Rouge aplique ressaltat de sintaxi.
+
+### SQL i PostGIS
+
+```sql
+SELECT
+  name,
+  ST_Area(geom::geography) AS area_m2
+FROM protected_areas
+WHERE ST_Intersects(
+  geom,
+  ST_Transform(
+    ST_SetSRID(ST_MakePoint(1.244, 41.118), 4326),
+    ST_SRID(geom)
+  )
+);
+```
+
+### Python
+
+```python
+from pathlib import Path
+
+import geopandas as gpd
+
+roads = gpd.read_file(Path("data") / "roads.gpkg")
+roads_25831 = roads.to_crs(25831)
+print(roads_25831.length.sum())
+```
+
+### R
+
+```r
+library(sf)
+
+roads <- st_read("data/roads.gpkg", quiet = TRUE)
+roads_25831 <- st_transform(roads, 25831)
+sum(st_length(roads_25831))
+```
+
+### Haskell
+
+```haskell
+data Cell = Cell { row :: Int, col :: Int }
+
+manhattan :: Cell -> Cell -> Int
+manhattan a b = abs (row a - row b) + abs (col a - col b)
+```

@@ -228,6 +228,15 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-right-rail")).toBeHidden();
   await page.locator("[data-manual-sidebar-toggle]").click();
 
+  await page.goto(siteUrl("/en/chapters/data-tools/"));
+  await expect(page.locator("code.language-plaintext.highlighter-rouge", { hasText: "ST_Transform" })).toHaveCount(1);
+  await expect(page.locator(".language-sql.highlighter-rouge")).toContainText("ST_Area");
+  await expect(page.locator(".language-sql.highlighter-rouge span.k").first()).toContainText("SELECT");
+  await expect(page.locator(".language-python.highlighter-rouge")).toContainText("geopandas");
+  await expect(page.locator(".language-r.highlighter-rouge")).toContainText("st_transform");
+  await expect(page.locator(".language-haskell.highlighter-rouge")).toContainText("manhattan");
+  await page.screenshot({ path: join(renderOut, `manual-code-fences-${testInfo.project.name}.png`), fullPage: true });
+
   await page.goto(siteUrl("/en/chapters/figures-diagrams/"));
   await expect(page.locator(".md-subfigure-set")).toHaveCount(1);
   await expect(page.locator(".md-subfigure")).toHaveCount(3);
