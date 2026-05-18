@@ -73,6 +73,12 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   await expect(page.locator(".profile-highlights")).toContainText("Active projects");
   await expect(page.locator(".profile-highlights")).toContainText("Recent posts");
   await expect(page.locator(".profile-highlight-projects .project-card")).toHaveCount(2);
+  await expect(page.locator(".profile-post-list time").first()).toContainText(/\d{1,2} [A-Z][a-z]{2} \d{4}/);
+  await expect(page.locator(".profile-post-list time").first()).not.toContainText(/^\d{4}-\d{2}-\d{2}$/);
+  await expect(page.locator("footer")).toContainText("Made with");
+  await expect(page.locator("footer")).toContainText("unaltraweb");
+  await expect(page.locator("footer")).toContainText("personal profile");
+  await expect(page.locator("footer")).toContainText(/Last updated: [A-Z][a-z]+ \d{1,2}, \d{4}/);
   await expect(page.locator(".post-title")).toHaveCount(0);
   await expect(page.locator("#light-toggle-sepia")).toHaveCount(1);
   await expectImageLoaded(page.locator(".profile-card-avatar"));
@@ -292,6 +298,8 @@ test("multilingual profile and publications pages render", async ({ page }, test
     ["/en/blog/", ["Building a reusable academic web template", "Minimal Mistakes", "al-folio", "Bibliometrics"]],
     ["/en/cv/", ["ModernCV-style CV", "assets/pdf/cv.pdf", "make cv-preview"]],
     ["/en/projects/", ["unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor", "Journal and article statistics"]],
+    ["/ca/projectes/", ["Projectes", "unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor"]],
+    ["/es/proyectos/", ["Proyectos", "unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor"]],
     ["/en/publications/", ["Goodchild", "Zaragozí", "Gutiérrez", "Bibliometric"]],
   ];
 
@@ -304,6 +312,9 @@ test("multilingual profile and publications pages render", async ({ page }, test
       expect(html).toContain(needle);
     }
     if (path === "/ca/") {
+      await expect(page.locator("footer")).toContainText("Fet amb");
+      await expect(page.locator("footer")).toContainText("perfil personal");
+      await expect(page.locator("footer")).toContainText(/Darrera actualització: \d{2}\/\d{2}\/\d{4}/);
       await page.screenshot({ path: join(renderOut, `personal-ca-home-${testInfo.project.name}.png`), fullPage: true });
     }
   }
@@ -313,6 +324,8 @@ test("blog archive paginates demo posts", async ({ page }) => {
   test.skip(activeProfile !== "personal", "personal profile only");
   await page.goto(siteUrl("/en/blog/"));
   await expect(page.locator(".blog-archive-item")).toHaveCount(4);
+  await expect(page.locator(".blog-archive-meta time").first()).toContainText(/[A-Z][a-z]{2} \d{1,2}, \d{4}/);
+  await expect(page.locator(".blog-archive-meta time").first()).not.toContainText(/^\d{4}-\d{2}-\d{2}$/);
   await expect(page.locator(".pagination")).toBeVisible();
   await expect(page.locator(".pagination .page-link", { hasText: "2" })).toHaveAttribute("href", /\/en\/blog\/page\/2\/?$/);
 
