@@ -11,7 +11,7 @@ START_PATH ?= /en/
 endif
 LIVERELOAD ?= --livereload
 LIVERELOAD_PORT ?= 35729
-LOCAL_CORE ?= ../unaltraweb
+LOCAL_CORE ?=
 LOCAL_GEMFILE := tmp/Gemfile.local
 DEV_CONFIG := tmp/_config.development.yml
 PROFILE_CONFIG := tmp/_config.profile.yml
@@ -28,32 +28,38 @@ CV_PREVIEW ?= assets/img/cv-preview.jpg
 LOCAL_UID ?= $(shell id -u)
 LOCAL_GID ?= $(shell id -g)
 LOCAL_URL := http://localhost:$(PORT)$(BASEURL)$(START_PATH)
-LOCAL_JEKYLL_CONFIG := $(LOCAL_CORE)/_config.yml,_config.yml
-ACTIVE_JEKYLL_CONFIG := $(LOCAL_JEKYLL_CONFIG)
-ifneq ($(strip $(SITE_PROFILE)),)
-ACTIVE_JEKYLL_CONFIG := $(LOCAL_JEKYLL_CONFIG),$(PROFILE_CONFIG)
-endif
-SERVE_JEKYLL_CONFIG := $(ACTIVE_JEKYLL_CONFIG),$(DEV_CONFIG)
+CORE_DIR_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print spec.full_gem_path
+CORE_CONFIG_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print File.join(spec.full_gem_path, "_config.yml")
 
 DOCKER_PORTS = -p $(PORT):$(PORT)
 SERVE_LIVERELOAD_ARGS =
+DOCKER_CORE_VOLUME =
+DOCKER_LOCAL_CORE =
 ifneq ($(strip $(LIVERELOAD)),)
 DOCKER_PORTS += -p $(LIVERELOAD_PORT):$(LIVERELOAD_PORT)
 SERVE_LIVERELOAD_ARGS = $(LIVERELOAD) --livereload-port $(LIVERELOAD_PORT)
 endif
+ifneq ($(strip $(LOCAL_CORE)),)
+DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
+DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
+endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open serve serve-native build build-native test test-native down metrics-scimago-fetch metrics-update metrics-update-all metrics-check cv-preview docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open serve serve-native build build-native test test-native down metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
 
 local-core-check:
-	@test -d "$(LOCAL_CORE)" || (echo "Set LOCAL_CORE to the local unaltraweb checkout path." && exit 1)
-	@test -f "$(LOCAL_CORE)/unaltraweb.gemspec" || (echo "$(LOCAL_CORE) does not look like an unaltraweb checkout." && exit 1)
+	@if test -n "$(LOCAL_CORE)"; then \
+	  test -d "$(LOCAL_CORE)" || (echo "Set LOCAL_CORE to the local unaltraweb checkout path." && exit 1); \
+	  test -f "$(LOCAL_CORE)/unaltraweb.gemspec" || (echo "$(LOCAL_CORE) does not look like an unaltraweb checkout." && exit 1); \
+	fi
 
 local-gemfile:
-	@mkdir -p tmp
-	@printf '%s\n' 'source "https://rubygems.org"' '' 'group :jekyll_plugins do' '  gem "unaltraweb", path: "$(LOCAL_CORE)"' 'end' > "$(LOCAL_GEMFILE)"
+	@if test -n "$(LOCAL_CORE)"; then \
+	  mkdir -p tmp; \
+	  printf '%s\n' 'source "https://rubygems.org"' '' 'group :jekyll_plugins do' '  gem "unaltraweb", path: "$(LOCAL_CORE)"' 'end' > "$(LOCAL_GEMFILE)"; \
+	fi
 
 profile-config:
 	@mkdir -p tmp
@@ -85,9 +91,12 @@ python-deps:
 	  printf '%s\n' "$$stamp" > "$(PIP_STAMP)"; \
 	fi
 
-bundle-install: local-gemfile
+bundle-install: local-core-check local-gemfile
 	@mkdir -p "$(LOCAL_BUNDLE_APP_CONFIG)" "$(LOCAL_BUNDLE_PATH)"
-	BUNDLE_GEMFILE=$(LOCAL_GEMFILE) BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) check || BUNDLE_GEMFILE=$(LOCAL_GEMFILE) BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) install
+	@gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; fi; \
+	BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) check || \
+	BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) install
 
 open open-local:
 	@printf 'Opening %s\n' "$(LOCAL_URL)"
@@ -96,36 +105,77 @@ open open-local:
 serve: local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
 	@(sleep 45; xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || true) & \
-	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native LOCAL_CORE=/srv/unaltraweb PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)"'
+	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)"'
 
-serve-native serve-local: local-core-check profile-config dev-config python-deps bundle-install
-	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE=$(LOCAL_GEMFILE) BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$(SERVE_JEKYLL_CONFIG)" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --disable-disk-cache
+serve-native serve-local: profile-config dev-config python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_config="$(abspath $(LOCAL_CORE))/_config.yml"; else core_config=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_CONFIG_RUBY)'); fi; \
+	active_config="$$core_config,_config.yml"; \
+	if test -n "$(SITE_PROFILE)"; then active_config="$$active_config,$(PROFILE_CONFIG)"; fi; \
+	serve_config="$$active_config,$(DEV_CONFIG)"; \
+	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --disable-disk-cache
 
 build: local-core-check
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native LOCAL_CORE=/srv/unaltraweb SITE_PROFILE="$(SITE_PROFILE)"'
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)"'
 
-build-native build-local: local-core-check profile-config python-deps bundle-install
-	JEKYLL_ENV=production PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE=$(LOCAL_GEMFILE) BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll build --config "$(ACTIVE_JEKYLL_CONFIG)" --disable-disk-cache
+build-native build-local: profile-config python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_config="$(abspath $(LOCAL_CORE))/_config.yml"; else core_config=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_CONFIG_RUBY)'); fi; \
+	active_config="$$core_config,_config.yml"; \
+	if test -n "$(SITE_PROFILE)"; then active_config="$$active_config,$(PROFILE_CONFIG)"; fi; \
+	JEKYLL_ENV=production PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll build --config "$$active_config" --disable-disk-cache
 
 metrics-scimago-fetch: local-core-check
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make python-deps LOCAL_CORE=/srv/unaltraweb && PYTHONUSERBASE=/srv/jekyll/$(PYTHONUSERBASE) PIP_CACHE_DIR=/srv/jekyll/$(PIP_CACHE_DIR) PATH=/srv/jekyll/$(PYTHONUSERBASE)/bin:$$PATH /srv/unaltraweb/scripts/biblio/fetch_scimago_csv.sh'
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make metrics-scimago-fetch-native $(DOCKER_LOCAL_CORE)'
+
+metrics-scimago-fetch-native: python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" "$$core_dir/scripts/biblio/fetch_scimago_csv.sh"
 
 metrics-update: local-core-check
-	docker run --rm -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make python-deps LOCAL_CORE=/srv/unaltraweb && PYTHONUSERBASE=/srv/jekyll/$(PYTHONUSERBASE) PIP_CACHE_DIR=/srv/jekyll/$(PIP_CACHE_DIR) PATH=/srv/jekyll/$(PYTHONUSERBASE)/bin:$$PATH python3 /srv/unaltraweb/scripts/biblio/metrics_update.py && chown -R $(LOCAL_UID):$(LOCAL_GID) _bibliography/papers.bib _data/metrics.yml tmp 2>/dev/null || true'
+	docker run --rm -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make metrics-update-native $(DOCKER_LOCAL_CORE) && chown -R $(LOCAL_UID):$(LOCAL_GID) _bibliography/papers.bib _data/metrics.yml tmp 2>/dev/null || true'
+
+metrics-update-native: python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py"
 
 metrics-update-all: metrics-scimago-fetch metrics-update
 
 metrics-check: local-core-check
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make python-deps LOCAL_CORE=/srv/unaltraweb && PYTHONUSERBASE=/srv/jekyll/$(PYTHONUSERBASE) PIP_CACHE_DIR=/srv/jekyll/$(PIP_CACHE_DIR) PATH=/srv/jekyll/$(PYTHONUSERBASE)/bin:$$PATH python3 /srv/unaltraweb/scripts/biblio/metrics_update.py --offline --dry-run && make build-native LOCAL_CORE=/srv/unaltraweb'
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make metrics-check-native $(DOCKER_LOCAL_CORE)'
+
+metrics-check-native: python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py" --offline --dry-run; \
+	$(MAKE) build-native LOCAL_CORE="$(LOCAL_CORE)"
 
 cv-preview: local-core-check
-	docker run --rm -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'set -e; if ! command -v gs >/dev/null 2>&1 && ! command -v pdftoppm >/dev/null 2>&1 && ! command -v mutool >/dev/null 2>&1; then printf "Installing poppler-utils for PDF preview rendering.\n"; apt_log=/tmp/cv-preview-apt.log; if ! apt-get update -qq >"$$apt_log" 2>&1 || ! DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends poppler-utils >>"$$apt_log" 2>&1; then cat "$$apt_log"; exit 1; fi; fi; /srv/unaltraweb/scripts/cv/render_pdf_preview.sh "$(CV_PDF)" "$(CV_PREVIEW)"; out_dir=$$(dirname "$(CV_PREVIEW)"); chown "$(LOCAL_UID):$(LOCAL_GID)" "$(CV_PREVIEW)" "$$out_dir"'
+	docker run --rm -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make cv-preview-native $(DOCKER_LOCAL_CORE) CV_PDF="$(CV_PDF)" CV_PREVIEW="$(CV_PREVIEW)" && out_dir=$$(dirname "$(CV_PREVIEW)"); chown "$(LOCAL_UID):$(LOCAL_GID)" "$(CV_PREVIEW)" "$$out_dir"'
+
+cv-preview-native: python-deps bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
+	if ! command -v gs >/dev/null 2>&1 && ! command -v pdftoppm >/dev/null 2>&1 && ! command -v mutool >/dev/null 2>&1; then \
+	  printf "Installing poppler-utils for PDF preview rendering.\n"; \
+	  apt_log=/tmp/cv-preview-apt.log; \
+	  if ! apt-get update -qq >"$$apt_log" 2>&1 || ! DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends poppler-utils >>"$$apt_log" 2>&1; then cat "$$apt_log"; exit 1; fi; \
+	fi; \
+	"$$core_dir/scripts/cv/render_pdf_preview.sh" "$(CV_PDF)" "$(CV_PREVIEW)"
 
 test test-native render-smoke render-smoke-local: local-core-check
 	@mkdir -p tmp/render-smoke
 	@set -e; \
 	server_log="tmp/render-smoke/jekyll.log"; \
-	server_cid=$$(docker run -d --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native LOCAL_CORE=/srv/unaltraweb HOST=127.0.0.1 PORT=$(PORT) LIVERELOAD= SITE_PROFILE="$(SITE_PROFILE)"' ); \
+	server_cid=$$(docker run -d --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) HOST=127.0.0.1 PORT=$(PORT) LIVERELOAD= SITE_PROFILE="$(SITE_PROFILE)"' ); \
 	cleanup() { docker logs $$server_cid > "$$server_log" 2>&1 || true; docker stop $$server_cid >/dev/null 2>&1 || true; docker rm $$server_cid >/dev/null 2>&1 || true; }; \
 	trap cleanup EXIT; \
 	ready=0; \

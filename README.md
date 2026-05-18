@@ -33,6 +33,16 @@ For a local layout, create a file such as `_layouts/my-layout.liquid` in this re
 
 See the core customization notes in [`docs/customization.md`](https://github.com/dosquartsdedocs/unaltraweb/blob/main/docs/customization.md).
 
+## GitHub-only workflow
+
+Use this template to create a new repository, then edit content directly in GitHub:
+
+- `_config.yml` selects the site profile and public URL.
+- `_data/` contains structured content such as team members, teachers, metrics and repositories.
+- `_pages/`, `_posts/`, `_projects/`, `_chapters/` and `_bibliography/` contain the editable site content.
+
+Pushes to `main` build and deploy the site with the reusable workflow from `dosquartsdedocs/unaltraweb`. Dependabot opens pull requests when GitHub Actions or Bundler dependencies can be updated.
+
 ## Local workflow
 
 ```bash
@@ -44,7 +54,7 @@ make test
 make down
 ```
 
-The default workflow runs through Docker. While developing `unaltraweb` and this template side by side, point `LOCAL_CORE` to the local core checkout. This does not require pushing core changes to GitHub:
+The default local workflow runs through Docker and uses the `unaltraweb` gem declared in `Gemfile`. While developing `unaltraweb` and this template side by side, point `LOCAL_CORE` to the local core checkout. This does not require pushing core changes to GitHub:
 
 ```bash
 make serve LOCAL_CORE=../unaltraweb
@@ -64,9 +74,9 @@ unaltraweb:
 For local testing, pass `SITE_PROFILE` to `make serve`, `make build` or `make test`. The Makefile writes a temporary config overlay in `tmp/_config.profile.yml`, so you can test another profile without editing `_config.yml` or changing what GitHub Pages will publish:
 
 ```bash
-make serve LOCAL_CORE=../unaltraweb SITE_PROFILE=project
-make serve LOCAL_CORE=../unaltraweb SITE_PROFILE=software
-make test LOCAL_CORE=../unaltraweb SITE_PROFILE=project
+make serve SITE_PROFILE=project
+make serve SITE_PROFILE=software
+make test SITE_PROFILE=project
 ```
 
 `make serve` also enables a local developer mode overlay that is not loaded by `make build`. The floating developer switcher reports the real build profile while you browse locally.
@@ -77,6 +87,6 @@ After replacing the demo CV PDF, regenerate the first-page preview used by the C
 make cv-preview CV_PDF=assets/pdf/cv.pdf CV_PREVIEW=assets/img/cv-preview.jpg
 ```
 
-## GitHub workflow
+## GitHub Pages
 
-Small content edits can be done directly in GitHub. Pushes to `main` build and deploy the site to `gh-pages`.
+Small content edits can be done directly in GitHub. Pushes to `main` build and deploy the site through GitHub Pages Actions.
