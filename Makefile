@@ -1,5 +1,7 @@
 PYTHON ?= python3
 BUNDLE ?= bundle
+METRICS_ARGS ?=
+SCIMAGO_INPUT ?=
 PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
@@ -135,7 +137,9 @@ metrics-scimago-fetch-native: python-deps bundle-install
 	@set -e; \
 	gemfile="Gemfile"; \
 	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
-	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" "$$core_dir/scripts/biblio/fetch_scimago_csv.sh"
+	scimago_args=""; \
+	if test -n "$(SCIMAGO_INPUT)"; then scimago_args="--input $(SCIMAGO_INPUT)"; fi; \
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" "$$core_dir/scripts/biblio/fetch_scimago_csv.sh" $$scimago_args
 
 metrics-update: local-core-check
 	docker run --rm -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make metrics-update-native $(DOCKER_LOCAL_CORE) && chown -R $(LOCAL_UID):$(LOCAL_GID) _bibliography/papers.bib _data/metrics.yml tmp 2>/dev/null || true'
@@ -144,7 +148,7 @@ metrics-update-native: python-deps bundle-install
 	@set -e; \
 	gemfile="Gemfile"; \
 	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
-	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py"
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py" $(METRICS_ARGS)
 
 metrics-update-all: metrics-scimago-fetch metrics-update
 
@@ -155,7 +159,7 @@ metrics-check-native: python-deps bundle-install
 	@set -e; \
 	gemfile="Gemfile"; \
 	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
-	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py" --offline --dry-run; \
+	PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" python3 "$$core_dir/scripts/biblio/metrics_update.py" --offline --dry-run $(METRICS_ARGS); \
 	$(MAKE) build-native LOCAL_CORE="$(LOCAL_CORE)"
 
 cv-preview: local-core-check

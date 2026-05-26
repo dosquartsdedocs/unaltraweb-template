@@ -54,6 +54,17 @@ make test
 make down
 ```
 
+Publication metrics can also be updated from GitHub Actions with the manual `Update publication metrics` workflow. It calls the reusable metrics workflow from `dosquartsdedocs/unaltraweb` and opens a pull request by default.
+
+The metrics workflow keeps Scimago caches and diagnostics out of pull requests. When PR creation is enabled, it commits only versionable generated data: `_bibliography/**/*.bib` and `_data/metrics.yml`.
+
+Local metrics commands accept the same core script arguments:
+
+```bash
+make metrics-update METRICS_ARGS="--strict-external --require-scimago"
+make metrics-scimago-fetch SCIMAGO_INPUT=path/to/scimagojr.csv
+```
+
 The default local workflow runs through Docker and uses the `unaltraweb` gem declared in `Gemfile`. While developing `unaltraweb` and this template side by side, point `LOCAL_CORE` to the local core checkout. This does not require pushing core changes to GitHub:
 
 ```bash
