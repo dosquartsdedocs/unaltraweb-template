@@ -6,6 +6,12 @@ PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
 SITE_PROFILE ?=
+PROFILE ?= personal
+PERSONAL_PORT ?= 4001
+PROJECT_PORT ?= 4002
+MANUAL_PORT ?= 4003
+SOFTWARE_PORT ?= 4004
+OPEN_DELAY ?= 25
 VISUAL_PROFILES ?= personal project manual
 ifeq ($(SITE_PROFILE),project)
 START_PATH ?= /en/
@@ -31,8 +37,20 @@ CV_PREVIEW ?= assets/img/cv-preview.jpg
 LOCAL_UID ?= $(shell id -u)
 LOCAL_GID ?= $(shell id -g)
 LOCAL_URL := http://localhost:$(PORT)$(BASEURL)$(START_PATH)
+PERSONAL_URL := http://localhost:$(PERSONAL_PORT)$(BASEURL)$(START_PATH)
+PROJECT_URL := http://localhost:$(PROJECT_PORT)$(BASEURL)$(START_PATH)
+MANUAL_URL := http://localhost:$(MANUAL_PORT)$(BASEURL)$(START_PATH)
+SOFTWARE_URL := http://localhost:$(SOFTWARE_PORT)$(BASEURL)$(START_PATH)
 CORE_DIR_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print spec.full_gem_path
 CORE_CONFIG_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print File.join(spec.full_gem_path, "_config.yml")
+PROFILE_COMPOSE_FILE := docker-compose.profiles.yml
+PROFILE_COMPOSE_LOCAL_CORE_FILE := tmp/docker-compose.local-core.yml
+PROFILE_COMPOSE_FILES := -f $(PROFILE_COMPOSE_FILE)
+ifneq ($(strip $(LOCAL_CORE)),)
+PROFILE_COMPOSE_FILES += -f $(PROFILE_COMPOSE_LOCAL_CORE_FILE)
+endif
+
+export DOCKER_IMAGE LOCAL_UID LOCAL_GID PERSONAL_PORT PROJECT_PORT MANUAL_PORT SOFTWARE_PORT
 
 DOCKER_PORTS = -p $(PORT):$(PORT)
 SERVE_LIVERELOAD_ARGS =
@@ -47,7 +65,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open serve serve-native build build-native test test-native screenshots screenshots-all down metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-personal serve-project serve-manual serve-software serve-allprofiles build build-native test test-native screenshots screenshots-all down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -104,6 +122,75 @@ bundle-install: local-core-check local-gemfile
 open open-local:
 	@printf 'Opening %s\n' "$(LOCAL_URL)"
 	@xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || sensible-browser "$(LOCAL_URL)" >/dev/null 2>&1 || printf 'Open this URL manually: %s\n' "$(LOCAL_URL)"
+
+open-url:
+	@url="$(URL)"; \
+	printf 'Opening %s\n' "$$url"; \
+	xdg-open "$$url" >/dev/null 2>&1 || sensible-browser "$$url" >/dev/null 2>&1 || printf 'Open this URL manually: %s\n' "$$url"
+
+profile-compose-local-core: local-core-check
+	@mkdir -p tmp
+	@if test -n "$(LOCAL_CORE)"; then \
+	  core="$(abspath $(LOCAL_CORE))"; \
+	  printf '%s\n' \
+	    'services:' \
+	    '  personal:' \
+	    '    environment:' \
+	    '      LOCAL_CORE: /srv/unaltraweb' \
+	    '    volumes:' \
+	    "      - $$core:/srv/unaltraweb:ro" \
+	    '  project:' \
+	    '    environment:' \
+	    '      LOCAL_CORE: /srv/unaltraweb' \
+	    '    volumes:' \
+	    "      - $$core:/srv/unaltraweb:ro" \
+	    '  manual:' \
+	    '    environment:' \
+	    '      LOCAL_CORE: /srv/unaltraweb' \
+	    '    volumes:' \
+	    "      - $$core:/srv/unaltraweb:ro" \
+	    '  software:' \
+	    '    environment:' \
+	    '      LOCAL_CORE: /srv/unaltraweb' \
+	    '    volumes:' \
+	    "      - $$core:/srv/unaltraweb:ro" \
+	    > "$(PROFILE_COMPOSE_LOCAL_CORE_FILE)"; \
+	else \
+	  rm -f "$(PROFILE_COMPOSE_LOCAL_CORE_FILE)"; \
+	fi
+
+serve-profile: profile-compose-local-core
+	@case "$(PROFILE)" in \
+	  personal) url="$(PERSONAL_URL)"; service="personal" ;; \
+	  project) url="$(PROJECT_URL)"; service="project" ;; \
+	  manual) url="$(MANUAL_URL)"; service="manual" ;; \
+	  software) url="$(SOFTWARE_URL)"; service="software" ;; \
+	  *) printf 'Unknown PROFILE=%s. Use personal, project, manual, or software.\n' "$(PROFILE)"; exit 1 ;; \
+	esac; \
+	printf 'Serving %s at %s\n' "$(PROFILE)" "$$url"; \
+	(sleep $(OPEN_DELAY); xdg-open "$$url" >/dev/null 2>&1 || sensible-browser "$$url" >/dev/null 2>&1 || true) & \
+	docker compose $(PROFILE_COMPOSE_FILES) up "$$service"
+
+serve-personal:
+	$(MAKE) serve-profile PROFILE=personal
+
+serve-project:
+	$(MAKE) serve-profile PROFILE=project
+
+serve-manual:
+	$(MAKE) serve-profile PROFILE=manual
+
+serve-software:
+	$(MAKE) serve-profile PROFILE=software
+
+serve-allprofiles: profile-compose-local-core
+	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
+	@printf 'Personal: %s\nProject:  %s\nManual:   %s\n' "$(PERSONAL_URL)" "$(PROJECT_URL)" "$(MANUAL_URL)"
+	@(sleep $(OPEN_DELAY); \
+	  xdg-open "$(PERSONAL_URL)" >/dev/null 2>&1 || sensible-browser "$(PERSONAL_URL)" >/dev/null 2>&1 || true; \
+	  xdg-open "$(PROJECT_URL)" >/dev/null 2>&1 || sensible-browser "$(PROJECT_URL)" >/dev/null 2>&1 || true; \
+	  xdg-open "$(MANUAL_URL)" >/dev/null 2>&1 || sensible-browser "$(MANUAL_URL)" >/dev/null 2>&1 || true) & \
+	docker compose $(PROFILE_COMPOSE_FILES) up personal project manual
 
 serve: local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
@@ -204,8 +291,12 @@ screenshots screenshots-all: local-core-check
 
 down docker-down:
 	-docker compose down --remove-orphans
+	-docker compose -f $(PROFILE_COMPOSE_FILE) down --remove-orphans
 	-docker stop "$(CONTAINER)" >/dev/null 2>&1 || true
 	-docker rm "$(CONTAINER)" >/dev/null 2>&1 || true
+
+down-profiles:
+	-docker compose -f $(PROFILE_COMPOSE_FILE) down --remove-orphans
 
 docker-serve docker-serve-local: serve
 docker-build docker-build-local: build

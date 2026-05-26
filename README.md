@@ -92,6 +92,17 @@ make test SITE_PROFILE=project
 
 `make serve` also enables a local developer mode overlay that is not loaded by `make build`. The floating developer switcher reports the real build profile while you browse locally.
 
+For faster profile-specific development, the template also provides Docker Compose targets with fixed ports and automatic browser opening:
+
+```bash
+make serve-personal LOCAL_CORE=../unaltraweb  # http://localhost:4001/unaltraweb-template/en/
+make serve-project LOCAL_CORE=../unaltraweb   # http://localhost:4002/unaltraweb-template/en/
+make serve-manual LOCAL_CORE=../unaltraweb    # http://localhost:4003/unaltraweb-template/en/
+make down-profiles
+```
+
+`make serve-allprofiles LOCAL_CORE=../unaltraweb` starts personal, project and manual at the same time and opens all three URLs. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
+
 ## Visual review
 
 Use profile overlays to inspect a single profile quickly:
