@@ -6,6 +6,6 @@ lang: es
 ref: theses
 profiles: [project]
 permalink: /es/tesis/
-nav: false
-nav_order: 5
+nav: true
+nav_order: 4
 ---

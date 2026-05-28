@@ -1,12 +1,12 @@
-- name: Roger Tomlinson
+- name: Jane Doe
   role: Course coordinator
-  affiliation: Canada Geographic Information System
-  email: roger@example.org
-  url: https://example.org/roger-tomlinson
+  affiliation: Example University
+  email: jane.doe@example.org
+  url: https://example.org/jane-doe
   url_label: Profile
-- name: Michael Goodchild
+- name: Alex Example
   role: Seminar teacher
-  affiliation: University of California, Santa Barbara
-  email: michael@example.org
-  url: https://example.org/michael-goodchild
+  affiliation: Example Institute
+  email: alex.example@example.org
+  url: https://example.org/alex-example
   url_label: Profile

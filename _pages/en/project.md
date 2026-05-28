@@ -6,7 +6,17 @@ lang: en
 ref: home
 profiles: [project]
 permalink: /en/
-nav: false
+nav: true
+nav_title: Project
+nav_order: 2
+dropdown: true
+children:
+  - title: The project
+    permalink: /en/
+  - title: Team
+    permalink: /en/team/
+  - title: Previous projects
+    permalink: /en/previous-projects/
 hero:
   image: /assets/img/projects/unaltraweb-template.svg
   alt: Diagram of a thin site template connected to a reusable unaltraweb core
@@ -32,6 +42,6 @@ The project profile is for research groups, funded projects and public research 
 | Field | Example |
 |---|---|
 | Profile | `site_profile: project` |
-| Navigation | Team, outputs, publications, theses, resources, readings, news |
+| Navigation | News, publications, project pages, resources and outputs |
 | Sidebar | No personal social-link sidebar |
 | Build mode | Static Jekyll build selected by configuration |

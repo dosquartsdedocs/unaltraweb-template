@@ -6,8 +6,7 @@ lang: en
 ref: project_team
 profiles: [project]
 permalink: /en/team/
-nav: true
-nav_order: 2
+nav: false
 ---
 
 Project teams are data-driven. Edit `_data/team.yml` to replace these placeholder collaborators with the real people and institutions behind the project.

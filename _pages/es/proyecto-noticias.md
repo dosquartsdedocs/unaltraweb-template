@@ -7,7 +7,7 @@ ref: project_news
 profiles: [project]
 permalink: /es/noticias/
 nav: true
-nav_order: 8
+nav_order: 1
 ---
 
 <ul class="profile-post-list">

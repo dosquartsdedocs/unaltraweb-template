@@ -15,6 +15,6 @@ cover_alt: unaltremanual cover
 
 Aquesta demo és petita a propòsit: mostra l'estructura que necessita un manual d'assignatura abans d'omplir-lo amb contingut real.
 
->> Keep ordinary course prose readable, and reserve callouts for the moments where the student needs a clear pause.
+>> Mantén llegible el text ordinari del curs i reserva els avisos per als moments en què l'estudiant necessita una pausa clara.
 
-The manual profile keeps metrics out of chapter bibliographies, because the references here serve learning, not evaluation.
+El perfil de manual manté les mètriques fora de les bibliografies de capítol, perquè ací les referències serveixen a l'aprenentatge, no a l'avaluació.

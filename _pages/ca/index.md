@@ -1,6 +1,6 @@
 ---
 layout: profile
-title: Roger Tomlinson
+title: Joan Ningu
 lang: ca
 ref: home
 profiles: [personal]
@@ -8,7 +8,7 @@ permalink: /ca/
 nav: false
 ---
 
-Roger Tomlinson s'usa ací com a perfil demo per a una web acadèmica personal centrada en SIG i ciència de la informació geogràfica. Substitueix aquest text per la teua biografia investigadora, la presentació del teu grup o la descripció del teu projecte.
+Joan Ningu es un perfil demo fictici per a una web acadèmica personal centrada en SIG i ciència de la informació geogràfica. Substitueix aquest text per la teua biografia investigadora, la presentació del teu grup o la descripció del teu projecte.
 
 ## Recerca
 

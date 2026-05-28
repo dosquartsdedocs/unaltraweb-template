@@ -1,6 +1,6 @@
 ---
 layout: profile
-title: Roger Tomlinson
+title: John Doe
 lang: en
 ref: home
 profiles: [personal]
@@ -8,7 +8,7 @@ permalink: /en/
 nav: false
 ---
 
-Roger Tomlinson is used here as a demo profile for a personal academic site focused on GIS and geographical information science. Replace this text with your own research biography, group presentation or project description.
+John Doe is a fictional demo profile for a personal academic site focused on GIS and geographical information science. Replace this text with your own research biography, group presentation or project description.
 
 ## Research
 

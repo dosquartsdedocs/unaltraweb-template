@@ -1,7 +1,7 @@
 ---
 layout: manual-home
 title: unaltremanual
-description: Un perfil de manual para materiales academicos con capitulos multilingues, navegacion lateral clara y bibliografia docente.
+description: Un perfil de manual para materiales académicos con capítulos multilingües, navegación lateral clara y bibliografía docente.
 lang: es
 ref: home
 profiles: [manual]
@@ -11,10 +11,10 @@ cover_image: /assets/img/manual-cover-cat.png
 cover_alt: unaltremanual cover
 ---
 
-## Como usar este manual
+## Cómo usar este manual
 
-Esta demo es pequena a proposito: muestra la estructura que necesita un manual de asignatura antes de llenarlo con contenido real.
+Esta demo es pequeña a propósito: muestra la estructura que necesita un manual de asignatura antes de llenarlo con contenido real.
 
->> Keep ordinary course prose readable, and reserve callouts for the moments where the student needs a clear pause.
+>> Mantén legible el texto ordinario del curso y reserva los avisos para los momentos en que el estudiante necesita una pausa clara.
 
-The manual profile keeps metrics out of chapter bibliographies, because the references here serve learning, not evaluation.
+El perfil de manual mantiene las métricas fuera de las bibliografías de capítulo, porque aquí las referencias sirven al aprendizaje, no a la evaluación.

@@ -6,7 +6,17 @@ lang: ca
 ref: home
 profiles: [project]
 permalink: /ca/
-nav: false
+nav: true
+nav_title: Projecte
+nav_order: 2
+dropdown: true
+children:
+  - title: El projecte
+    permalink: /ca/
+  - title: Equip
+    permalink: /ca/equip/
+  - title: Projectes anteriors
+    permalink: /ca/projectes-anteriors/
 hero:
   image: /assets/img/projects/unaltraweb-template.svg
   alt: Diagrama d'una plantilla de continguts connectada al core reutilitzable d'unaltraweb
@@ -20,5 +30,5 @@ El perfil de projecte està pensat per a grups, projectes finançats i infraestr
 | Camp | Exemple |
 |---|---|
 | Perfil | `site_profile: project` |
-| Navegació | Equip, resultats, publicacions, tesis, recursos, notícies |
+| Navegació | Notícies, publicacions, pàgines del projecte, recursos i resultats |
 | Barra lateral | Sense enllaços socials personals |

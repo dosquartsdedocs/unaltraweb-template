@@ -8,6 +8,7 @@ title: "Notas sobre calidad de datos espaciales"
 author: "equipo del proyecto unaltraweb"
 book_type: "Nota de lectura"
 publisher: "Serie de documentación del proyecto"
+collection_name: "Notas metodológicas"
 year: 2026
 pages: 42
 book_language: "Español"

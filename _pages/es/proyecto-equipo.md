@@ -6,8 +6,7 @@ lang: es
 ref: project_team
 profiles: [project]
 permalink: /es/equipo/
-nav: true
-nav_order: 2
+nav: false
 ---
 
 El equipo se carga desde `_data/team.yml`. Sustituye estos colaboradores de ejemplo por las personas e instituciones reales del proyecto.

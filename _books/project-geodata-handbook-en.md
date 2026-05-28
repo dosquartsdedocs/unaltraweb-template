@@ -8,6 +8,7 @@ title: "Project Geodata Handbook"
 author: "unaltraweb project team"
 book_type: "Technical manual"
 publisher: "Project documentation series"
+collection_name: "Project manuals"
 year: 2026
 pages: 96
 book_language: "English"

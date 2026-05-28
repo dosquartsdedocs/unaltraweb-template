@@ -1,6 +1,6 @@
 ---
 layout: profile
-title: Roger Tomlinson
+title: Juan Nadie
 lang: es
 ref: home
 profiles: [personal]
@@ -8,7 +8,7 @@ permalink: /es/
 nav: false
 ---
 
-Roger Tomlinson se usa aquí como perfil demo para una web académica personal centrada en SIG y ciencia de la información geográfica. Sustituye este texto por tu biografía investigadora, la presentación de tu grupo o la descripción de tu proyecto.
+Juan Nadie es un perfil demo ficticio para una web académica personal centrada en SIG y ciencia de la información geográfica. Sustituye este texto por tu biografía investigadora, la presentación de tu grupo o la descripción de tu proyecto.
 
 ## Investigación
 

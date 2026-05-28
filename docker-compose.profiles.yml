@@ -34,7 +34,7 @@ services:
 
   software:
     <<: *serve-base
-    container_name: unaltraweb-template-software
+    container_name: unaltraweb-template-techdocs
     ports:
       - "${SOFTWARE_PORT:-4004}:4004"
-    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4004 LIVERELOAD= SITE_PROFILE=software'
+    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4004 LIVERELOAD= SITE_PROFILE=techdocs'

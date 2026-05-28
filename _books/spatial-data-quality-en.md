@@ -8,6 +8,7 @@ title: "Spatial Data Quality Notes"
 author: "unaltraweb project team"
 book_type: "Reading note"
 publisher: "Project documentation series"
+collection_name: "Method notes"
 year: 2026
 pages: 42
 book_language: "English"

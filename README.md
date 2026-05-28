@@ -1,6 +1,6 @@
 # unaltraweb-template
 
-Starter repository for academic, research project, software and documentation websites based on [`dosquartsdedocs/unaltraweb`](https://github.com/dosquartsdedocs/unaltraweb).
+Starter repository for academic, research project, manual and documentation websites based on [`dosquartsdedocs/unaltraweb`](https://github.com/dosquartsdedocs/unaltraweb).
 
 ## Edit this
 
@@ -86,7 +86,7 @@ For local testing, pass `SITE_PROFILE` to `make serve`, `make build` or `make te
 
 ```bash
 make serve SITE_PROFILE=project
-make serve SITE_PROFILE=software
+make serve SITE_PROFILE=techdocs
 make test SITE_PROFILE=project
 ```
 
@@ -98,10 +98,13 @@ For faster profile-specific development, the template also provides Docker Compo
 make serve-personal LOCAL_CORE=../unaltraweb  # http://localhost:4001/unaltraweb-template/en/
 make serve-project LOCAL_CORE=../unaltraweb   # http://localhost:4002/unaltraweb-template/en/
 make serve-manual LOCAL_CORE=../unaltraweb    # http://localhost:4003/unaltraweb-template/en/
+make serve-techdocs LOCAL_CORE=../unaltraweb  # http://localhost:4004/unaltraweb-template/en/
 make down-profiles
 ```
 
-`make serve-allprofiles LOCAL_CORE=../unaltraweb` starts personal, project and manual at the same time and opens all three URLs. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
+`make serve-software` is kept as an alias while the profile name settles. `make serve-allprofiles LOCAL_CORE=../unaltraweb` starts personal, project, manual and techdocs at the same time and opens all URLs. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
+
+The techdocs profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the left documentation index without editing navigation templates.
 
 ## Visual review
 
@@ -111,6 +114,7 @@ Use profile overlays to inspect a single profile quickly:
 make serve SITE_PROFILE=personal
 make serve SITE_PROFILE=project
 make serve SITE_PROFILE=manual
+make serve SITE_PROFILE=techdocs
 ```
 
 Generate screenshots for all demo profiles and shared features:
@@ -119,10 +123,17 @@ Generate screenshots for all demo profiles and shared features:
 make screenshots
 ```
 
-The screenshots are written to `tmp/render-smoke/` and cover the profile column, color themes, multilingual pages, project team and output cards, manual structure, callouts, Mermaid-backed figures and subfigures. While developing the core theme locally, use:
+The screenshots are written to `tmp/render-smoke/` and cover the profile column, color themes, multilingual pages, project team and output cards, manual structure, callouts, Mermaid-backed figures and subfigures. To regenerate the screenshots embedded in the documentation and copy them to `assets/img/screenshots/`, use:
+
+```bash
+make docs-screenshots
+```
+
+While developing the core theme locally, use:
 
 ```bash
 make screenshots LOCAL_CORE=../unaltraweb
+make docs-screenshots LOCAL_CORE=../unaltraweb
 ```
 
 After replacing the demo CV PDF, regenerate the first-page preview used by the CV pages:

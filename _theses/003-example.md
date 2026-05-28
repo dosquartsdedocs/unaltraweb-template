@@ -1,22 +1,21 @@
 ---
-student: "David Harvey"
+student: "Dana Example"
 status: defended
 order: 3
 align: right
-image: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/David_Harvey2.jpg/640px-David_Harvey2.jpg
+image: /assets/img/team/user-placeholder.png
 image_circular: false
-image_alt_en: "Portrait of geographer David Harvey"
-image_alt_es: "Retrato del geografo David Harvey"
-image_alt_ca: "Retrat del geograf David Harvey"
-image_caption_en: "Portrait of David Harvey (geographer)."
-image_caption_es: "Retrato de David Harvey (geografo)."
-image_caption_ca: "Retrat de David Harvey (geograf)."
-image_source: "Wikimedia Commons"
-image_source_url: https://commons.wikimedia.org/wiki/File:David_Harvey2.jpg
+image_alt_en: "Placeholder portrait for Dana Example"
+image_alt_es: "Retrato placeholder de Dana Example"
+image_alt_ca: "Retrat placeholder de Dana Example"
+image_caption_en: "Placeholder portrait for a fictional thesis record."
+image_caption_es: "Retrato placeholder para una tesis ficticia."
+image_caption_ca: "Retrat placeholder per a una tesi ficticia."
+image_source: "unaltraweb placeholder"
 year: 1961
-institution: "University of Cambridge"
+institution: "Example University"
 more_info: >
-  <p>Identity check: <a href="https://www.wikidata.org/wiki/Q343055">Wikidata Q343055 (David Harvey, geographer)</a>.</p>
+  <p>Fictional thesis record included to demonstrate the project thesis layout.</p>
 title_en: "Agricultural and rural change in Kent (1800-1900)"
 title_es: "Cambio agricola y rural en Kent (1800-1900)"
 title_ca: "Canvi agricol i rural a Kent (1800-1900)"

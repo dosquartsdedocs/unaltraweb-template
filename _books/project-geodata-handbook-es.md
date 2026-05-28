@@ -8,6 +8,7 @@ title: "Manual de geodatos del proyecto"
 author: "equipo del proyecto unaltraweb"
 book_type: "Manual técnico"
 publisher: "Serie de documentación del proyecto"
+collection_name: "Manuales del proyecto"
 year: 2026
 pages: 96
 book_language: "Español"

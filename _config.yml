@@ -1,26 +1,26 @@
 # Local project configuration. The base configuration is loaded from the
 # unaltraweb core gem by Makefile using: core/_config.yml,_config.yml
 
-title: Roger Tomlinson
+title: unaltreselfie
 description: >
   Demo personal academic website built with unaltraweb.
 keywords: academic website, research, jekyll
 
 author:
-  name: Roger Tomlinson
-  bio: Geographer and pioneer of geographic information systems. Demo profile for a personal academic site.
-  affiliation: Canada Geographic Information System
-  location: Ottawa, Canada
+  name: John Doe
+  bio: Fictional researcher placeholder for a personal academic site.
+  affiliation: Example University
+  location: Example City
   email: researcher@example.org
   orcid: 0000-0002-1825-0097
   google_scholar: demo
   github: dosquartsdedocs
-  linkedin: roger-tomlinson-demo
+  linkedin: john-doe-demo
 
 lang: en
 default_lang: en
 languages: [en, es, ca]
-icon: "🧭"
+icon: "brand/dosquartsdedocs-logo-white.svg"
 
 url: "https://dosquartsdedocs.github.io"
 baseurl: "/unaltraweb-template"
@@ -70,6 +70,7 @@ unaltraweb:
     cv: true
     projects: true
     publications: true
+    readings: true
     metrics: true
     manual: true
   manual:
@@ -77,9 +78,14 @@ unaltraweb:
     cover_image: /assets/img/manual-cover-cat.png
     logo: /assets/img/brand/dosquartsdedocs-logo.svg
     logo_inverse: /assets/img/brand/dosquartsdedocs-logo-white.svg
+  documentation:
+    collection: documentation
+    logo: /assets/img/brand/dosquartsdedocs-logo.svg
+    logo_inverse: /assets/img/brand/dosquartsdedocs-logo-white.svg
+    logo_sepia: /assets/img/brand/dosquartsdedocs-logo.svg
   figure_captions:
     enabled: true
-    collections: [chapters]
+    collections: [chapters, documentation]
 
 giscus:
   repo: dosquartsdedocs/unaltraweb-template

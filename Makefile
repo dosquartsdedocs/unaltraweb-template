@@ -12,7 +12,8 @@ PROJECT_PORT ?= 4002
 MANUAL_PORT ?= 4003
 SOFTWARE_PORT ?= 4004
 OPEN_DELAY ?= 25
-VISUAL_PROFILES ?= personal project manual
+VISUAL_PROFILES ?= personal project manual techdocs
+DOC_SCREENSHOTS_DIR ?= assets/img/screenshots
 ifeq ($(SITE_PROFILE),project)
 START_PATH ?= /en/
 else
@@ -23,7 +24,8 @@ LIVERELOAD_PORT ?= 35729
 LOCAL_CORE ?=
 LOCAL_GEMFILE := tmp/Gemfile.local
 DEV_CONFIG := tmp/_config.development.yml
-PROFILE_CONFIG := tmp/_config.profile.yml
+PROFILE_CONFIG := tmp/_config.profile$(if $(strip $(SITE_PROFILE)),.$(SITE_PROFILE),).yml
+SERVE_DESTINATION := $(if $(strip $(SITE_PROFILE)),tmp/_site.$(SITE_PROFILE),_site)
 LOCAL_BUNDLE_APP_CONFIG ?= tmp/bundle_config
 LOCAL_BUNDLE_PATH ?= tmp/bundle_path
 PYTHONUSERBASE ?= tmp/python_user
@@ -65,7 +67,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-personal serve-project serve-manual serve-software serve-allprofiles build build-native test test-native screenshots screenshots-all down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-personal serve-project serve-manual serve-software serve-techdocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -88,10 +90,13 @@ profile-config:
 	  profile="$(SITE_PROFILE)"; \
 	  title="unaltraweb $$profile"; \
 	  description="Demo $$profile website built with unaltraweb."; \
-	  if test "$$profile" = "personal"; then title="Roger Tomlinson"; description="Demo personal academic website built with unaltraweb."; fi; \
-	  if test "$$profile" = "project"; then title="unaltraweb project"; description="Demo research project website built with unaltraweb."; fi; \
+	  if test "$$profile" = "personal"; then title="unaltreselfie"; description="Demo personal academic website built with unaltraweb."; fi; \
+	  if test "$$profile" = "project"; then title="unaltreprojecte"; description="Demo research project website built with unaltraweb."; fi; \
 	  if test "$$profile" = "manual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
+	  if test "$$profile" = "software" || test "$$profile" = "techdocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
 	  printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
+	  if test "$$profile" = "project"; then printf '%s\n' 'copyright_holder: Project team' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "software" || test "$$profile" = "techdocs"; then printf '%s\n' 'copyright_holder: unaltredocs team' >> "$(PROFILE_CONFIG)"; fi; \
 	  if test "$$profile" = "project"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
 	  if test "$$profile" = "manual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
 	else \
@@ -164,8 +169,8 @@ serve-profile: profile-compose-local-core
 	  personal) url="$(PERSONAL_URL)"; service="personal" ;; \
 	  project) url="$(PROJECT_URL)"; service="project" ;; \
 	  manual) url="$(MANUAL_URL)"; service="manual" ;; \
-	  software) url="$(SOFTWARE_URL)"; service="software" ;; \
-	  *) printf 'Unknown PROFILE=%s. Use personal, project, manual, or software.\n' "$(PROFILE)"; exit 1 ;; \
+	  software|techdocs) url="$(SOFTWARE_URL)"; service="software" ;; \
+	  *) printf 'Unknown PROFILE=%s. Use personal, project, manual, software, or techdocs.\n' "$(PROFILE)"; exit 1 ;; \
 	esac; \
 	printf 'Serving %s at %s\n' "$(PROFILE)" "$$url"; \
 	(sleep $(OPEN_DELAY); xdg-open "$$url" >/dev/null 2>&1 || sensible-browser "$$url" >/dev/null 2>&1 || true) & \
@@ -180,17 +185,20 @@ serve-project:
 serve-manual:
 	$(MAKE) serve-profile PROFILE=manual
 
-serve-software:
-	$(MAKE) serve-profile PROFILE=software
+serve-software: serve-techdocs
+
+serve-techdocs:
+	$(MAKE) serve-profile PROFILE=techdocs
 
 serve-allprofiles: profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
-	@printf 'Personal: %s\nProject:  %s\nManual:   %s\n' "$(PERSONAL_URL)" "$(PROJECT_URL)" "$(MANUAL_URL)"
+	@printf 'Personal: %s\nProject:  %s\nManual:   %s\nTechDocs: %s\n' "$(PERSONAL_URL)" "$(PROJECT_URL)" "$(MANUAL_URL)" "$(SOFTWARE_URL)"
 	@(sleep $(OPEN_DELAY); \
 	  xdg-open "$(PERSONAL_URL)" >/dev/null 2>&1 || sensible-browser "$(PERSONAL_URL)" >/dev/null 2>&1 || true; \
 	  xdg-open "$(PROJECT_URL)" >/dev/null 2>&1 || sensible-browser "$(PROJECT_URL)" >/dev/null 2>&1 || true; \
-	  xdg-open "$(MANUAL_URL)" >/dev/null 2>&1 || sensible-browser "$(MANUAL_URL)" >/dev/null 2>&1 || true) & \
-	docker compose $(PROFILE_COMPOSE_FILES) up personal project manual
+	  xdg-open "$(MANUAL_URL)" >/dev/null 2>&1 || sensible-browser "$(MANUAL_URL)" >/dev/null 2>&1 || true; \
+	  xdg-open "$(SOFTWARE_URL)" >/dev/null 2>&1 || sensible-browser "$(SOFTWARE_URL)" >/dev/null 2>&1 || true) & \
+	docker compose $(PROFILE_COMPOSE_FILES) up personal project manual software
 
 serve: local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
@@ -204,7 +212,7 @@ serve-native serve-local: profile-config dev-config python-deps bundle-install
 	active_config="$$core_config,_config.yml"; \
 	if test -n "$(SITE_PROFILE)"; then active_config="$$active_config,$(PROFILE_CONFIG)"; fi; \
 	serve_config="$$active_config,$(DEV_CONFIG)"; \
-	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --disable-disk-cache
+	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --destination "$(SERVE_DESTINATION)" --disable-disk-cache
 
 build: local-core-check
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)"'
@@ -288,6 +296,19 @@ screenshots screenshots-all: local-core-check
 	  $(MAKE) render-smoke SITE_PROFILE="$$profile" LOCAL_CORE="$(LOCAL_CORE)" PORT="$(PORT)" BASEURL="$(BASEURL)"; \
 	done; \
 	printf '\nScreenshots written to tmp/render-smoke/\n'
+
+docs-screenshots: screenshots
+	@mkdir -p "$(DOC_SCREENSHOTS_DIR)"
+	@set -e; \
+	set -- tmp/render-smoke/*.png; \
+	if test "$$1" = 'tmp/render-smoke/*.png'; then \
+	  printf 'No screenshots found in tmp/render-smoke/.\n'; \
+	  exit 1; \
+	fi; \
+	cp "$$@" "$(DOC_SCREENSHOTS_DIR)/"; \
+	printf 'Copied %s screenshots to %s/\n' "$$#" "$(DOC_SCREENSHOTS_DIR)"
+
+documentation-screenshots screenshots-docs: docs-screenshots
 
 down docker-down:
 	-docker compose down --remove-orphans

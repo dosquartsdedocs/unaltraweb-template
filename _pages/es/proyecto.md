@@ -6,7 +6,17 @@ lang: es
 ref: home
 profiles: [project]
 permalink: /es/
-nav: false
+nav: true
+nav_title: Proyecto
+nav_order: 2
+dropdown: true
+children:
+  - title: El proyecto
+    permalink: /es/
+  - title: Equipo
+    permalink: /es/equipo/
+  - title: Proyectos anteriores
+    permalink: /es/proyectos-anteriores/
 hero:
   image: /assets/img/projects/unaltraweb-template.svg
   alt: Diagrama de una plantilla de contenidos conectada al core reutilizable de unaltraweb
@@ -20,5 +30,5 @@ El perfil de proyecto está pensado para grupos, proyectos financiados e infraes
 | Campo | Ejemplo |
 |---|---|
 | Perfil | `site_profile: project` |
-| Navegación | Equipo, resultados, publicaciones, tesis, recursos, noticias |
+| Navegación | Noticias, publicaciones, páginas del proyecto, recursos y resultados |
 | Barra lateral | Sin enlaces sociales personales |

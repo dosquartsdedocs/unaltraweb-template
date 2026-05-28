@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Reusable profile pages overview</title>
+  <desc id="desc">A schematic screenshot showing data files feeding reusable unaltraweb pages.</desc>
+  <rect width="960" height="560" rx="28" fill="#f7f4ec"/>
+  <rect x="44" y="42" width="872" height="476" rx="20" fill="#fffdf8" stroke="#d8cdb8" stroke-width="2"/>
+  <rect x="44" y="42" width="872" height="54" rx="20" fill="#19202a"/>
+  <circle cx="76" cy="69" r="7" fill="#e07a5f"/>
+  <circle cx="101" cy="69" r="7" fill="#e9c46a"/>
+  <circle cx="126" cy="69" r="7" fill="#2a9d8f"/>
+  <text x="166" y="75" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#fff">unaltreprojecte</text>
+  <rect x="80" y="132" width="210" height="330" rx="16" fill="#f2efe7" stroke="#ddd2bd"/>
+  <text x="108" y="170" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#6b7280">DATA SOURCES</text>
+  <rect x="108" y="196" width="154" height="34" rx="8" fill="#ffffff" stroke="#d8cdb8"/>
+  <text x="128" y="218" font-family="monospace" font-size="13" fill="#263238">_data/team.yml</text>
+  <rect x="108" y="244" width="154" height="34" rx="8" fill="#ffffff" stroke="#d8cdb8"/>
+  <text x="128" y="266" font-family="monospace" font-size="13" fill="#263238">_books</text>
+  <rect x="108" y="292" width="154" height="34" rx="8" fill="#ffffff" stroke="#d8cdb8"/>
+  <text x="128" y="314" font-family="monospace" font-size="13" fill="#263238">_theses</text>
+  <rect x="108" y="340" width="154" height="34" rx="8" fill="#ffffff" stroke="#d8cdb8"/>
+  <text x="128" y="362" font-family="monospace" font-size="13" fill="#263238">repositories.yml</text>
+  <rect x="340" y="132" width="520" height="330" rx="16" fill="#ffffff" stroke="#d8cdb8"/>
+  <text x="372" y="170" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#111827">Reusable pages</text>
+  <g fill="#eef5ff" stroke="#bdd7ff">
+    <rect x="372" y="198" width="204" height="82" rx="14"/>
+    <rect x="604" y="198" width="204" height="82" rx="14"/>
+    <rect x="372" y="306" width="204" height="82" rx="14"/>
+    <rect x="604" y="306" width="204" height="82" rx="14"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" fill="#1f2937">
+    <text x="402" y="232" font-size="18" font-weight="800">Team</text>
+    <text x="402" y="256" font-size="13">team-grid include</text>
+    <text x="634" y="232" font-size="18" font-weight="800">Readings</text>
+    <text x="634" y="256" font-size="13">book-shelf layout</text>
+    <text x="402" y="340" font-size="18" font-weight="800">Theses</text>
+    <text x="402" y="364" font-size="13">theses layout</text>
+    <text x="634" y="340" font-size="18" font-weight="800">Repos</text>
+    <text x="634" y="364" font-size="13">repositories layout</text>
+  </g>
+  <g stroke="#9a7a3f" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M290 213 C318 213 326 214 340 218"/>
+    <path d="M290 261 C318 261 326 248 340 246"/>
+    <path d="M290 309 C318 309 326 342 340 348"/>
+    <path d="M290 357 C318 357 326 348 340 348"/>
+  </g>
+  <text x="372" y="428" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6b7280">Content stays local; layouts and includes stay in the reusable core.</text>
+</svg>

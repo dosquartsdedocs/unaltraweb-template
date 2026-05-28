@@ -8,6 +8,7 @@ title: "Manual de geodades del projecte"
 author: "equip del projecte unaltraweb"
 book_type: "Manual tècnic"
 publisher: "Sèrie de documentació del projecte"
+collection_name: "Manuals del projecte"
 year: 2026
 pages: 96
 book_language: "Català"
