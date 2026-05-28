@@ -8,7 +8,7 @@ Starter repository for academic, research project, manual and documentation webs
 - `_pages/`
 - `_projects/`
 - `_posts/`
-- `_bibliography/papers.bib`
+- `_bibliography/papers.bib` and `_bibliography/manual.bib`
 - `_data/`
 - `_sass/_site-custom.scss`
 - `assets/img/`

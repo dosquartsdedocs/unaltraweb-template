@@ -194,6 +194,7 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await page.goto(siteUrl("/en/publications/"));
   await expect(page.locator(".publications")).toContainText("Goodchild");
   await expect(page.locator(".publications")).toContainText("Zaragozí");
+  await expect(page.locator(".publications")).not.toContainText("Practical Handbook");
   await page.screenshot({ path: join(renderOut, `project-publications-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/resources/"));
@@ -348,9 +349,13 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator("#manual-more-readings-title")).toContainText("More readings");
   await expect(page.locator(".manual-featured-reference")).toHaveCount(3);
   await expect(page.locator(".manual-featured-authors").first()).toContainText("Samantha Lavender");
-  await page.locator(".manual-featured-details summary").first().click();
-  await expect(page.locator(".manual-featured-details").first()).toContainText("Authors");
-  await expect(page.locator(".manual-featured-details").first()).toContainText("How to cite (APA)");
+  await expect(page.locator(".manual-featured-reference .manual-reference-links .cite").first()).toContainText("How to cite (APA)");
+  await page.locator(".manual-featured-reference .manual-reference-links .cite").first().click();
+  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toHaveClass(/open/);
+  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toContainText("Practical Handbook");
+  await page.locator(".manual-featured-reference .manual-reference-links .bibtex").first().click();
+  await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toHaveClass(/open/);
+  await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toContainText("@book");
   await expect(page.locator(".manual-other-bibliography .manual-reference")).toHaveCount(9);
   await expect(page.locator(".manual-content")).toContainText("Geographic Information Science and Systems");
   await expect(page.locator(".manual-content")).toContainText("Remote Sensing and Image Interpretation");
@@ -360,9 +365,10 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-other-bibliography")).toContainText("Geographical Information Science");
   await expect(page.locator(".manual-reference-preview img[data-zoomable]")).toHaveCount(9);
   await expect(page.locator(".manual-featured-cover img[data-zoomable]")).toHaveCount(3);
-  await page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-details summary").click();
-  await expect(page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-details")).toContainText("DOI");
-  await expect(page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-details")).toContainText("Abstract");
+  await expect(page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-links a[href*='doi.org']")).toContainText("DOI");
+  await page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-links .abstract").click();
+  await expect(page.locator("#gutierrezProfilingTouristsUse2020 .abstract.hidden")).toHaveClass(/open/);
+  await expect(page.locator("#gutierrezProfilingTouristsUse2020 .abstract.hidden")).toContainText("Data collected through smart travel cards");
   const manualOtherReferences = await page.locator(".manual-other-bibliography .manual-reference-text").allTextContents();
   expect(manualOtherReferences[0]).toContain("2023");
   expect(manualOtherReferences[manualOtherReferences.length - 1]).toContain("1992");
