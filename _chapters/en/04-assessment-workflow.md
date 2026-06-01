@@ -4,7 +4,7 @@ title: Assessment workflow
 description: Rubrics, submissions and feedback loops for a manual-based course.
 lang: en
 ref: manual-assessment-workflow
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/chapters/assessment-workflow/
 weight: 50
 part: Assessment

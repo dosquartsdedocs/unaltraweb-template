@@ -3,7 +3,7 @@ title: Sucre sintàctic en Markdown
 description: Dreceres creatives per a avisos, figures, taules, subfigures i diagrames Mermaid.
 lang: ca
 ref: software_markdown_syntax_sugar
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 subsection: Autoria creativa
 weight: 56

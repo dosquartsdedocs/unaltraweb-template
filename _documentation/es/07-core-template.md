@@ -3,7 +3,7 @@ title: Repositorios núcleo y plantilla
 description: Por qué el comportamiento reutilizable vive en el núcleo y el contenido local vive en sitios hijo.
 lang: es
 ref: software_core_template
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Conceptos
 weight: 18
 permalink: /es/docs/nucleo-plantilla/

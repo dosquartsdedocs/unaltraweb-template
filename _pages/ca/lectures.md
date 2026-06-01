@@ -4,11 +4,11 @@ title: Lectures
 description: Notes de lectura i bibliografia anotada per al perfil personal.
 lang: ca
 ref: books
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: readings
 permalink: /ca/lectures/
 nav: true
-nav_order: 9
+nav_order: 10
 collection: books
 ---
 

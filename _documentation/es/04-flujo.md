@@ -3,7 +3,7 @@ title: Flujo de construcción
 description: Cómo las ediciones locales pasan por overlays de perfil, Jekyll y despliegue.
 lang: es
 ref: software_workflow
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Guías
 weight: 70
 permalink: /es/docs/flujo/

@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-rs-6-fundamentals-of-satellite-remote-sensing
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-rs-6-fundamentals-of-satellite-remote-sensing/
 title: "Fundamentals of Satellite Remote Sensing"
 calibre_source: rs

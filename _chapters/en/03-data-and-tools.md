@@ -4,7 +4,7 @@ title: Data and tools
 description: A compact place for datasets, software notes and coordinate reference system guidance.
 lang: en
 ref: manual-data-tools
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/chapters/data-tools/
 weight: 40
 part: Resources

@@ -3,7 +3,7 @@ title: SEO multilingüe
 description: Cómo conviven páginas traducidas, canonicals, hreflang y sitemaps.
 lang: es
 ref: software_multilingual_seo
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoría
 subsection: Modelo de contenido
 weight: 47

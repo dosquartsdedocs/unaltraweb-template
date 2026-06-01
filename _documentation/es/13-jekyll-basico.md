@@ -3,7 +3,7 @@ title: Jekyll básico para sitios hijo
 description: Los conceptos mínimos de Jekyll antes de editar un repositorio hijo.
 lang: es
 ref: software_jekyll_basics
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoría
 weight: 30
 permalink: /es/docs/jekyll-basico/

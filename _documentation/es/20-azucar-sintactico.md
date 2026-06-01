@@ -3,7 +3,7 @@ title: Azúcar sintáctico en Markdown
 description: Atajos creativos para avisos, figuras, tablas, subfiguras y diagramas Mermaid.
 lang: es
 ref: software_markdown_syntax_sugar
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoría
 subsection: Autoría creativa
 weight: 56

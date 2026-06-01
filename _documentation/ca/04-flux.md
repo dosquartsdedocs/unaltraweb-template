@@ -3,7 +3,7 @@ title: Flux de construcció
 description: Com les edicions locals passen per overlays de perfil, Jekyll i desplegament.
 lang: ca
 ref: software_workflow
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Guies
 weight: 70
 permalink: /ca/docs/flux/

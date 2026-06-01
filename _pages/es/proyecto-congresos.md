@@ -4,7 +4,7 @@ title: Congresos
 description: Reuniones, congresos, talleres y eventos públicos conectados con el proyecto.
 lang: es
 ref: conferences
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/congresos/
 nav: true
 nav_order: 3

@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-gis-31-applied-gis-and-spatial-analysis
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-gis-31-applied-gis-and-spatial-analysis/
 title: "Applied GIS and Spatial Analysis"
 calibre_source: gis

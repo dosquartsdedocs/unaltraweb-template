@@ -79,15 +79,15 @@ The profile published by GitHub is the one in `_config.yml`:
 
 ```yaml
 unaltraweb:
-  site_profile: personal
+  site_profile: unaltreselfie
 ```
 
 For local testing, pass `SITE_PROFILE` to `make serve`, `make build` or `make test`. The Makefile writes a temporary config overlay in `tmp/_config.profile.yml`, so you can test another profile without editing `_config.yml` or changing what GitHub Pages will publish:
 
 ```bash
-make serve SITE_PROFILE=project
-make serve SITE_PROFILE=techdocs
-make test SITE_PROFILE=project
+make serve SITE_PROFILE=unaltreprojecte
+make serve SITE_PROFILE=unaltredocs
+make test SITE_PROFILE=unaltreprojecte
 ```
 
 `make serve` also enables a local developer mode overlay that is not loaded by `make build`. The floating developer switcher reports the real build profile while you browse locally.
@@ -95,26 +95,26 @@ make test SITE_PROFILE=project
 For faster profile-specific development, the template also provides Docker Compose targets with fixed ports and automatic browser opening:
 
 ```bash
-make serve-personal LOCAL_CORE=../unaltraweb  # http://localhost:4001/unaltraweb-template/en/
-make serve-project LOCAL_CORE=../unaltraweb   # http://localhost:4002/unaltraweb-template/en/
-make serve-manual LOCAL_CORE=../unaltraweb    # http://localhost:4003/unaltraweb-template/en/
-make serve-techdocs LOCAL_CORE=../unaltraweb  # http://localhost:4004/unaltraweb-template/en/
+make serve-unaltreselfie LOCAL_CORE=../unaltraweb  # http://localhost:4001/unaltraweb-template/en/
+make serve-unaltreprojecte LOCAL_CORE=../unaltraweb   # http://localhost:4002/unaltraweb-template/en/
+make serve-unaltremanual LOCAL_CORE=../unaltraweb    # http://localhost:4003/unaltraweb-template/en/
+make serve-unaltredocs LOCAL_CORE=../unaltraweb  # http://localhost:4004/unaltraweb-template/en/
 make down-profiles
 ```
 
-`make serve-software` is kept as an alias while the profile name settles. `make serve-allprofiles LOCAL_CORE=../unaltraweb` starts personal, project, manual and techdocs at the same time and opens all URLs. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
+`make serve-allprofiles LOCAL_CORE=../unaltraweb` starts `unaltreselfie`, `unaltreprojecte`, `unaltremanual` and `unaltredocs` at the same time, then opens only the `unaltreselfie` URL. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
 
-The techdocs profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the left documentation index without editing navigation templates.
+The `unaltredocs` profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the left documentation index without editing navigation templates.
 
 ## Visual review
 
 Use profile overlays to inspect a single profile quickly:
 
 ```bash
-make serve SITE_PROFILE=personal
-make serve SITE_PROFILE=project
-make serve SITE_PROFILE=manual
-make serve SITE_PROFILE=techdocs
+make serve SITE_PROFILE=unaltreselfie
+make serve SITE_PROFILE=unaltreprojecte
+make serve SITE_PROFILE=unaltremanual
+make serve SITE_PROFILE=unaltredocs
 ```
 
 Generate screenshots for all demo profiles and shared features:

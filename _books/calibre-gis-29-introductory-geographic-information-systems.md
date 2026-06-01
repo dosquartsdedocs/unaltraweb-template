@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-gis-29-introductory-geographic-information-systems
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-gis-29-introductory-geographic-information-systems/
 title: "Introductory Geographic Information Systems"
 calibre_source: gis

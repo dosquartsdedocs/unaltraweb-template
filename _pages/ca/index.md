@@ -3,7 +3,7 @@ layout: profile
 title: Joan Ningu
 lang: ca
 ref: home
-profiles: [personal]
+profiles: [unaltreselfie]
 permalink: /ca/
 nav: false
 ---

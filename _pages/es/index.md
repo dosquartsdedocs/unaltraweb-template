@@ -3,7 +3,7 @@ layout: profile
 title: Juan Nadie
 lang: es
 ref: home
-profiles: [personal]
+profiles: [unaltreselfie]
 permalink: /es/
 nav: false
 ---

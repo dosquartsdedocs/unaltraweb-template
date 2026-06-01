@@ -3,7 +3,7 @@ title: Exemples tècnics
 description: Fluxos Mermaid, figures indexades i captures de perfils en pàgines de documentació.
 lang: ca
 ref: software_technical_examples
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 weight: 55
 permalink: /ca/docs/exemples-tecnics/
@@ -21,7 +21,7 @@ flowchart LR
   profiles --> personal[personal]
   profiles --> project[project]
   profiles --> manual[manual]
-  profiles --> techdocs[techdocs]
+  profiles --> unaltredocs[unaltredocs]
 ```
 
 ![Captura placeholder del perfil manual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Captura indexada placeholder d'una pàgina manual.")

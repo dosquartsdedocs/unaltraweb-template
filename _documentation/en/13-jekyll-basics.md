@@ -3,7 +3,7 @@ title: Jekyll basics for child sites
 description: The minimum Jekyll concepts users need before editing a child repository.
 lang: en
 ref: software_jekyll_basics
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 weight: 30
 permalink: /en/docs/jekyll-basics/

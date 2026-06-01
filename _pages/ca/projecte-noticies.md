@@ -4,7 +4,7 @@ title: Notícies
 description: Actualitzacions i fites del projecte.
 lang: ca
 ref: project_news
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /ca/noticies/
 nav: true
 nav_order: 1

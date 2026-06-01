@@ -4,7 +4,7 @@ title: The project
 description: A real project-profile home page using the same Jekyll layouts and includes as production pages.
 lang: en
 ref: home
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/
 nav: true
 nav_title: Project
@@ -41,7 +41,7 @@ The project profile is for research groups, funded projects and public research 
 
 | Field | Example |
 |---|---|
-| Profile | `site_profile: project` |
+| Profile | `site_profile: unaltreprojecte` |
 | Navigation | News, publications, project pages, resources and outputs |
 | Sidebar | No personal social-link sidebar |
 | Build mode | Static Jekyll build selected by configuration |

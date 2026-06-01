@@ -3,7 +3,7 @@ title: GitHub Actions en llocs fills
 description: Com els repositoris fills criden fluxos de treball reutilitzables del nucli.
 lang: ca
 ref: software_github_actions
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Automatització
 subsection: GitHub Actions
 weight: 72

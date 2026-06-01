@@ -4,7 +4,7 @@ title: Figures i diagrames
 description: Un capítol breu sobre peus de figura, actius Mermaid i callouts docents.
 lang: ca
 ref: manual-figures-diagrams
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/chapters/figures-diagrames/
 weight: 20
 part: Producció

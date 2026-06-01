@@ -3,7 +3,7 @@ title: Technical examples
 description: Mermaid workflows, indexed figures and profile screenshots inside documentation pages.
 lang: en
 ref: software_technical_examples
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 weight: 55
 permalink: /en/docs/technical-examples/
@@ -21,7 +21,7 @@ flowchart LR
   profiles --> personal[personal]
   profiles --> project[project]
   profiles --> manual[manual]
-  profiles --> techdocs[techdocs]
+  profiles --> unaltredocs[unaltredocs]
 ```
 
 ![Manual profile screenshot placeholder]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Indexed screenshot placeholder for a manual profile page.")

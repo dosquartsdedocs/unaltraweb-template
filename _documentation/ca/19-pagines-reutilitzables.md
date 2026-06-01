@@ -3,7 +3,7 @@ title: Pàgines i plantilles reutilitzables de perfil
 description: D'on carreguen dades les pàgines d'equip, lectures, tesis, repositoris i publicacions.
 lang: ca
 ref: software_reusable_profile_pages
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 subsection: Model de contingut
 weight: 44
@@ -33,7 +33,7 @@ La pàgina d'equip és l'exemple més directe. `_pages/ca/projecte-equip.md` con
   pic: user-placeholder.png
 ```
 
-Usa `profiles: [project]` per a pàgines només de projecte, `profiles: [personal]` per a pàgines personals i `feature` quan una secció s'haja d'activar o ocultar mitjançant `unaltraweb.features`.
+Usa `profiles: [unaltreprojecte]` per a pàgines només de projecte, `profiles: [unaltreselfie]` per a pàgines personals i `feature` quan una secció s'haja d'activar o ocultar mitjançant `unaltraweb.features`.
 
 <h2 id="team-page">Pàgina d'equip</h2>
 
@@ -47,7 +47,7 @@ Les prestatgeries de lectura usen `layout: book-shelf` i `collection: books`. El
 
 Una biblioteca Calibre pot alimentar la mateixa col·lecció `_books`. El mapatge útil és directe: títol, autoria, editorial, data de publicació, ISBN, sèrie, etiquetes, comentaris i portada de Calibre passen a camps de front matter i text de ressenya. Usa `collection_name` per a l'agrupació visible de la prestatgeria i conserva la `series` de Calibre com a alternativa quan no hi haja una col·lecció explícita. Les portades haurien de copiar-se a `assets/img/books/` i referenciar-se amb `cover: /assets/img/books/<slug>.jpg`; els fitxers de llibre electrònic han de quedar fora del repositori llevat que els drets de distribució siguen clars.
 
-Per a un lloc personal, usa `profiles: [personal]` i les entrades apareixeran en `unaltreselfie`. Per a llistes de lectura de projecte, usa `profiles: [project]`. Les biblioteques virtuals, etiquetes o columnes personalitzades de Calibre poden convertir-se en `tags`, `status`, `collection_name` o pàgines generades separades, segons com estiga organitzada la biblioteca.
+Per a un lloc personal, usa `profiles: [unaltreselfie]` i les entrades apareixeran en `unaltreselfie`. Per a llistes de lectura de projecte, usa `profiles: [unaltreprojecte]`. Les biblioteques virtuals, etiquetes o columnes personalitzades de Calibre poden convertir-se en `tags`, `status`, `collection_name` o pàgines generades separades, segons com estiga organitzada la biblioteca.
 
 Per importar una biblioteca Calibre real necessitem tres decisions: la ruta de la biblioteca, quines col·leccions o etiquetes de Calibre es publiquen, i si cada element serà una nota pública de lectura, un esborrany privat omés del lloc o només una targeta de metadades amb portada i registre bibliogràfic.
 

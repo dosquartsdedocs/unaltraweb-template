@@ -4,7 +4,7 @@ title: How this manual works
 description: A first chapter that checks the manual structure, callouts, figures, Mermaid diagrams and references.
 lang: en
 ref: manual-orientation
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/chapters/orientation/
 weight: 10
 part: Orientation

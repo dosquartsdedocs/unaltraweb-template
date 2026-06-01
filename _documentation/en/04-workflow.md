@@ -3,7 +3,7 @@ title: Build workflow
 description: How local edits move through profile overlays, Jekyll and deployment.
 lang: en
 ref: software_workflow
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Guides
 weight: 70
 permalink: /en/docs/workflow/

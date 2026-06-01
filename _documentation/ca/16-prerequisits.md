@@ -3,7 +3,7 @@ title: Prerequisits abans de publicar
 description: Fitxers i serveis que cal revisar abans de publicar un lloc fill.
 lang: ca
 ref: software_prerequisites
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Construcció
 weight: 22
 permalink: /ca/docs/prerequisits/

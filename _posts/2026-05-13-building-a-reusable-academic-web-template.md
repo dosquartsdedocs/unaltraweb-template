@@ -12,6 +12,6 @@ related_posts: false
 
 This demo site is intentionally small. The useful parts live in `unaltraweb`: layouts, includes, styles, metrics tooling, theme handling, and site profiles.
 
-The template repository should mostly contain configuration and content. That keeps updates simple and makes it possible to reuse the same core for a personal site, a research project, a software site, or a manual.
+The template repository should mostly contain configuration and content. That keeps updates simple and makes it possible to reuse the same core for a personal site, a research project, a manual, or a documentation site.
 
-The next step is to make site profiles explicit enough that switching between `personal`, `project`, `software`, and `manual` is mostly a configuration change.
+The next step is to make site profiles explicit enough that switching between `unaltreselfie`, `unaltreprojecte`, `unaltremanual`, and `unaltredocs` is mostly a configuration change.

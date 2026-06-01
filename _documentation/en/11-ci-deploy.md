@@ -3,7 +3,7 @@ title: CI and deploy
 description: Automatic checks stay light while heavier jobs remain manual.
 lang: en
 ref: software_ci_deploy
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Automation
 subsection: GitHub Actions
 weight: 74

@@ -4,7 +4,7 @@ title: Course structure
 description: How to organise a subject manual into weeks, readings and practical sessions.
 lang: en
 ref: manual-course-structure
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/chapters/course-structure/
 weight: 30
 part: Planning

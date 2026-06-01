@@ -3,7 +3,7 @@ title: SEO multilingüe
 description: Com conviuen pàgines traduïdes, canonicals, hreflang i sitemaps.
 lang: ca
 ref: software_multilingual_seo
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 subsection: Model de contingut
 weight: 47

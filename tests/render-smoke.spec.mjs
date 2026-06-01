@@ -4,9 +4,9 @@ import { join } from "node:path";
 
 const baseUrl = (process.env.BASE_URL || "http://127.0.0.1:4000/unaltraweb-template").replace(/\/$/, "");
 const renderOut = process.env.RENDER_OUT || "tmp/render-smoke";
-const activeProfile = process.env.SITE_PROFILE || "personal";
+const activeProfile = process.env.SITE_PROFILE || "unaltreselfie";
 const startPath = process.env.START_PATH || "/en/";
-const isTechDocsProfile = ["techdocs", "software"].includes(activeProfile);
+const isDocsProfile = activeProfile === "unaltredocs";
 
 mkdirSync(renderOut, { recursive: true });
 
@@ -53,13 +53,11 @@ async function expectCoffeeAccent(page) {
 }
 
 test("profile page renders and supports theme modes", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "personal", "personal profile only");
+  test.skip(activeProfile !== "unaltreselfie", "unaltreselfie profile only");
   await page.goto(siteUrl("/en/"));
 
-  await expect(page.locator("html")).toHaveAttribute("data-site-type", "personal");
-  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "personal");
-  await expect(page.locator("body")).toHaveClass(/site-type-personal/);
-  await expect(page.locator("body")).toHaveClass(/site-profile-personal/);
+  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "unaltreselfie");
+  await expect(page.locator("body")).toHaveClass(/site-profile-unaltreselfie/);
   await expect(page.locator(".profile-page-sidebar .profile-card")).toContainText("John Doe");
   await expect(page.locator(".profile-card-links a[aria-label='GitHub']")).toHaveCount(1);
   await expect(page.locator(".profile-card-links a[aria-label='ORCID']")).toHaveCount(1);
@@ -70,6 +68,7 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   await expect(liveNavbar.locator(".navbar-nav .nav-item.active > .nav-link")).toContainText("Home");
   await expect(liveNavbar).not.toContainText("About");
   await expect(liveNavbar).toContainText("Blog");
+  await expect(liveNavbar).toContainText("News");
   await expect(liveNavbar).toContainText("CV");
   await expect(liveNavbar).toContainText("Projects");
   await expect(page.locator(".developer-mode-switcher")).toContainText("Developer mode");
@@ -128,11 +127,11 @@ test("developer mode exposes the local profile switcher", async ({ page }) => {
 });
 
 test("project profile renders real project pages", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "project", "project profile only");
+  test.skip(activeProfile !== "unaltreprojecte", "unaltreprojecte profile only");
 
   await page.goto(siteUrl("/en/"));
-  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "project");
-  await expect(page.locator("body")).toHaveClass(/site-profile-project/);
+  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "unaltreprojecte");
+  await expect(page.locator("body")).toHaveClass(/site-profile-unaltreprojecte/);
   await expect(page.locator(".navbar-brand")).toContainText("unaltreprojecte");
   await expect(page.locator(".navbar .navbar-nav .nav-item.active > .nav-link")).toContainText("Project");
   await expect(page.locator(".navbar")).toContainText("Team");
@@ -253,11 +252,11 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
 
 
 test("manual profile renders a multilingual handbook", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "manual", "manual profile only");
+  test.skip(activeProfile !== "unaltremanual", "unaltremanual profile only");
 
   await page.goto(siteUrl("/en/"));
-  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "manual");
-  await expect(page.locator("body")).toHaveClass(/site-profile-manual/);
+  await expect(page.locator("html")).toHaveAttribute("data-site-profile", "unaltremanual");
+  await expect(page.locator("body")).toHaveClass(/site-profile-unaltremanual/);
   await expect(page.locator(".navbar-brand")).toContainText("unaltremanual");
   await expect(page.locator(".manual-cover h1")).toContainText("unaltremanual");
   await expect(page.locator(".manual-sidebar")).toContainText("Contents");
@@ -378,7 +377,9 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".reading-cover figcaption.custom", { hasText: "URV teacher" })).toBeVisible();
   await expect(page.locator(".manual-other-bibliography")).toContainText("Geographical Information Science");
   await expect(page.locator(".manual-reference-preview img[data-zoomable]")).toHaveCount(9);
-  await expect(page.locator(".manual-featured-cover img[data-zoomable]")).toHaveCount(3);
+  await expect(page.locator(".manual-featured-cover img[data-zoomable]")).toHaveCount(0);
+  await expect(page.locator(".manual-featured-cover a.cover-link")).toHaveCount(3);
+  await expect(page.locator(".manual-featured-reference h3 a", { hasText: "Practical Handbook" })).toHaveAttribute("href", /\/en\/readings\/calibre-rs-3-practical-handbook-of-remote-sensing-second-edition\/?$/);
   await expect(page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-links a[href*='doi.org']")).toContainText("DOI");
   await page.locator("#gutierrezProfilingTouristsUse2020 .manual-reference-links .abstract").click();
   await expect(page.locator("#gutierrezProfilingTouristsUse2020 .abstract.hidden")).toHaveClass(/open/);
@@ -389,6 +390,12 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".reading-rating", { hasText: "5/5" }).first()).toBeVisible();
   await page.screenshot({ path: join(renderOut, `manual-bibliography-${testInfo.project.name}.png`), fullPage: true });
 
+  await page.locator(".manual-featured-reference h3 a", { hasText: "Practical Handbook" }).click();
+  await expect(page).toHaveURL(/\/en\/readings\/calibre-rs-3-practical-handbook-of-remote-sensing-second-edition\/?$/);
+  await expect(page.locator(".reading-review")).toContainText("Practical Handbook of Remote Sensing");
+  await expect(page.locator(".reading-biblio-actions")).toContainText("Bibliographic record");
+  await page.screenshot({ path: join(renderOut, `manual-selected-reading-detail-${testInfo.project.name}.png`), fullPage: true });
+
   await page.goto(siteUrl("/ca/chapters/orientacio/"));
   await expect(page.locator("html")).toHaveAttribute("lang", "ca");
   await expect(page.locator(".manual-chapter-header h1")).toContainText("Com funciona aquest manual");
@@ -397,8 +404,8 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await page.screenshot({ path: join(renderOut, `manual-ca-chapter-${testInfo.project.name}.png`), fullPage: true });
 });
 
-test("techdocs profile renders the documentation collection", async ({ page }, testInfo) => {
-  test.skip(!isTechDocsProfile, "techdocs profile only");
+test("unaltredocs profile renders the documentation collection", async ({ page }, testInfo) => {
+  test.skip(!isDocsProfile, "unaltredocs profile only");
 
   await page.goto(siteUrl("/en/"));
   await expect(page.locator("html")).toHaveAttribute("data-site-profile", activeProfile);
@@ -412,7 +419,7 @@ test("techdocs profile renders the documentation collection", async ({ page }, t
   await expect(page.locator(".documentation-sidebar")).toContainText("Operations");
   await expect(page.locator(".documentation-card")).toHaveCount(22);
   await expectImageLoaded(page.locator(".documentation-hero img"));
-  await page.screenshot({ path: join(renderOut, `techdocs-home-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-home-${testInfo.project.name}.png`), fullPage: true });
 
   const beforeDocsFontSize = await page.locator(".documentation-content").evaluate((node) => getComputedStyle(node).fontSize);
   await expect(page.locator(".documentation-font-dropdown")).toHaveCount(1);
@@ -424,12 +431,12 @@ test("techdocs profile renders the documentation collection", async ({ page }, t
 
   await page.locator("[data-content-search]").fill("profiles");
   await expect(page.locator("[data-content-search-results]")).toContainText("Site profiles");
-  await page.screenshot({ path: join(renderOut, `techdocs-search-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-search-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/profile-checklist/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Profile feature checklist");
   await expect(page.locator(".profile-feature-matrix")).toContainText("unaltredocs");
-  await page.screenshot({ path: join(renderOut, `techdocs-profile-matrix-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-profile-matrix-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/reusable-profile-pages/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Reusable profile pages and layouts");
@@ -439,48 +446,48 @@ test("techdocs profile renders the documentation collection", async ({ page }, t
   await expect(page.locator("head link[rel='alternate'][hreflang='es']")).toHaveAttribute("href", /\/es\/docs\/paginas-reutilizables\/?$/);
   await expect(page.locator("head link[rel='alternate'][hreflang='ca']")).toHaveAttribute("href", /\/ca\/docs\/pagines-reutilitzables\/?$/);
   await expect(page.locator("head link[rel='alternate'][hreflang='x-default']")).toHaveAttribute("href", /\/en\/docs\/reusable-profile-pages\/?$/);
-  await page.screenshot({ path: join(renderOut, `techdocs-reusable-pages-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-reusable-pages-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/documentation-collection/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Documentation collection");
   await expect(page.locator(".documentation-content")).toContainText("Documentation sidebar");
-  await page.screenshot({ path: join(renderOut, `techdocs-documentation-collection-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-documentation-collection-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/workflow/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Build workflow");
   await expect(page.locator(".documentation-page-nav")).toContainText("Next");
   await expect(page.locator(".documentation-page-nav")).toContainText("GitHub Actions in child sites");
-  await page.screenshot({ path: join(renderOut, `techdocs-workflow-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-workflow-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/technical-examples/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Technical examples");
   await expect(page.locator(".documentation-content")).toContainText("flowchart LR");
-  await page.screenshot({ path: join(renderOut, `techdocs-technical-examples-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-technical-examples-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/markdown-syntax-sugar/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Markdown syntax sugar");
   await expect(page.locator(".documentation-content")).toContainText("Callout shorthand");
   await expect(page.locator(".documentation-content")).toContainText("Subfigure compositions");
   await expect(page.locator(".documentation-content")).toContainText("Mermaid source files as SVG figures");
-  await page.screenshot({ path: join(renderOut, `techdocs-markdown-syntax-sugar-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-markdown-syntax-sugar-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/profile-screenshots/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Profile screenshots");
   await expect(page.locator("img[src$='manual-search-chromium.png']")).toHaveCount(1);
-  await expect(page.locator("img[src$='techdocs-profile-matrix-chromium.png']")).toHaveCount(1);
-  await page.screenshot({ path: join(renderOut, `techdocs-profile-screenshots-${testInfo.project.name}.png`), fullPage: true });
+  await expect(page.locator("img[src$='unaltredocs-profile-matrix-chromium.png']")).toHaveCount(1);
+  await page.screenshot({ path: join(renderOut, `unaltredocs-profile-screenshots-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/docs/multilingual-seo/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Multilingual SEO");
   await expect(page.locator(".documentation-content")).toContainText("self-referencing canonical URL");
   await expect(page.locator(".documentation-content")).toContainText("hreflang");
-  await page.screenshot({ path: join(renderOut, `techdocs-multilingual-seo-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-multilingual-seo-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/es/docs/que-es-unaltraweb/"));
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
   await expect(page.locator(".documentation-page-header h1")).toContainText("¿Qué es unaltraweb?");
   await expect(page.locator(".documentation-sidebar")).toContainText("Perfiles de sitio");
-  await page.screenshot({ path: join(renderOut, `techdocs-es-page-${testInfo.project.name}.png`), fullPage: true });
+  await page.screenshot({ path: join(renderOut, `unaltredocs-es-page-${testInfo.project.name}.png`), fullPage: true });
 });
 
 test("coffee mode uses coffee accents", async ({ page }) => {
@@ -490,7 +497,7 @@ test("coffee mode uses coffee accents", async ({ page }) => {
 
   await expectThemeState(page, "sepia");
   await expectCoffeeAccent(page);
-  if (isTechDocsProfile) {
+  if (isDocsProfile) {
     await expect(page.locator("[data-documentation-theme-label]")).toContainText("Coffee");
   }
 });
@@ -540,7 +547,7 @@ test("callout shorthand upgrades nested blockquotes", async ({ page }, testInfo)
 });
 
 test("multilingual profile and publications pages render", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "personal", "personal profile only");
+  test.skip(activeProfile !== "unaltreselfie", "unaltreselfie profile only");
   const pages = [
     ["/en/", ["John Doe", "profile-card"]],
     ["/es/", ["Juan Nadie", "profile-card"]],
@@ -554,12 +561,12 @@ test("multilingual profile and publications pages render", async ({ page }, test
     ["/es/proyectos/", ["Proyectos", "unaltraweb template", "Minimal Mistakes profile pattern", "al-folio refactor"]],
     ["/en/publications/", ["Goodchild", "Zaragozí", "Gutiérrez", "Bibliometric"]],
     ["/en/readings/", ["Readings", "GIS", "Remote sensing", "Applied GIS and Spatial Analysis", "Remote Sensing and Image Interpretation"]],
+    ["/en/news/", ["News", "press", "interview", "University GIS podcast"]],
   ];
 
   for (const [path, needles] of pages) {
     await page.goto(siteUrl(path));
-    await expect(page.locator("html")).toHaveAttribute("data-site-type", "personal");
-    await expect(page.locator("html")).toHaveAttribute("data-site-profile", "personal");
+    await expect(page.locator("html")).toHaveAttribute("data-site-profile", "unaltreselfie");
     const html = await page.content();
     for (const needle of needles) {
       expect(html).toContain(needle);
@@ -572,7 +579,7 @@ test("multilingual profile and publications pages render", async ({ page }, test
       await expect(page.locator("footer")).toContainText(/Darrera actualització: \d{2}\/\d{2}\/\d{4}/);
       await page.screenshot({ path: join(renderOut, `personal-ca-home-${testInfo.project.name}.png`), fullPage: true });
     }
-    if (["/en/blog/", "/en/cv/", "/en/projects/", "/en/publications/", "/en/readings/"].includes(path)) {
+    if (["/en/blog/", "/en/cv/", "/en/projects/", "/en/publications/", "/en/readings/", "/en/news/"].includes(path)) {
       const slug = path.replace(/^\/en\//, "").replace(/\/$/, "");
       await page.screenshot({ path: join(renderOut, `personal-${slug}-${testInfo.project.name}.png`), fullPage: true });
     }
@@ -580,7 +587,7 @@ test("multilingual profile and publications pages render", async ({ page }, test
 });
 
 test("blog archive paginates demo posts", async ({ page }) => {
-  test.skip(activeProfile !== "personal", "personal profile only");
+  test.skip(activeProfile !== "unaltreselfie", "unaltreselfie profile only");
   await page.goto(siteUrl("/en/blog/"));
   await expect(page.locator(".blog-archive-item")).toHaveCount(4);
   await expect(page.locator(".blog-archive-range")).toContainText("Posts from");
@@ -611,7 +618,7 @@ test("blog archive paginates demo posts", async ({ page }) => {
 });
 
 test("CV preview and project cards link to rich project pages", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "personal", "personal profile only");
+  test.skip(activeProfile !== "unaltreselfie", "unaltreselfie profile only");
   await page.goto(siteUrl("/en/cv/"));
   await expect(page.locator(".cv-download-card")).toContainText("Download PDF");
   await expect(page.locator(".cv-download-button")).toHaveAttribute("href", /assets\/pdf\/cv\.pdf$/);
@@ -639,7 +646,7 @@ test("CV preview and project cards link to rich project pages", async ({ page },
 });
 
 test("mobile profile render is usable", async ({ page }, testInfo) => {
-  test.skip(activeProfile !== "personal", "personal profile only");
+  test.skip(activeProfile !== "unaltreselfie", "unaltreselfie profile only");
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(siteUrl("/en/"));
 
@@ -656,7 +663,7 @@ test("mobile profile render is usable", async ({ page }, testInfo) => {
 test("publication page does not overflow on mobile", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
 
-  if (isTechDocsProfile) {
+  if (isDocsProfile) {
     await page.goto(siteUrl("/en/docs/what-is-unaltraweb/"));
     await expect(page.locator(".documentation-layout")).toBeVisible();
     await expect(page.locator(".documentation-layout")).toHaveClass(/documentation-toc-collapsed/);
@@ -667,11 +674,11 @@ test("publication page does not overflow on mobile", async ({ page }, testInfo) 
     await expect(page.locator(".documentation-layout")).not.toHaveClass(/documentation-toc-collapsed/);
     await expect(page.locator(".documentation-nav")).toBeVisible();
     await expectNoHorizontalOverflow(page);
-    await page.screenshot({ path: join(renderOut, `techdocs-mobile-${testInfo.project.name}.png`), fullPage: true });
+    await page.screenshot({ path: join(renderOut, `unaltredocs-mobile-${testInfo.project.name}.png`), fullPage: true });
     return;
   }
 
-  if (activeProfile === "manual") {
+  if (activeProfile === "unaltremanual") {
     await page.goto(siteUrl("/en/"));
     await expect(page.locator(".manual-layout")).toBeVisible();
     await expectNoHorizontalOverflow(page);

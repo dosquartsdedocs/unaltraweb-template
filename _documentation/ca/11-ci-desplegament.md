@@ -3,7 +3,7 @@ title: CI i desplegament
 description: Les comprovacions automàtiques es mantenen lleugeres i els treballs pesats queden manuals.
 lang: ca
 ref: software_ci_deploy
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Automatització
 subsection: GitHub Actions
 weight: 74

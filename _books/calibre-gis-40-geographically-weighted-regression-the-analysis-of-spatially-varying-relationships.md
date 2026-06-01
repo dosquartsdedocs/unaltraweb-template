@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-gis-40-geographically-weighted-regression-the-analysis-of-spatially-varying-relationships
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-gis-40-geographically-weighted-regression-the-analysis-of-spatially-varying-relationships/
 title: "Geographically Weighted Regression: The Analysis of Spatially Varying Relationships"
 calibre_source: gis

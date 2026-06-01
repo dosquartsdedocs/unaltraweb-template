@@ -3,7 +3,7 @@ title: ¿Qué es unaltraweb?
 description: El núcleo reutilizable, el repositorio de plantilla y el papel de los perfiles.
 lang: es
 ref: software_getting_started
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Conceptos
 weight: 10
 permalink: /es/docs/que-es-unaltraweb/

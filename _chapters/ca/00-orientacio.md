@@ -4,7 +4,7 @@ title: Com funciona aquest manual
 description: Un primer capítol per comprovar l'estructura, els callouts, les figures, Mermaid i la bibliografia.
 lang: ca
 ref: manual-orientation
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/chapters/orientacio/
 weight: 10
 part: Orientació

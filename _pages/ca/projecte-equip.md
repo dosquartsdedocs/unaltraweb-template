@@ -4,7 +4,7 @@ title: Equip
 description: Persones i institucions del projecte.
 lang: ca
 ref: project_team
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /ca/equip/
 nav: false
 ---

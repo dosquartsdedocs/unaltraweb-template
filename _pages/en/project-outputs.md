@@ -4,7 +4,7 @@ title: Outputs
 description: Reusable products published by the project.
 lang: en
 ref: outputs
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/outputs/
 nav: false
 nav_order: 3

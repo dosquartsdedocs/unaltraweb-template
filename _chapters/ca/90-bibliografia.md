@@ -4,7 +4,7 @@ title: Bibliografia
 description: Llibres i articles que donen suport al manual sense convertir-se en un capítol numerat.
 lang: ca
 ref: manual-bibliography
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/bibliografia/
 weight: 90
 part: Referència

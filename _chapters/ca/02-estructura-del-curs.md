@@ -4,7 +4,7 @@ title: Estructura del curs
 description: Com organitzar un manual d'assignatura en setmanes, lectures i pràctiques.
 lang: ca
 ref: manual-course-structure
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/chapters/estructura-del-curs/
 weight: 30
 part: Planificació

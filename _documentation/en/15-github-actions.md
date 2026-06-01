@@ -3,7 +3,7 @@ title: GitHub Actions in child sites
 description: How child repositories call reusable workflows from the core.
 lang: en
 ref: software_github_actions
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Automation
 subsection: GitHub Actions
 weight: 72

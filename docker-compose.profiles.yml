@@ -11,30 +11,30 @@ x-serve-base: &serve-base
     - .:/srv/jekyll
 
 services:
-  personal:
+  unaltreselfie:
     <<: *serve-base
-    container_name: unaltraweb-template-personal
+    container_name: unaltraweb-template-unaltreselfie
     ports:
-      - "${PERSONAL_PORT:-4001}:4001"
-    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4001 LIVERELOAD= SITE_PROFILE=personal'
+      - "${UNALTRESELFIE_PORT:-4001}:4001"
+    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4001 LIVERELOAD= SITE_PROFILE=unaltreselfie'
 
-  project:
+  unaltreprojecte:
     <<: *serve-base
-    container_name: unaltraweb-template-project
+    container_name: unaltraweb-template-unaltreprojecte
     ports:
-      - "${PROJECT_PORT:-4002}:4002"
-    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4002 LIVERELOAD= SITE_PROFILE=project'
+      - "${UNALTREPROJECTE_PORT:-4002}:4002"
+    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4002 LIVERELOAD= SITE_PROFILE=unaltreprojecte'
 
-  manual:
+  unaltremanual:
     <<: *serve-base
-    container_name: unaltraweb-template-manual
+    container_name: unaltraweb-template-unaltremanual
     ports:
-      - "${MANUAL_PORT:-4003}:4003"
-    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4003 LIVERELOAD= SITE_PROFILE=manual'
+      - "${UNALTREMANUAL_PORT:-4003}:4003"
+    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4003 LIVERELOAD= SITE_PROFILE=unaltremanual'
 
-  software:
+  unaltredocs:
     <<: *serve-base
-    container_name: unaltraweb-template-techdocs
+    container_name: unaltraweb-template-unaltredocs
     ports:
-      - "${SOFTWARE_PORT:-4004}:4004"
-    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4004 LIVERELOAD= SITE_PROFILE=techdocs'
+      - "${UNALTREDOCS_PORT:-4004}:4004"
+    command: bash -lc 'make serve-native HOST=0.0.0.0 PORT=4004 LIVERELOAD= SITE_PROFILE=unaltredocs'

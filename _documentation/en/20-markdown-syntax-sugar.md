@@ -3,7 +3,7 @@ title: Markdown syntax sugar
 description: Creative shorthand for callouts, figures, tables, subfigures and Mermaid diagrams.
 lang: en
 ref: software_markdown_syntax_sugar
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 subsection: Creative authoring
 weight: 56

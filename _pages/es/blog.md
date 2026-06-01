@@ -3,11 +3,11 @@ layout: page
 title: Blog
 lang: es
 ref: blog
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: blog
 permalink: /es/blog/
 nav: true
-nav_order: 6
+nav_order: 7
 pagination:
   enabled: true
   locale: es

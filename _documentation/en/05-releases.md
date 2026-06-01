@@ -3,7 +3,7 @@ title: Release updates
 description: How child sites can consume newer versions of the core.
 lang: en
 ref: software_releases
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Operations
 weight: 85
 permalink: /en/docs/releases/

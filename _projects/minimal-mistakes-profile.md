@@ -19,7 +19,7 @@ resources:
 
 ![Profile layout wireframe]({{ '/assets/img/projects/minimal-mistakes-profile.svg' | relative_url }}){: .img-fluid .rounded .z-depth-1 }
 
-Minimal Mistakes is a useful reference for the `personal` site profile because it handles author identity calmly: profile sidebar, navigation, blog archive, and content pages each have a clear role.
+Minimal Mistakes is a useful reference for the `unaltreselfie` site profile because it handles author identity calmly: profile sidebar, navigation, blog archive, and content pages each have a clear role.
 
 ## Pattern Inventory
 

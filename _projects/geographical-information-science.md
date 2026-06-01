@@ -38,5 +38,5 @@ The image above is intentionally abstract. In a real research-line page, this sl
 
 - Reading list for core GIScience concepts.
 - Short method notes with reproducible examples.
-- Teaching materials that can later become a `course` site profile.
+- Teaching materials that can later become an `unaltremanual` site profile.
 - Software packages and datasets connected to the publication list.

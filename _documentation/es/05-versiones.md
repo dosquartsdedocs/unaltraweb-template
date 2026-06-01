@@ -3,7 +3,7 @@ title: Actualizaciones de versión
 description: Cómo los sitios hijo pueden consumir versiones nuevas del núcleo.
 lang: es
 ref: software_releases
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Operaciones
 weight: 85
 permalink: /es/docs/versiones/

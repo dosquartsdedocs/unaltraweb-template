@@ -4,7 +4,7 @@ title: Recursos
 description: Resultats, repositoris, lectures i materials reutilitzables del projecte.
 lang: ca
 ref: resources
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /ca/recursos/
 nav: true
 nav_order: 6

@@ -3,7 +3,7 @@ layout: page
 title: Publications
 lang: en
 ref: publications
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: publications
 permalink: /en/publications/
 nav: true

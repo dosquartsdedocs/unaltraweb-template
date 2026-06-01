@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-rs-3-practical-handbook-of-remote-sensing-second-edition
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-rs-3-practical-handbook-of-remote-sensing-second-edition/
 title: "Practical Handbook of Remote Sensing; Second Edition"
 calibre_source: rs

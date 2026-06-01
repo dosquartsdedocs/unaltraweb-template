@@ -4,7 +4,7 @@ title: El proyecto
 description: Página de inicio real del perfil de proyecto.
 lang: es
 ref: home
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/
 nav: true
 nav_title: Proyecto
@@ -29,6 +29,6 @@ El perfil de proyecto está pensado para grupos, proyectos financiados e infraes
 
 | Campo | Ejemplo |
 |---|---|
-| Perfil | `site_profile: project` |
+| Perfil | `site_profile: unaltreprojecte` |
 | Navegación | Noticias, publicaciones, páginas del proyecto, recursos y resultados |
 | Barra lateral | Sin enlaces sociales personales |

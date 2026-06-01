@@ -3,13 +3,13 @@ title: Resultados de investigación y datos
 description: Cómo documentar conjuntos de datos, software, informes y productos reutilizables de investigación.
 lang: es
 ref: software_research_outputs
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoría
 weight: 50
 permalink: /es/docs/outputs-investigacion/
 ---
 
-El perfil `techdocs` puede documentar más que paquetes de software. Úsalo para conjuntos de datos, modelos, dashboards, protocolos, API públicas y resultados reproducibles de proyecto.
+El perfil `unaltredocs` puede documentar más que paquetes de software. Úsalo para conjuntos de datos, modelos, dashboards, protocolos, API públicas y resultados reproducibles de proyecto.
 
 <h2 id="project-resources-and-outputs">Recursos y resultados de proyecto</h2>
 

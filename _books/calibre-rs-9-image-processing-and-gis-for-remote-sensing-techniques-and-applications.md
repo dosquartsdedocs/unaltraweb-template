@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-rs-9-image-processing-and-gis-for-remote-sensing-techniques-and-applications
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-rs-9-image-processing-and-gis-for-remote-sensing-techniques-and-applications/
 title: "Image Processing and GIS for Remote Sensing: Techniques and Applications"
 calibre_source: rs

@@ -4,7 +4,7 @@ title: unaltremanual
 description: A manual profile for academic handbooks with multilingual chapters, readable side navigation and teaching-first references.
 lang: en
 ref: home
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/
 nav: false
 cover_image: /assets/img/manual-cover-cat.png

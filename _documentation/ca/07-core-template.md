@@ -3,7 +3,7 @@ title: Repositoris nucli i plantilla
 description: Per què el comportament reutilitzable viu al nucli i el contingut local viu en llocs fills.
 lang: ca
 ref: software_core_template
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Conceptes
 weight: 18
 permalink: /ca/docs/nucli-plantilla/

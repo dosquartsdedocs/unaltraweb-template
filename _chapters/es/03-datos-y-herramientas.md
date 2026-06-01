@@ -4,7 +4,7 @@ title: Datos y herramientas
 description: Espacio para datasets, notas de software y sistemas de referencia de coordenadas.
 lang: es
 ref: manual-data-tools
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /es/chapters/datos-y-herramientas/
 weight: 40
 part: Recursos

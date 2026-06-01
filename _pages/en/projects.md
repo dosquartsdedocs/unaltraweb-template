@@ -3,11 +3,11 @@ layout: page
 title: Projects
 lang: en
 ref: projects
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: projects
 permalink: /en/projects/
 nav: true
-nav_order: 8
+nav_order: 9
 ---
 
 Use `_projects/` for personal research projects, software, datasets, labs, or long-running initiatives.

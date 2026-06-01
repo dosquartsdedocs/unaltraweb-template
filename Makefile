@@ -6,19 +6,15 @@ PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
 SITE_PROFILE ?=
-PROFILE ?= personal
-PERSONAL_PORT ?= 4001
-PROJECT_PORT ?= 4002
-MANUAL_PORT ?= 4003
-SOFTWARE_PORT ?= 4004
+PROFILE ?= unaltreselfie
+UNALTRESELFIE_PORT ?= 4001
+UNALTREPROJECTE_PORT ?= 4002
+UNALTREMANUAL_PORT ?= 4003
+UNALTREDOCS_PORT ?= 4004
 OPEN_DELAY ?= 25
-VISUAL_PROFILES ?= personal project manual techdocs
+VISUAL_PROFILES ?= unaltreselfie unaltreprojecte unaltremanual unaltredocs
 DOC_SCREENSHOTS_DIR ?= assets/img/screenshots
-ifeq ($(SITE_PROFILE),project)
 START_PATH ?= /en/
-else
-START_PATH ?= /en/
-endif
 LIVERELOAD ?= --livereload
 LIVERELOAD_PORT ?= 35729
 LOCAL_CORE ?=
@@ -39,10 +35,10 @@ CV_PREVIEW ?= assets/img/cv-preview.jpg
 LOCAL_UID ?= $(shell id -u)
 LOCAL_GID ?= $(shell id -g)
 LOCAL_URL := http://localhost:$(PORT)$(BASEURL)$(START_PATH)
-PERSONAL_URL := http://localhost:$(PERSONAL_PORT)$(BASEURL)$(START_PATH)
-PROJECT_URL := http://localhost:$(PROJECT_PORT)$(BASEURL)$(START_PATH)
-MANUAL_URL := http://localhost:$(MANUAL_PORT)$(BASEURL)$(START_PATH)
-SOFTWARE_URL := http://localhost:$(SOFTWARE_PORT)$(BASEURL)$(START_PATH)
+UNALTRESELFIE_URL := http://localhost:$(UNALTRESELFIE_PORT)$(BASEURL)$(START_PATH)
+UNALTREPROJECTE_URL := http://localhost:$(UNALTREPROJECTE_PORT)$(BASEURL)$(START_PATH)
+UNALTREMANUAL_URL := http://localhost:$(UNALTREMANUAL_PORT)$(BASEURL)$(START_PATH)
+UNALTREDOCS_URL := http://localhost:$(UNALTREDOCS_PORT)$(BASEURL)$(START_PATH)
 CORE_DIR_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print spec.full_gem_path
 CORE_CONFIG_RUBY := spec = Gem::Specification.find_by_name("unaltraweb"); print File.join(spec.full_gem_path, "_config.yml")
 PROFILE_COMPOSE_FILE := docker-compose.profiles.yml
@@ -52,7 +48,7 @@ ifneq ($(strip $(LOCAL_CORE)),)
 PROFILE_COMPOSE_FILES += -f $(PROFILE_COMPOSE_LOCAL_CORE_FILE)
 endif
 
-export DOCKER_IMAGE LOCAL_UID LOCAL_GID PERSONAL_PORT PROJECT_PORT MANUAL_PORT SOFTWARE_PORT
+export DOCKER_IMAGE LOCAL_UID LOCAL_GID UNALTRESELFIE_PORT UNALTREPROJECTE_PORT UNALTREMANUAL_PORT UNALTREDOCS_PORT
 
 DOCKER_PORTS = -p $(PORT):$(PORT)
 SERVE_LIVERELOAD_ARGS =
@@ -67,7 +63,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-personal serve-project serve-manual serve-software serve-techdocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -90,15 +86,15 @@ profile-config:
 	  profile="$(SITE_PROFILE)"; \
 	  title="unaltraweb $$profile"; \
 	  description="Demo $$profile website built with unaltraweb."; \
-	  if test "$$profile" = "personal"; then title="unaltreselfie"; description="Demo personal academic website built with unaltraweb."; fi; \
-	  if test "$$profile" = "project"; then title="unaltreprojecte"; description="Demo research project website built with unaltraweb."; fi; \
-	  if test "$$profile" = "manual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
-	  if test "$$profile" = "software" || test "$$profile" = "techdocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
+	  if test "$$profile" = "unaltreselfie"; then title="unaltreselfie"; description="Demo personal academic website built with unaltraweb."; fi; \
+	  if test "$$profile" = "unaltreprojecte"; then title="unaltreprojecte"; description="Demo research project website built with unaltraweb."; fi; \
+	  if test "$$profile" = "unaltremanual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
+	  if test "$$profile" = "unaltredocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
 	  printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
-	  if test "$$profile" = "project"; then printf '%s\n' 'copyright_holder: Project team' >> "$(PROFILE_CONFIG)"; fi; \
-	  if test "$$profile" = "software" || test "$$profile" = "techdocs"; then printf '%s\n' 'copyright_holder: unaltredocs team' >> "$(PROFILE_CONFIG)"; fi; \
-	  if test "$$profile" = "project"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
-	  if test "$$profile" = "manual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "unaltreprojecte"; then printf '%s\n' 'copyright_holder: Project team' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "unaltredocs"; then printf '%s\n' 'copyright_holder: unaltredocs team' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "unaltreprojecte"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
+	  if test "$$profile" = "unaltremanual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
 	else \
 	  rm -f "$(PROFILE_CONFIG)"; \
 	fi
@@ -139,22 +135,22 @@ profile-compose-local-core: local-core-check
 	  core="$(abspath $(LOCAL_CORE))"; \
 	  printf '%s\n' \
 	    'services:' \
-	    '  personal:' \
+	    '  unaltreselfie:' \
 	    '    environment:' \
 	    '      LOCAL_CORE: /srv/unaltraweb' \
 	    '    volumes:' \
 	    "      - $$core:/srv/unaltraweb:ro" \
-	    '  project:' \
+	    '  unaltreprojecte:' \
 	    '    environment:' \
 	    '      LOCAL_CORE: /srv/unaltraweb' \
 	    '    volumes:' \
 	    "      - $$core:/srv/unaltraweb:ro" \
-	    '  manual:' \
+	    '  unaltremanual:' \
 	    '    environment:' \
 	    '      LOCAL_CORE: /srv/unaltraweb' \
 	    '    volumes:' \
 	    "      - $$core:/srv/unaltraweb:ro" \
-	    '  software:' \
+	    '  unaltredocs:' \
 	    '    environment:' \
 	    '      LOCAL_CORE: /srv/unaltraweb' \
 	    '    volumes:' \
@@ -166,37 +162,35 @@ profile-compose-local-core: local-core-check
 
 serve-profile: profile-compose-local-core
 	@case "$(PROFILE)" in \
-	  personal) url="$(PERSONAL_URL)"; service="personal" ;; \
-	  project) url="$(PROJECT_URL)"; service="project" ;; \
-	  manual) url="$(MANUAL_URL)"; service="manual" ;; \
-	  software|techdocs) url="$(SOFTWARE_URL)"; service="software" ;; \
-	  *) printf 'Unknown PROFILE=%s. Use personal, project, manual, software, or techdocs.\n' "$(PROFILE)"; exit 1 ;; \
+	  unaltreselfie) url="$(UNALTRESELFIE_URL)"; service="unaltreselfie" ;; \
+	  unaltreprojecte) url="$(UNALTREPROJECTE_URL)"; service="unaltreprojecte" ;; \
+	  unaltremanual) url="$(UNALTREMANUAL_URL)"; service="unaltremanual" ;; \
+	  unaltredocs) url="$(UNALTREDOCS_URL)"; service="unaltredocs" ;; \
+	  *) printf 'Unknown PROFILE=%s. Use unaltreselfie, unaltreprojecte, unaltremanual, or unaltredocs.\n' "$(PROFILE)"; exit 1 ;; \
 	esac; \
 	printf 'Serving %s at %s\n' "$(PROFILE)" "$$url"; \
 	(sleep $(OPEN_DELAY); xdg-open "$$url" >/dev/null 2>&1 || sensible-browser "$$url" >/dev/null 2>&1 || true) & \
 	docker compose $(PROFILE_COMPOSE_FILES) up "$$service"
 
-serve-personal:
-	$(MAKE) serve-profile PROFILE=personal
+serve-unaltreselfie:
+	$(MAKE) serve-profile PROFILE=unaltreselfie
 
-serve-project:
-	$(MAKE) serve-profile PROFILE=project
+serve-unaltreprojecte:
+	$(MAKE) serve-profile PROFILE=unaltreprojecte
 
-serve-manual:
-	$(MAKE) serve-profile PROFILE=manual
+serve-unaltremanual:
+	$(MAKE) serve-profile PROFILE=unaltremanual
 
-serve-software: serve-techdocs
-
-serve-techdocs:
-	$(MAKE) serve-profile PROFILE=techdocs
+serve-unaltredocs:
+	$(MAKE) serve-profile PROFILE=unaltredocs
 
 serve-allprofiles: profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
-	@printf 'Personal: %s\nProject:  %s\nManual:   %s\nTechDocs: %s\n' "$(PERSONAL_URL)" "$(PROJECT_URL)" "$(MANUAL_URL)" "$(SOFTWARE_URL)"
-	@printf 'Opening only Personal; use the developer switcher to move between profiles.\n'
+	@printf 'unaltreselfie:   %s\nunaltreprojecte: %s\nunaltremanual:   %s\nunaltredocs:     %s\n' "$(UNALTRESELFIE_URL)" "$(UNALTREPROJECTE_URL)" "$(UNALTREMANUAL_URL)" "$(UNALTREDOCS_URL)"
+	@printf 'Opening only unaltreselfie; use the developer switcher to move between profiles.\n'
 	@(sleep $(OPEN_DELAY); \
-	  xdg-open "$(PERSONAL_URL)" >/dev/null 2>&1 || sensible-browser "$(PERSONAL_URL)" >/dev/null 2>&1 || true) & \
-	docker compose $(PROFILE_COMPOSE_FILES) up personal project manual software
+	  xdg-open "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || sensible-browser "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || true) & \
+	docker compose $(PROFILE_COMPOSE_FILES) up unaltreselfie unaltreprojecte unaltremanual unaltredocs
 
 serve: local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"

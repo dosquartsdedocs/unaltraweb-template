@@ -3,7 +3,7 @@ title: Preview profiles
 description: Run several profile builds at once without sharing output directories.
 lang: en
 ref: software_profile_preview
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Build
 weight: 25
 permalink: /en/docs/profile-preview/
@@ -22,4 +22,4 @@ make serve-allprofiles LOCAL_CORE=../unaltraweb
 | personal | 4001 | `tmp/_site.personal` |
 | project | 4002 | `tmp/_site.project` |
 | manual | 4003 | `tmp/_site.manual` |
-| techdocs | 4004 | `tmp/_site.techdocs` |
+| unaltredocs | 4004 | `tmp/_site.unaltredocs` |

@@ -3,7 +3,7 @@ layout: profile
 title: John Doe
 lang: en
 ref: home
-profiles: [personal]
+profiles: [unaltreselfie]
 permalink: /en/
 nav: false
 ---

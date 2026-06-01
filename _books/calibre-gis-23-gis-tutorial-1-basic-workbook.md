@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-gis-23-gis-tutorial-1-basic-workbook
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-gis-23-gis-tutorial-1-basic-workbook/
 title: "GIS Tutorial 1: Basic Workbook"
 calibre_source: gis

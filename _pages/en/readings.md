@@ -4,11 +4,11 @@ title: Readings
 description: Reading notes and annotated bibliography for the personal profile.
 lang: en
 ref: books
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: readings
 permalink: /en/readings/
 nav: true
-nav_order: 9
+nav_order: 10
 collection: books
 ---
 

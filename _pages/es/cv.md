@@ -3,11 +3,11 @@ layout: page
 title: CV
 lang: es
 ref: cv
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: cv
 permalink: /es/cv/
 nav: true
-nav_order: 7
+nav_order: 8
 cv_pdf: /assets/pdf/cv.pdf
 cv_preview: /assets/img/cv-preview.jpg
 ---

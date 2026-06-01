@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: spatial-data-quality
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/readings/spatial-data-quality/
 title: "Spatial Data Quality Notes"
 author: "unaltraweb project team"

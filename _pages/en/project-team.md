@@ -4,7 +4,7 @@ title: Team
 description: Project people and institutions as first-class project content.
 lang: en
 ref: project_team
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/team/
 nav: false
 ---

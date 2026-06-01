@@ -4,7 +4,7 @@ title: Resources
 description: Project outputs, repositories, reading notes and reusable material.
 lang: en
 ref: resources
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/resources/
 nav: true
 nav_order: 6

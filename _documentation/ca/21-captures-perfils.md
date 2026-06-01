@@ -3,7 +3,7 @@ title: Captures de perfils
 description: Captures generades per revisar i documentar els quatre perfils preparats.
 lang: ca
 ref: software_profile_screenshots
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Guies
 subsection: Revisió visual
 weight: 68
@@ -62,18 +62,18 @@ L'execució neta escriu PNG a `tmp/render-smoke/`. La documentació copia les ca
 
 ## unaltredocs
 
-![Inici d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-home-chromium.png "Inici d'unaltredocs")
+![Inici d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-home-chromium.png "Inici d'unaltredocs")
 
-![Resultats de cerca d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-search-chromium.png "Resultats de cerca d'unaltredocs")
+![Resultats de cerca d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-search-chromium.png "Resultats de cerca d'unaltredocs")
 
-![Matriu de perfils d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-profile-matrix-chromium.png "Matriu de perfils d'unaltredocs")
+![Matriu de perfils d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-profile-matrix-chromium.png "Matriu de perfils d'unaltredocs")
 
-![Documentació de pàgines reutilitzables en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-reusable-pages-chromium.png "Documentació de pàgines reutilitzables en unaltredocs")
+![Documentació de pàgines reutilitzables en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-reusable-pages-chromium.png "Documentació de pàgines reutilitzables en unaltredocs")
 
-![Sucre sintàctic Markdown en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-markdown-syntax-sugar-chromium.png "Sucre sintàctic Markdown en unaltredocs")
+![Sucre sintàctic Markdown en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-markdown-syntax-sugar-chromium.png "Sucre sintàctic Markdown en unaltredocs")
 
-![SEO multilingüe en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-multilingual-seo-chromium.png "SEO multilingüe en unaltredocs")
+![SEO multilingüe en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-multilingual-seo-chromium.png "SEO multilingüe en unaltredocs")
 
-![Exemples de sintaxi en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-technical-examples-chromium.png "Exemples de sintaxi en unaltredocs")
+![Exemples de sintaxi en unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-technical-examples-chromium.png "Exemples de sintaxi en unaltredocs")
 
-![Disseny mòbil d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/techdocs-mobile-chromium.png "Disseny mòbil d'unaltredocs")
+![Disseny mòbil d'unaltredocs]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-mobile-chromium.png "Disseny mòbil d'unaltredocs")

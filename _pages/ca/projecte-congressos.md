@@ -4,7 +4,7 @@ title: Congressos
 description: Reunions, congressos, tallers i esdeveniments públics connectats amb el projecte.
 lang: ca
 ref: conferences
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /ca/congressos/
 nav: true
 nav_order: 3

@@ -4,7 +4,7 @@ title: Conferences
 description: Meetings, congresses, workshops and public events connected to the project.
 lang: en
 ref: conferences
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/conferences/
 nav: true
 nav_order: 3

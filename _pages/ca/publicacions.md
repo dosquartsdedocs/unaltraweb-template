@@ -3,7 +3,7 @@ layout: page
 title: Publicacions
 lang: ca
 ref: publications
-profiles: [personal]
+profiles: [unaltreselfie]
 feature: publications
 permalink: /ca/publicacions/
 nav: true

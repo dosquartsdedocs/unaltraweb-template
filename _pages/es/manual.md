@@ -4,7 +4,7 @@ title: unaltremanual
 description: Un perfil de manual para materiales académicos con capítulos multilingües, navegación lateral clara y bibliografía docente.
 lang: es
 ref: home
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /es/
 nav: false
 cover_image: /assets/img/manual-cover-cat.png

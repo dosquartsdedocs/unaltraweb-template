@@ -3,7 +3,7 @@ title: Actualitzacions de versió
 description: Com els llocs fills poden consumir versions noves del nucli.
 lang: ca
 ref: software_releases
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Operacions
 weight: 85
 permalink: /ca/docs/versions/

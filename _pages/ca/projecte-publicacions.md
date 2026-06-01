@@ -4,7 +4,7 @@ title: Publicacions
 description: Bibliografia i mètriques del perfil de projecte.
 lang: ca
 ref: project_publications
-profiles: [project]
+profiles: [unaltreprojecte]
 feature: publications
 permalink: /ca/publicacions/
 nav: true

@@ -4,7 +4,7 @@ title: Publications
 description: Bibliography, metrics and previews scoped to the project profile.
 lang: en
 ref: project_publications
-profiles: [project]
+profiles: [unaltreprojecte]
 feature: publications
 permalink: /en/publications/
 nav: true

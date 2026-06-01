@@ -4,7 +4,7 @@ title: Proyectos anteriores
 description: Precedentes e iniciativas relacionadas que explican de dónde viene este proyecto.
 lang: es
 ref: previous_projects
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/proyectos-anteriores/
 nav: false
 ---

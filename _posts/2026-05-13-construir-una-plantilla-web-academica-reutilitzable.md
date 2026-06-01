@@ -12,6 +12,6 @@ related_posts: false
 
 Aquest lloc demo és intencionadament petit. Les parts útils viuen a `unaltraweb`: layouts, includes, estils, eines de mètriques, gestió de temes i perfils de lloc.
 
-El repositori de plantilla hauria de contindre sobretot configuració i contingut. Això simplifica les actualitzacions i fa possible reutilitzar el mateix core per a una web personal, un projecte de recerca, un lloc de programari o un manual.
+El repositori de plantilla hauria de contindre sobretot configuració i contingut. Això simplifica les actualitzacions i fa possible reutilitzar el mateix core per a una web personal, un projecte de recerca, un manual o un lloc de documentació.
 
-El pas següent és fer prou explícits els perfils perquè canviar entre `personal`, `project`, `software` i `manual` siga sobretot una qüestió de configuració.
+El pas següent és fer prou explícits els perfils perquè canviar entre `unaltreselfie`, `unaltreprojecte`, `unaltremanual` i `unaltredocs` siga sobretot una qüestió de configuració.

@@ -3,7 +3,7 @@ title: Multilingual SEO
 description: How translated pages, canonicals, hreflang and sitemaps work together.
 lang: en
 ref: software_multilingual_seo
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 subsection: Content model
 weight: 47

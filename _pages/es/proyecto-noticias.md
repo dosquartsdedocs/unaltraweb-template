@@ -4,7 +4,7 @@ title: Noticias
 description: Actualizaciones y hitos del proyecto.
 lang: es
 ref: project_news
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/noticias/
 nav: true
 nav_order: 1

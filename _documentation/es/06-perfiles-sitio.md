@@ -3,7 +3,7 @@ title: Perfiles de sitio
 description: Familias de sitio preparadas y seleccionadas en tiempo de construcción.
 lang: es
 ref: software_site_profiles
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Conceptos
 weight: 15
 permalink: /es/docs/perfiles-sitio/
@@ -13,10 +13,10 @@ Los perfiles son familias de sitio de alto nivel, no layouts de Jekyll. El perfi
 
 | Perfil | Uso |
 |---|---|
-| `personal` | Sitio personal académico o profesional |
-| `project` | Proyecto de investigación o infraestructura pública |
-| `manual` | Manual tipo libro o guía docente |
-| `techdocs` | Documentación técnica con índice izquierdo |
+| `unaltreselfie` | Sitio personal académico o profesional |
+| `unaltreprojecte` | Proyecto de investigación o infraestructura pública |
+| `unaltremanual` | Manual tipo libro o guía docente |
+| `unaltredocs` | Documentación técnica con índice izquierdo |
 
 <h2 id="profile-specific-home">Inicio específico del perfil</h2>
 
@@ -24,4 +24,4 @@ Cada perfil puede mostrar una página de inicio distinta aunque comparta el mism
 
 <h2 id="book-like-chapters">Capítulos tipo libro</h2>
 
-El perfil `manual` sirve para material secuencial: capítulos, apuntes docentes o guías. Usa layouts de manual y navegación anterior/siguiente para que el sitio se comporte más como un libro que como una página de proyecto.
+El perfil `unaltremanual` sirve para material secuencial: capítulos, apuntes docentes o guías. Usa layouts de manual y navegación anterior/siguiente para que el sitio se comporte más como un libro que como una página de proyecto.

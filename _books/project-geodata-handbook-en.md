@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: project-geodata-handbook
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/readings/project-geodata-handbook/
 title: "Project Geodata Handbook"
 author: "unaltraweb project team"

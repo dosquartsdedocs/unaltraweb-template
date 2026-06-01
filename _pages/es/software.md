@@ -4,7 +4,7 @@ title: unaltredocs
 description: Documentación técnica para el núcleo reutilizable y el flujo de trabajo de plantilla de unaltraweb.
 lang: es
 ref: home
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 permalink: /es/
 nav: true
 nav_title: Inicio

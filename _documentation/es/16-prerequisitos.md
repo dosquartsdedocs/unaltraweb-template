@@ -3,7 +3,7 @@ title: Prerrequisitos antes de publicar
 description: Ficheros y servicios que revisar antes de publicar un sitio hijo.
 lang: es
 ref: software_prerequisites
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Construcción
 weight: 22
 permalink: /es/docs/prerequisitos/

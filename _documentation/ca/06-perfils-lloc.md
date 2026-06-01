@@ -3,7 +3,7 @@ title: Perfils de lloc
 description: Famílies de lloc preparades i seleccionades en temps de construcció.
 lang: ca
 ref: software_site_profiles
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Conceptes
 weight: 15
 permalink: /ca/docs/perfils-lloc/
@@ -13,10 +13,10 @@ Els perfils són famílies de lloc d'alt nivell, no layouts de Jekyll. El perfil
 
 | Perfil | Ús |
 |---|---|
-| `personal` | Lloc personal acadèmic o professional |
-| `project` | Projecte de recerca o infraestructura pública |
-| `manual` | Manual tipus llibre o guia docent |
-| `techdocs` | Documentació tècnica amb índex esquerre |
+| `unaltreselfie` | Lloc personal acadèmic o professional |
+| `unaltreprojecte` | Projecte de recerca o infraestructura pública |
+| `unaltremanual` | Manual tipus llibre o guia docent |
+| `unaltredocs` | Documentació tècnica amb índex esquerre |
 
 <h2 id="profile-specific-home">Inici específic del perfil</h2>
 
@@ -24,4 +24,4 @@ Cada perfil pot mostrar una pàgina d'inici diferent encara que compartisca el m
 
 <h2 id="book-like-chapters">Capítols de tipus llibre</h2>
 
-El perfil `manual` serveix per a material seqüencial: capítols, apunts docents o guies. Usa layouts de manual i navegació anterior/següent perquè el lloc es comporte més com un llibre que com una pàgina de projecte.
+El perfil `unaltremanual` serveix per a material seqüencial: capítols, apunts docents o guies. Usa layouts de manual i navegació anterior/següent perquè el lloc es comporte més com un llibre que com una pàgina de projecte.

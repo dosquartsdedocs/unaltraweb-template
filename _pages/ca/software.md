@@ -4,7 +4,7 @@ title: unaltredocs
 description: Documentació tècnica per al nucli reutilitzable i el flux de treball de plantilla d'unaltraweb.
 lang: ca
 ref: home
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 permalink: /ca/
 nav: true
 nav_title: Inici

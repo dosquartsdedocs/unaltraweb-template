@@ -4,7 +4,7 @@ title: Recursos
 description: Resultados, repositorios, lecturas y materiales reutilizables del proyecto.
 lang: es
 ref: resources
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/recursos/
 nav: true
 nav_order: 6

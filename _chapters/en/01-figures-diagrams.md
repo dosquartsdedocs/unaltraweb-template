@@ -4,7 +4,7 @@ title: Figures and diagrams
 description: A short chapter about figure captions, Mermaid assets and teaching callouts.
 lang: en
 ref: manual-figures-diagrams
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/chapters/figures-diagrams/
 weight: 20
 part: Production

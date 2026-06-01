@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-gis-41-geographic-information-science-and-systems
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-gis-41-geographic-information-science-and-systems/
 title: "Geographic Information Science and Systems"
 calibre_source: gis

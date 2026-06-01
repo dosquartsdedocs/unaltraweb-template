@@ -4,7 +4,7 @@ title: Dades i eines
 description: Espai per a datasets, notes de programari i sistemes de referència de coordenades.
 lang: ca
 ref: manual-data-tools
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/chapters/dades-i-eines/
 weight: 40
 part: Recursos

@@ -4,7 +4,7 @@ title: Equipo
 description: Personas e instituciones del proyecto.
 lang: es
 ref: project_team
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /es/equipo/
 nav: false
 ---

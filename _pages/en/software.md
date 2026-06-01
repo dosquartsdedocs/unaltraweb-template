@@ -4,7 +4,7 @@ title: unaltredocs
 description: Technical documentation for the reusable unaltraweb core and template workflow.
 lang: en
 ref: home
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 permalink: /en/
 nav: true
 nav_title: Overview

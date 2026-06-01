@@ -3,7 +3,7 @@ title: What is unaltraweb?
 description: The reusable core, the template repository and the role of profiles.
 lang: en
 ref: software_getting_started
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Concepts
 weight: 10
 permalink: /en/docs/what-is-unaltraweb/

@@ -3,13 +3,13 @@ title: Resultats de recerca i dades
 description: Com documentar conjunts de dades, programari, informes i productes reutilitzables de recerca.
 lang: ca
 ref: software_research_outputs
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 weight: 50
 permalink: /ca/docs/outputs-recerca/
 ---
 
-El perfil `techdocs` pot documentar més que paquets de programari. Usa'l per a conjunts de dades, models, quadres de comandament, protocols, API públiques i resultats reproduïbles de projecte.
+El perfil `unaltredocs` pot documentar més que paquets de programari. Usa'l per a conjunts de dades, models, quadres de comandament, protocols, API públiques i resultats reproduïbles de projecte.
 
 <h2 id="project-resources-and-outputs">Recursos i resultats de projecte</h2>
 

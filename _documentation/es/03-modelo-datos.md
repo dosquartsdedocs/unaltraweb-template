@@ -3,7 +3,7 @@ title: Páginas, colecciones y navegación
 description: Cómo los sitios hijo organizan contenido sin editar plantillas del núcleo.
 lang: es
 ref: software_data_model
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoría
 subsection: Modelo de contenido
 weight: 40
@@ -28,7 +28,7 @@ Las entradas de blog viven en la colección de posts y normalmente se activan en
 
 <h2 id="cv-page">Página de CV</h2>
 
-La página de CV pertenece al perfil personal y suele apoyarse en Markdown local, datos YAML o un layout específico. Guárdala bajo `_pages/<lang>/` con `profiles: [personal]` para que los builds de proyecto y documentación no la rendericen.
+La página de CV pertenece al perfil personal y suele apoyarse en Markdown local, datos YAML o un layout específico. Guárdala bajo `_pages/<lang>/` con `profiles: [unaltreselfie]` para que los builds de proyecto y documentación no la rendericen.
 
 <h2 id="publications-page">Página de publicaciones</h2>
 

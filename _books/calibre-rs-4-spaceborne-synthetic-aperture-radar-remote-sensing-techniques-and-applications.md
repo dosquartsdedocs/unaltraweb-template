@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-rs-4-spaceborne-synthetic-aperture-radar-remote-sensing-techniques-and-applications
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-rs-4-spaceborne-synthetic-aperture-radar-remote-sensing-techniques-and-applications/
 title: "Spaceborne Synthetic Aperture Radar Remote Sensing; Techniques and Applications"
 calibre_source: rs

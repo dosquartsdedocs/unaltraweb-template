@@ -3,7 +3,7 @@ title: Jekyll bàsic per a llocs fills
 description: Els conceptes mínims de Jekyll abans d'editar un repositori fill.
 lang: ca
 ref: software_jekyll_basics
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 weight: 30
 permalink: /ca/docs/jekyll-basic/

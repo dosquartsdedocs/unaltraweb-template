@@ -4,7 +4,7 @@ title: Avaluació i treball
 description: Rúbriques, lliuraments i retorn per a una assignatura basada en manual.
 lang: ca
 ref: manual-assessment-workflow
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /ca/chapters/avaluacio-i-treball/
 weight: 50
 part: Avaluació

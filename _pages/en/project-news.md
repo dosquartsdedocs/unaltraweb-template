@@ -4,7 +4,7 @@ title: News
 description: Project updates, releases and milestones.
 lang: en
 ref: project_news
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /en/news/
 nav: true
 nav_order: 1

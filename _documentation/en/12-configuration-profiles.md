@@ -3,7 +3,7 @@ title: Configuration and profiles
 description: How core defaults, child configuration and profile overlays combine.
 lang: en
 ref: software_configuration_profiles
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Build
 weight: 28
 permalink: /en/docs/configuration-profiles/

@@ -3,7 +3,7 @@ title: Métricas de publicaciones
 description: Por qué las métricas se actualizan explícitamente y no durante la construcción de Jekyll.
 lang: es
 ref: software_metrics
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Operaciones
 weight: 80
 permalink: /es/docs/metricas/

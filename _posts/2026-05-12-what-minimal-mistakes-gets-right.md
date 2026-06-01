@@ -12,4 +12,4 @@ related_posts: false
 
 Minimal Mistakes works well for personal sites because the information architecture is calm: a profile sidebar, clear navigation, readable archives, and no pressure to turn every page into a landing page.
 
-`unaltraweb` should borrow that clarity for the `personal` site profile while keeping the academic features that matter here: publications, metrics, multilingual pages, CVs, and research projects.
+`unaltraweb` should borrow that clarity for the `unaltreselfie` site profile while keeping the academic features that matter here: publications, metrics, multilingual pages, CVs, and research projects.

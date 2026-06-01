@@ -2,7 +2,7 @@
 layout: book-review
 lang: en
 ref: calibre-rs-5-remote-sensing-and-image-interpretation-7th-edition
-profiles: ["personal", "project", "manual"]
+profiles: ["unaltreselfie", "unaltreprojecte", "unaltremanual"]
 permalink: /en/readings/calibre-rs-5-remote-sensing-and-image-interpretation-7th-edition/
 title: "Remote Sensing and Image Interpretation, 7th Edition"
 calibre_source: rs

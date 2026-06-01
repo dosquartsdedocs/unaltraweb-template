@@ -3,7 +3,7 @@ title: GitHub Actions en sitios hijo
 description: Cómo los repositorios hijo llaman flujos de trabajo reutilizables del núcleo.
 lang: es
 ref: software_github_actions
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Automatización
 subsection: GitHub Actions
 weight: 72

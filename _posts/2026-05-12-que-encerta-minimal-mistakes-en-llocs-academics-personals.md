@@ -12,4 +12,4 @@ related_posts: false
 
 Minimal Mistakes funciona bé per a webs personals perquè l'arquitectura d'informació és tranquil·la: una columna de perfil, navegació clara, arxius llegibles i cap pressió per convertir cada pàgina en una landing page.
 
-`unaltraweb` hauria d'aprofitar aquesta claredat en el perfil `personal` i mantindre les funcions acadèmiques que importen ací: publicacions, mètriques, pàgines multilingües, CV i projectes de recerca.
+`unaltraweb` hauria d'aprofitar aquesta claredat en el perfil `unaltreselfie` i mantindre les funcions acadèmiques que importen ací: publicacions, mètriques, pàgines multilingües, CV i projectes de recerca.

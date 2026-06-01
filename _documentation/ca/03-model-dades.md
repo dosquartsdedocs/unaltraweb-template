@@ -3,7 +3,7 @@ title: Pàgines, col·leccions i navegació
 description: Com els llocs fills organitzen contingut sense editar plantilles del nucli.
 lang: ca
 ref: software_data_model
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Autoria
 subsection: Model de contingut
 weight: 40
@@ -28,7 +28,7 @@ Les entrades de blog viuen en la col·lecció de posts i normalment s'activen en
 
 <h2 id="cv-page">Pàgina de CV</h2>
 
-La pàgina de CV pertany al perfil personal i sol recolzar-se en Markdown local, dades YAML o un layout específic. Guarda-la sota `_pages/<lang>/` amb `profiles: [personal]` perquè els builds de projecte i documentació no la renderitzen.
+La pàgina de CV pertany al perfil personal i sol recolzar-se en Markdown local, dades YAML o un layout específic. Guarda-la sota `_pages/<lang>/` amb `profiles: [unaltreselfie]` perquè els builds de projecte i documentació no la renderitzen.
 
 <h2 id="publications-page">Pàgina de publicacions</h2>
 

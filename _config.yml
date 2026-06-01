@@ -64,8 +64,9 @@ pagination:
     after: 2
 
 unaltraweb:
-  site_profile: personal
+  site_profile: unaltreselfie
   features:
+    news: true
     blog: true
     cv: true
     projects: true

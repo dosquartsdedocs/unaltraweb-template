@@ -4,7 +4,7 @@ title: Bibliography
 description: Books and articles that support the manual without becoming a numbered chapter.
 lang: en
 ref: manual-bibliography
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /en/bibliography/
 weight: 90
 part: Reference

@@ -4,7 +4,7 @@ title: Estructura del curso
 description: Como organizar un manual de asignatura en semanas, lecturas y practicas.
 lang: es
 ref: manual-course-structure
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /es/chapters/estructura-del-curso/
 weight: 30
 part: Planificacion

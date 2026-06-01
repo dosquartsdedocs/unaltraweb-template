@@ -3,7 +3,7 @@ title: Reusable profile pages and layouts
 description: Where project team, readings, theses, repository and publication pages get their data.
 lang: en
 ref: software_reusable_profile_pages
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 subsection: Content model
 weight: 44
@@ -33,7 +33,7 @@ The team page is the simplest example. `_pages/en/project-team.md` contains pros
   pic: user-placeholder.png
 ```
 
-Use `profiles: [project]` for project-only pages, `profiles: [personal]` for personal pages and `feature` when a section should be enabled or hidden through `unaltraweb.features`.
+Use `profiles: [unaltreprojecte]` for project-only pages, `profiles: [unaltreselfie]` for personal pages and `feature` when a section should be enabled or hidden through `unaltraweb.features`.
 
 <h2 id="team-page">Team page</h2>
 
@@ -47,7 +47,7 @@ Reading shelves use `layout: book-shelf` and `collection: books`. Items live in 
 
 A Calibre library can feed the same `_books` collection. The useful mapping is direct: Calibre title, authors, publisher, publication date, ISBN, series, tags, comments and cover become front matter fields and review text. Use `collection_name` for the visible shelf grouping and keep Calibre's `series` as a fallback when there is no explicit collection. Covers should be copied into `assets/img/books/` and referenced with `cover: /assets/img/books/<slug>.jpg`; ebook files should stay outside the repository unless distribution rights are clear.
 
-For a personal site, use `profiles: [personal]` so the entries appear in `unaltreselfie`. For project reading lists, use `profiles: [project]`. Calibre virtual libraries, tags or custom columns can become `tags`, `status`, `collection_name` or separate generated pages, depending on how the library is organised.
+For a personal site, use `profiles: [unaltreselfie]` so the entries appear in `unaltreselfie`. For project reading lists, use `profiles: [unaltreprojecte]`. Calibre virtual libraries, tags or custom columns can become `tags`, `status`, `collection_name` or separate generated pages, depending on how the library is organised.
 
 To import a real Calibre library we need three decisions: the library path, which Calibre collections or tags to publish, and whether each item should be a public reading note, a private draft omitted from the site, or only a metadata card with cover and bibliographic record.
 

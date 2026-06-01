@@ -3,7 +3,7 @@ title: Publication metrics
 description: Why metrics are updated explicitly instead of during the Jekyll build.
 lang: en
 ref: software_metrics
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Operations
 weight: 80
 permalink: /en/docs/metrics/

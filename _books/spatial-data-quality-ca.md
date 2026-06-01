@@ -2,7 +2,7 @@
 layout: book-review
 lang: ca
 ref: spatial-data-quality
-profiles: [project]
+profiles: [unaltreprojecte]
 permalink: /ca/lectures/qualitat-dades-espacials/
 title: "Notes sobre qualitat de dades espacials"
 author: "equip del projecte unaltraweb"

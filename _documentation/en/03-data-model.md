@@ -3,7 +3,7 @@ title: Pages, collections and navigation
 description: How child sites organise content without editing core templates.
 lang: en
 ref: software_data_model
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Authoring
 subsection: Content model
 weight: 40
@@ -28,7 +28,7 @@ Blog entries live in the posts collection and are normally enabled for personal 
 
 <h2 id="cv-page">CV page</h2>
 
-The CV page is a personal-profile page, usually backed by local Markdown, YAML data or a selected layout. Keep it under `_pages/<lang>/` with `profiles: [personal]` so project and documentation builds do not render it.
+The CV page is a personal-profile page, usually backed by local Markdown, YAML data or a selected layout. Keep it under `_pages/<lang>/` with `profiles: [unaltreselfie]` so project and documentation builds do not render it.
 
 <h2 id="publications-page">Publications page</h2>
 

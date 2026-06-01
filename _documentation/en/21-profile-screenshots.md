@@ -3,7 +3,7 @@ title: Profile screenshots
 description: Generated screenshots used to review and document the four prepared profiles.
 lang: en
 ref: software_profile_screenshots
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Guides
 subsection: Visual review
 weight: 68
@@ -62,18 +62,18 @@ The clean run writes PNG files to `tmp/render-smoke/`. The documentation copies 
 
 ## unaltredocs
 
-![unaltredocs home]({{ site.baseurl }}/assets/img/screenshots/techdocs-home-chromium.png "unaltredocs home")
+![unaltredocs home]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-home-chromium.png "unaltredocs home")
 
-![unaltredocs search results]({{ site.baseurl }}/assets/img/screenshots/techdocs-search-chromium.png "unaltredocs search results")
+![unaltredocs search results]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-search-chromium.png "unaltredocs search results")
 
-![unaltredocs profile matrix]({{ site.baseurl }}/assets/img/screenshots/techdocs-profile-matrix-chromium.png "unaltredocs profile matrix")
+![unaltredocs profile matrix]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-profile-matrix-chromium.png "unaltredocs profile matrix")
 
-![unaltredocs reusable pages documentation]({{ site.baseurl }}/assets/img/screenshots/techdocs-reusable-pages-chromium.png "unaltredocs reusable pages documentation")
+![unaltredocs reusable pages documentation]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-reusable-pages-chromium.png "unaltredocs reusable pages documentation")
 
-![unaltredocs Markdown syntax sugar]({{ site.baseurl }}/assets/img/screenshots/techdocs-markdown-syntax-sugar-chromium.png "unaltredocs Markdown syntax sugar")
+![unaltredocs Markdown syntax sugar]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-markdown-syntax-sugar-chromium.png "unaltredocs Markdown syntax sugar")
 
-![unaltredocs multilingual SEO]({{ site.baseurl }}/assets/img/screenshots/techdocs-multilingual-seo-chromium.png "unaltredocs multilingual SEO")
+![unaltredocs multilingual SEO]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-multilingual-seo-chromium.png "unaltredocs multilingual SEO")
 
-![unaltredocs syntax examples]({{ site.baseurl }}/assets/img/screenshots/techdocs-technical-examples-chromium.png "unaltredocs syntax examples")
+![unaltredocs syntax examples]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-technical-examples-chromium.png "unaltredocs syntax examples")
 
-![unaltredocs mobile layout]({{ site.baseurl }}/assets/img/screenshots/techdocs-mobile-chromium.png "unaltredocs mobile layout")
+![unaltredocs mobile layout]({{ site.baseurl }}/assets/img/screenshots/unaltredocs-mobile-chromium.png "unaltredocs mobile layout")

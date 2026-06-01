@@ -3,7 +3,7 @@ title: Configuració i perfils
 description: Com es combinen defaults del nucli, configuració filla i overlays de perfil.
 lang: ca
 ref: software_configuration_profiles
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Construcció
 weight: 28
 permalink: /ca/docs/configuracio-perfils/
@@ -19,7 +19,7 @@ Els llocs `unaltraweb` es construeixen amb configuració per capes. El `_config.
 
 Mantén la configuració de producció en el `_config.yml` fill. Usa overlays només per a comparacions locals.
 
-## Marca de techdocs
+## Marca de unaltredocs
 
 El perfil de documentació llig els seus logos des de `unaltraweb.documentation`:
 

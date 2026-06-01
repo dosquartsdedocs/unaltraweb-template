@@ -4,7 +4,7 @@ title: Figuras y diagramas
 description: Un capitulo breve sobre pies de figura, activos Mermaid y callouts docentes.
 lang: es
 ref: manual-figures-diagrams
-profiles: [manual]
+profiles: [unaltremanual]
 permalink: /es/chapters/figuras-diagramas/
 weight: 20
 part: Produccion

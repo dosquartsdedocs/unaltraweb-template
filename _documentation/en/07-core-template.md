@@ -3,7 +3,7 @@ title: Core and template repositories
 description: Why reusable behaviour lives in the core and local content lives in child sites.
 lang: en
 ref: software_core_template
-profiles: [techdocs, software]
+profiles: [unaltredocs]
 section: Concepts
 weight: 18
 permalink: /en/docs/core-template/
