@@ -15,9 +15,7 @@ collection_es: "SIG"
 collection_ca: "SIG"
 status: finished
 manual_recommended: true
-ribbon_label_en: "A classic"
-ribbon_label_es: "Un clásico"
-ribbon_label_ca: "Un clàssic"
+ribbon_key: classic
 date: 2015-03-08
 author: "Paul A. Longley & Michael F. Goodchild & David J. Maguire & David W. Rhind & Wiley"
 publisher: "Wiley"

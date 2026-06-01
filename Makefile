@@ -193,11 +193,9 @@ serve-techdocs:
 serve-allprofiles: profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
 	@printf 'Personal: %s\nProject:  %s\nManual:   %s\nTechDocs: %s\n' "$(PERSONAL_URL)" "$(PROJECT_URL)" "$(MANUAL_URL)" "$(SOFTWARE_URL)"
+	@printf 'Opening only Personal; use the developer switcher to move between profiles.\n'
 	@(sleep $(OPEN_DELAY); \
-	  xdg-open "$(PERSONAL_URL)" >/dev/null 2>&1 || sensible-browser "$(PERSONAL_URL)" >/dev/null 2>&1 || true; \
-	  xdg-open "$(PROJECT_URL)" >/dev/null 2>&1 || sensible-browser "$(PROJECT_URL)" >/dev/null 2>&1 || true; \
-	  xdg-open "$(MANUAL_URL)" >/dev/null 2>&1 || sensible-browser "$(MANUAL_URL)" >/dev/null 2>&1 || true; \
-	  xdg-open "$(SOFTWARE_URL)" >/dev/null 2>&1 || sensible-browser "$(SOFTWARE_URL)" >/dev/null 2>&1 || true) & \
+	  xdg-open "$(PERSONAL_URL)" >/dev/null 2>&1 || sensible-browser "$(PERSONAL_URL)" >/dev/null 2>&1 || true) & \
 	docker compose $(PROFILE_COMPOSE_FILES) up personal project manual software
 
 serve: local-core-check

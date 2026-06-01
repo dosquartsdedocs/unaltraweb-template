@@ -229,6 +229,9 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(page.locator(".post > article")).toContainText("Applied GIS and Spatial Analysis");
   await expect(page.locator(".post > article")).toContainText("Remote Sensing and Image Interpretation");
   await expect(page.locator(".reading-rating", { hasText: "5/5" }).first()).toBeVisible();
+  await expect(page.locator(".reading-ribbon", { hasText: "Available at CRAI" })).toBeVisible();
+  const configuredRibbonBackground = await page.locator(".reading-ribbon", { hasText: "Available at CRAI" }).first().evaluate((ribbon) => getComputedStyle(ribbon).backgroundColor);
+  expect(configuredRibbonBackground).toBe("rgb(121, 183, 255)");
   await page.screenshot({ path: join(renderOut, `project-readings-${testInfo.project.name}.png`), fullPage: true });
 
   await page.locator(".reading-cover-title", { hasText: "Project Geodata Handbook" }).click();
@@ -352,6 +355,16 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator("#manual-more-readings-title")).toContainText("More readings");
   await expect(page.locator(".manual-featured-reference")).toHaveCount(3);
   await expect(page.locator(".manual-featured-authors").first()).toContainText("Samantha Lavender");
+  const originalViewport = page.viewportSize();
+  await page.setViewportSize({ width: 720, height: 900 });
+  await page.locator(".manual-featured-reference").first().scrollIntoViewIfNeeded();
+  const featuredCoverBox = await page.locator(".manual-featured-cover").first().boundingBox();
+  const featuredBodyBox = await page.locator(".manual-featured-reference-body").first().boundingBox();
+  expect(featuredCoverBox).not.toBeNull();
+  expect(featuredBodyBox).not.toBeNull();
+  expect(Math.ceil(featuredCoverBox.x + featuredCoverBox.width)).toBeLessThanOrEqual(Math.floor(featuredBodyBox.x));
+  expect(Math.floor(featuredBodyBox.x - (featuredCoverBox.x + featuredCoverBox.width))).toBeGreaterThanOrEqual(16);
+  if (originalViewport) await page.setViewportSize(originalViewport);
   await expect(page.locator(".manual-bibliography .manual-reference-links .cite")).toHaveCount(0);
   await expect(page.locator(".manual-chapter")).not.toContainText("How to cite (APA)");
   await page.locator(".manual-featured-reference .manual-reference-links .bibtex").first().click();
@@ -402,9 +415,10 @@ test("techdocs profile renders the documentation collection", async ({ page }, t
   await page.screenshot({ path: join(renderOut, `techdocs-home-${testInfo.project.name}.png`), fullPage: true });
 
   const beforeDocsFontSize = await page.locator(".documentation-content").evaluate((node) => getComputedStyle(node).fontSize);
-  await expect(page.locator(".documentation-font-controls [data-documentation-font]")).toHaveCount(3);
-  await expect(page.locator(".documentation-font-menu")).toHaveCount(0);
-  await page.locator(".documentation-font-controls [data-documentation-font='increase']").click();
+  await expect(page.locator(".documentation-font-dropdown")).toHaveCount(1);
+  await expect(page.locator(".documentation-font-menu [data-documentation-font]")).toHaveCount(3);
+  await page.locator("#documentationFontDropdown").click();
+  await page.locator(".documentation-font-menu [data-documentation-font='increase']").click();
   const afterDocsFontSize = await page.locator(".documentation-content").evaluate((node) => getComputedStyle(node).fontSize);
   expect(parseFloat(afterDocsFontSize)).toBeGreaterThan(parseFloat(beforeDocsFontSize));
 
@@ -645,6 +659,13 @@ test("publication page does not overflow on mobile", async ({ page }, testInfo) 
   if (isTechDocsProfile) {
     await page.goto(siteUrl("/en/docs/what-is-unaltraweb/"));
     await expect(page.locator(".documentation-layout")).toBeVisible();
+    await expect(page.locator(".documentation-layout")).toHaveClass(/documentation-toc-collapsed/);
+    await expect(page.locator(".documentation-tools")).toBeVisible();
+    await expect(page.locator(".documentation-search")).toBeVisible();
+    await expect(page.locator(".documentation-nav")).toBeHidden();
+    await page.locator("[data-documentation-sidebar-toggle]").click();
+    await expect(page.locator(".documentation-layout")).not.toHaveClass(/documentation-toc-collapsed/);
+    await expect(page.locator(".documentation-nav")).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await page.screenshot({ path: join(renderOut, `techdocs-mobile-${testInfo.project.name}.png`), fullPage: true });
     return;

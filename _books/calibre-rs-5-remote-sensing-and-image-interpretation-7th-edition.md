@@ -15,9 +15,7 @@ collection_es: "Teledetección"
 collection_ca: "Teledetecció"
 status: finished
 manual_recommended: true
-ribbon_label_en: "Available at CRAI"
-ribbon_label_es: "Disponible en el CRAI"
-ribbon_label_ca: "Disponible al CRAI"
+ribbon_key: crai
 date: 2015-01-22
 author: "Thomas Lillesand & Ralph W. Kiefer & Jonathan Chipman"
 publisher: "Wiley"

@@ -15,9 +15,7 @@ collection_es: "Teledetección"
 collection_ca: "Teledetecció"
 status: finished
 manual_recommended: true
-ribbon_label_en: "URV teacher"
-ribbon_label_es: "Profesorado URV"
-ribbon_label_ca: "Professorat URV"
+ribbon_key: urv-teacher
 date: 2023-02-20
 author: "Samantha Lavender & Andrew Lavender"
 year: 2023
