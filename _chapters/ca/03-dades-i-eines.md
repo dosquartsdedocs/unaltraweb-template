@@ -8,7 +8,7 @@ profiles: [manual]
 permalink: /ca/chapters/dades-i-eines/
 weight: 40
 part: Recursos
-manual_references: false
+manual_references: true
 ---
 
 Aquest capítol mostra material operatiu habitual en manuals acadèmics.
@@ -24,6 +24,8 @@ Els sistemes de referència de coordenades són més fàcils d'explicar amb exem
 ## Notes d'eines
 
 Les notes sobre versions han de ser curtes i lligades a l'activitat.
+
+Aquest capítol també cita {% cite goodchildGeographicalInformationScience1992 %} per comprovar la bibliografia final en un context compacte només amb CSL, sense portades ni targetes de lectures destacades.
 
 ## Blocs de codi i codi en línia
 

@@ -329,6 +329,9 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".language-python.highlighter-rouge")).toContainText("geopandas");
   await expect(page.locator(".language-r.highlighter-rouge")).toContainText("st_transform");
   await expect(page.locator(".language-haskell.highlighter-rouge")).toContainText("manhattan");
+  await expect(page.locator(".manual-references .manual-reference")).toContainText("Goodchild");
+  await expect(page.locator(".manual-references .manual-reference--with-preview")).toHaveCount(0);
+  await expect(page.locator(".manual-references .manual-reference-links .cite")).toHaveCount(0);
   await page.screenshot({ path: join(renderOut, `manual-code-fences-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/chapters/figures-diagrams/"));
@@ -349,10 +352,8 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator("#manual-more-readings-title")).toContainText("More readings");
   await expect(page.locator(".manual-featured-reference")).toHaveCount(3);
   await expect(page.locator(".manual-featured-authors").first()).toContainText("Samantha Lavender");
-  await expect(page.locator(".manual-featured-reference .manual-reference-links .cite").first()).toContainText("How to cite (APA)");
-  await page.locator(".manual-featured-reference .manual-reference-links .cite").first().click();
-  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toHaveClass(/open/);
-  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toContainText("Practical Handbook");
+  await expect(page.locator(".manual-bibliography .manual-reference-links .cite")).toHaveCount(0);
+  await expect(page.locator(".manual-chapter")).not.toContainText("How to cite (APA)");
   await page.locator(".manual-featured-reference .manual-reference-links .bibtex").first().click();
   await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toHaveClass(/open/);
   await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toContainText("@book");

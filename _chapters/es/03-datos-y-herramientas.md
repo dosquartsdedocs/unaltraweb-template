@@ -8,7 +8,7 @@ profiles: [manual]
 permalink: /es/chapters/datos-y-herramientas/
 weight: 40
 part: Recursos
-manual_references: false
+manual_references: true
 ---
 
 Este capitulo muestra material operativo habitual en manuales academicos.
@@ -24,6 +24,8 @@ Los sistemas de referencia de coordenadas son mas faciles de explicar con ejempl
 ## Notas de herramientas
 
 Las notas sobre versiones deben ser cortas y ligadas a la actividad.
+
+Este capítulo también cita {% cite goodchildGeographicalInformationScience1992 %} para comprobar la bibliografía final en un contexto compacto solo con CSL, sin portadas ni tarjetas de lecturas destacadas.
 
 ## Bloques de codigo y codigo en linea
 

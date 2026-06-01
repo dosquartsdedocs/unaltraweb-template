@@ -8,7 +8,7 @@ profiles: [manual]
 permalink: /en/chapters/data-tools/
 weight: 40
 part: Resources
-manual_references: false
+manual_references: true
 ---
 
 This chapter models the kind of operational material that often appears in academic handbooks.
@@ -24,6 +24,8 @@ Coordinate reference systems are easier to teach when examples, warnings and dia
 ## Tool notes
 
 Keep version-specific advice short and close to the activity that needs it.
+
+This chapter also cites {% cite goodchildGeographicalInformationScience1992 %} so the end-of-chapter bibliography can be checked in a compact CSL-only context, without preview covers or featured reading cards.
 
 ## Code fences and inline code
 
