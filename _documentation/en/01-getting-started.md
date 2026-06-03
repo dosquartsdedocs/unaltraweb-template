@@ -4,7 +4,7 @@ description: The reusable core, the template repository and the role of profiles
 lang: en
 ref: software_getting_started
 profiles: [unaltredocs]
-section: Concepts
+section: User guides
 weight: 10
 permalink: /en/docs/what-is-unaltraweb/
 ---

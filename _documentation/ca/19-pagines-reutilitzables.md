@@ -4,9 +4,8 @@ description: D'on carreguen dades les pàgines d'equip, lectures, tesis, reposit
 lang: ca
 ref: software_reusable_profile_pages
 profiles: [unaltredocs]
-section: Autoria
-subsection: Model de contingut
-weight: 44
+section: Estàndards
+weight: 220
 permalink: /ca/docs/pagines-reutilitzables/
 ---
 

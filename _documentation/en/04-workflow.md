@@ -4,8 +4,8 @@ description: How local edits move through profile overlays, Jekyll and deploymen
 lang: en
 ref: software_workflow
 profiles: [unaltredocs]
-section: Guides
-weight: 70
+section: Developers
+weight: 330
 permalink: /en/docs/workflow/
 mermaid:
   enabled: true

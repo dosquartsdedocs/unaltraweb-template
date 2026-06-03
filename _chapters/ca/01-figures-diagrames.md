@@ -25,17 +25,27 @@ Els manuals combinen text, captures, figures i diagrames conceptuals.
 
 ## Composicions amb subfigures
 
-Fes servir un bloc compacte tipus patchwork quan diverses imatges Markdown han de llegir-se com una sola figura.
+Fes servir un bloc compacte tipus patchwork quan diverses imatges Markdown han de llegir-se com una sola figura. `abc` posa panells en una sola fila, `/` obri una fila nova i `+` continua disponible quan els separadors explícits ajuden a llegir la composició.
 
-::: subfigures a+b/c "Una composició de tres panells per a materials de manual"
+::: subfigures abc "Una composició en una sola fila amb sintaxi compacta `abc`"
 ![Captura de programari]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Captura de programari")
 ![Placeholder de mapa]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Placeholder de mapa")
 ![Diagrama conceptual]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Diagrama conceptual")
 :::
 
+::: subfigures a+b/c "Una composició de dues files amb separadors explícits"
+![Estat de la interfície]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Estat de la interfície")
+![Context espacial]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Context espacial")
+![Resum conceptual]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Resum conceptual")
+:::
+
 ## Mermaid i temes
 
 Les figures Mermaid tenen superfícies adaptades als modes clar, fosc i cafè.
+
+La figura següent apunta a la font `.mmd` llegible; la compilació serveix l'SVG generat i l'embolcalla amb la superfície de diagrama del manual.
+
+![Flux de capítol com a font Mermaid]({{ site.baseurl }}/assets/diagrams/manual-flow.mmd "Una font Mermaid renderitzada com a SVG adaptat al tema")
 
 ### Diagrames editables
 

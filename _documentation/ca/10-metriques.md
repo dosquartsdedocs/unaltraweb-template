@@ -5,7 +5,7 @@ lang: ca
 ref: software_metrics
 profiles: [unaltredocs]
 section: Operacions
-weight: 80
+weight: 400
 permalink: /ca/docs/metriques/
 ---
 
@@ -14,6 +14,6 @@ permalink: /ca/docs/metriques/
 Les construccions normals de Jekyll continuen sent estàtiques. Les mètriques de publicacions es poden refrescar localment o mitjançant el flux de treball manual `Update publication metrics`. Les memòries cau Scimago i diagnòstics generats queden fora dels pull requests; els resultats versionables es limiten a bibliografia i `_data/metrics.yml`.
 
 ```bash
-make metrics-update LOCAL_CORE=../unaltraweb
-make metrics-check LOCAL_CORE=../unaltraweb
+make metrics-update
+make metrics-check
 ```

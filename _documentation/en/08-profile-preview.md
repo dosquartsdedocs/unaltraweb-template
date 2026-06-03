@@ -4,8 +4,8 @@ description: Run several profile builds at once without sharing output directori
 lang: en
 ref: software_profile_preview
 profiles: [unaltredocs]
-section: Build
-weight: 25
+section: Developers
+weight: 310
 permalink: /en/docs/profile-preview/
 ---
 
@@ -14,12 +14,12 @@ permalink: /en/docs/profile-preview/
 Each profile server writes a separate temporary config and destination, so concurrent previews do not overwrite each other.
 
 ```bash
-make serve-allprofiles LOCAL_CORE=../unaltraweb
+make serve-allprofiles
 ```
 
 | Profile | Port | Destination |
 |---|---|---|
-| personal | 4001 | `tmp/_site.personal` |
-| project | 4002 | `tmp/_site.project` |
-| manual | 4003 | `tmp/_site.manual` |
+| unaltreselfie | 4001 | `tmp/_site.unaltreselfie` |
+| unaltreprojecte | 4002 | `tmp/_site.unaltreprojecte` |
+| unaltremanual | 4003 | `tmp/_site.unaltremanual` |
 | unaltredocs | 4004 | `tmp/_site.unaltredocs` |

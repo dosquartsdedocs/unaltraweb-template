@@ -4,9 +4,8 @@ description: Atajos creativos para avisos, figuras, tablas, subfiguras y diagram
 lang: es
 ref: software_markdown_syntax_sugar
 profiles: [unaltredocs]
-section: Autoría
-subsection: Autoría creativa
-weight: 56
+section: Estándares
+weight: 240
 permalink: /es/docs/azucar-sintactico/
 mermaid:
   enabled: true
@@ -75,20 +74,26 @@ Usa un bloque `table` cuando una tabla Markdown necesite pie y contador propio.
 
 ## Composiciones con subfiguras
 
-Las subfiguras usan un bloque compacto. La cadena de composición usa `/` para filas y `+` para paneles en la misma fila.
+Las subfiguras usan un bloque compacto. La cadena de composición puede usar filas compactas como `abc`, `/` para filas y `+` cuando los separadores explícitos hacen más clara la composición.
 
 ```markdown
-::: subfigures a+b/c "Una composición de tres paneles"
+::: subfigures abc "Tres paneles en una sola fila"
 ![Interfaz](/assets/img/placeholders/manual-screenshot.svg "Interfaz")
 ![Mapa](/assets/img/placeholders/manual-map.svg "Mapa")
 ![Diagrama](/assets/img/placeholders/manual-diagram-card.svg "Diagrama")
 :::
 ```
 
-::: subfigures a+b/c "Una composición de tres paneles"
+::: subfigures abc "Tres paneles en una sola fila"
 ![Interfaz]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Interfaz")
 ![Mapa]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Mapa")
 ![Diagrama]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Diagrama")
+:::
+
+::: subfigures a+b/c "Composición de dos filas con separadores explícitos"
+![Paso uno]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Paso uno")
+![Paso dos]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Paso dos")
+![Paso tres]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Paso tres")
 :::
 
 ## Bloques Mermaid

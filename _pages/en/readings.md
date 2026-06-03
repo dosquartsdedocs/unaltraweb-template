@@ -8,7 +8,7 @@ profiles: [unaltreselfie]
 feature: readings
 permalink: /en/readings/
 nav: true
-nav_order: 10
+nav_order: 6
 collection: books
 ---
 

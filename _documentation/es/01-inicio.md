@@ -4,7 +4,7 @@ description: El núcleo reutilizable, el repositorio de plantilla y el papel de 
 lang: es
 ref: software_getting_started
 profiles: [unaltredocs]
-section: Conceptos
+section: Guías de usuario
 weight: 10
 permalink: /es/docs/que-es-unaltraweb/
 ---

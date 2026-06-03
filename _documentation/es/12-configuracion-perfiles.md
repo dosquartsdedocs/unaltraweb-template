@@ -4,8 +4,8 @@ description: Cómo se combinan defaults del núcleo, configuración hija y overl
 lang: es
 ref: software_configuration_profiles
 profiles: [unaltredocs]
-section: Construcción
-weight: 28
+section: Desarrolladores
+weight: 320
 permalink: /es/docs/configuracion-perfiles/
 ---
 

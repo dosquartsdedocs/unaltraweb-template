@@ -1,25 +1,27 @@
 ---
 title: Install and run locally
-description: The smallest local workflow for developing a child site against a local core checkout.
+description: The smallest local workflow for previewing a child site with the packaged core.
 lang: en
 ref: software_installation
 profiles: [unaltredocs]
-section: Build
+section: User guides
 weight: 20
 permalink: /en/docs/installation/
 ---
 
-The template can consume a local checkout of the core without publishing a gem. This is the normal development loop while changing `unaltraweb` itself.
+The normal child-site workflow uses the `unaltraweb` dependency declared in `Gemfile`. You do not need a sibling `../unaltraweb` checkout to preview a site.
 
 ```bash
-make serve-unaltreselfie LOCAL_CORE=../unaltraweb
-make serve-unaltreprojecte LOCAL_CORE=../unaltraweb
-make serve-unaltremanual LOCAL_CORE=../unaltraweb
-make serve-unaltredocs LOCAL_CORE=../unaltraweb
+make bootstrap
+make serve-unaltreselfie
+make serve-unaltreprojecte
+make serve-unaltremanual
+make serve-unaltredocs
 ```
 
 | Input | Meaning |
 |---|---|
-| `LOCAL_CORE` | Path to the local `unaltraweb` checkout |
 | `SITE_PROFILE` | Build profile selected by the Makefile overlay |
 | `tmp/_site.<profile>` | Isolated output directory for concurrent profile servers |
+
+Set `LOCAL_CORE=../unaltraweb` only when you are actively editing the core and want this child site to consume those local changes before updating the gem dependency.

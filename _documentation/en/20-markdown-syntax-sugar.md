@@ -4,9 +4,8 @@ description: Creative shorthand for callouts, figures, tables, subfigures and Me
 lang: en
 ref: software_markdown_syntax_sugar
 profiles: [unaltredocs]
-section: Authoring
-subsection: Creative authoring
-weight: 56
+section: Standards
+weight: 240
 permalink: /en/docs/markdown-syntax-sugar/
 mermaid:
   enabled: true
@@ -75,20 +74,26 @@ Use a `table` block when a Markdown table needs a caption and its own counter.
 
 ## Subfigure compositions
 
-Subfigures use one compact block. The layout string uses `/` for rows and `+` for panels in the same row.
+Subfigures use one compact block. The layout string can use compact row labels such as `abc`, `/` for rows, and `+` when explicit panel separators are clearer.
 
 ```markdown
-::: subfigures a+b/c "A three-panel composition"
+::: subfigures abc "Three panels in one row"
 ![Interface](/assets/img/placeholders/manual-screenshot.svg "Interface")
 ![Map](/assets/img/placeholders/manual-map.svg "Map")
 ![Diagram](/assets/img/placeholders/manual-diagram-card.svg "Diagram")
 :::
 ```
 
-::: subfigures a+b/c "A three-panel composition"
+::: subfigures abc "Three panels in one row"
 ![Interface]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Interface")
 ![Map]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Map")
 ![Diagram]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Diagram")
+:::
+
+::: subfigures a+b/c "Two-row composition with explicit separators"
+![Step one]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Step one")
+![Step two]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Step two")
+![Step three]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Step three")
 :::
 
 ## Mermaid fences

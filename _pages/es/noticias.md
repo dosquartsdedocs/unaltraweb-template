@@ -8,7 +8,7 @@ profiles: [unaltreselfie]
 feature: news
 permalink: /es/noticias/
 nav: true
-nav_order: 6
+nav_order: 1
 ---
 
 {% include news.liquid %}

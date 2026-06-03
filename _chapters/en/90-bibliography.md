@@ -9,6 +9,7 @@ permalink: /en/bibliography/
 weight: 90
 part: Reference
 manual_numbered: false
+manual_toc: false
 manual_references: false
 keywords: readings books articles GIS remote sensing bibliography
 ---

@@ -4,8 +4,7 @@ description: Cómo los sitios hijo organizan contenido sin editar plantillas del
 lang: es
 ref: software_data_model
 profiles: [unaltredocs]
-section: Autoría
-subsection: Modelo de contenido
+section: Guías de usuario
 weight: 40
 permalink: /es/docs/modelo-contenido/
 ---

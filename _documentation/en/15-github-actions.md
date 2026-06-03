@@ -4,9 +4,8 @@ description: How child repositories call reusable workflows from the core.
 lang: en
 ref: software_github_actions
 profiles: [unaltredocs]
-section: Automation
-subsection: GitHub Actions
-weight: 72
+section: Developers
+weight: 340
 permalink: /en/docs/github-actions/
 ---
 

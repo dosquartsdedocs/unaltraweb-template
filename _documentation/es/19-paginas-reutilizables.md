@@ -4,9 +4,8 @@ description: De dónde cargan datos las páginas de equipo, lecturas, tesis, rep
 lang: es
 ref: software_reusable_profile_pages
 profiles: [unaltredocs]
-section: Autoría
-subsection: Modelo de contenido
-weight: 44
+section: Estándares
+weight: 220
 permalink: /es/docs/paginas-reutilizables/
 ---
 

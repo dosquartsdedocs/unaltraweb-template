@@ -9,6 +9,7 @@ permalink: /ca/bibliografia/
 weight: 90
 part: Referència
 manual_numbered: false
+manual_toc: false
 manual_references: false
 keywords: lectures llibres articles SIG teledetecció bibliografia
 ---

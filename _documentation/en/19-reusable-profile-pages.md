@@ -4,9 +4,8 @@ description: Where project team, readings, theses, repository and publication pa
 lang: en
 ref: software_reusable_profile_pages
 profiles: [unaltredocs]
-section: Authoring
-subsection: Content model
-weight: 44
+section: Standards
+weight: 220
 permalink: /en/docs/reusable-profile-pages/
 ---
 

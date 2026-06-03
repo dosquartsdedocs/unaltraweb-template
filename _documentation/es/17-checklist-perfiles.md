@@ -4,8 +4,8 @@ description: Una matriz basada en metadatos sobre lo que admite cada perfil prep
 lang: es
 ref: software_profile_checklist
 profiles: [unaltredocs]
-section: Conceptos
-weight: 17
+section: Perfiles
+weight: 150
 permalink: /es/docs/checklist-perfiles/
 profile_feature_matrix:
   feature_label: Funcionalidad

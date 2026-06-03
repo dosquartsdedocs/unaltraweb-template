@@ -1,11 +1,11 @@
 ---
 title: Exemples tècnics
-description: Fluxos Mermaid, figures indexades i captures de perfils en pàgines de documentació.
+description: Fluxos Mermaid, figures indexades i exemples tècnics en pàgines de documentació.
 lang: ca
 ref: software_technical_examples
 profiles: [unaltredocs]
-section: Autoria
-weight: 55
+section: Estàndards
+weight: 250
 permalink: /ca/docs/exemples-tecnics/
 mermaid:
   enabled: true
@@ -18,14 +18,14 @@ Les pàgines de documentació poden barrejar text, diagrames, figures indexades 
 flowchart LR
   core[nucli unaltraweb] --> template[plantilla filla]
   template --> profiles{perfil}
-  profiles --> personal[personal]
-  profiles --> project[project]
-  profiles --> manual[manual]
+  profiles --> unaltreselfie[unaltreselfie]
+  profiles --> unaltreprojecte[unaltreprojecte]
+  profiles --> unaltremanual[unaltremanual]
   profiles --> unaltredocs[unaltredocs]
 ```
 
-![Captura placeholder del perfil manual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Captura indexada placeholder d'una pàgina manual.")
+![Figura placeholder del perfil unaltremanual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Figura indexada placeholder d'una pàgina unaltremanual.")
 
-![Targeta placeholder del perfil project]({{ site.baseurl }}/assets/img/projects/unaltraweb-template.svg "Il·lustració indexada placeholder d'una pàgina project.")
+![Targeta placeholder del perfil unaltreprojecte]({{ site.baseurl }}/assets/img/projects/unaltraweb-template.svg "Il·lustració indexada placeholder d'una pàgina unaltreprojecte.")
 
 Usa peus de figura quan una captura o diagrama forma part de l'argument. Deixa les imatges decoratives per al hero o el disseny de targetes.

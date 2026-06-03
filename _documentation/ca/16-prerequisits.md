@@ -4,8 +4,8 @@ description: Fitxers i serveis que cal revisar abans de publicar un lloc fill.
 lang: ca
 ref: software_prerequisites
 profiles: [unaltredocs]
-section: Construcció
-weight: 22
+section: Operacions
+weight: 390
 permalink: /ca/docs/prerequisits/
 ---
 

@@ -4,7 +4,7 @@ description: Los conceptos mínimos de Jekyll antes de editar un repositorio hij
 lang: es
 ref: software_jekyll_basics
 profiles: [unaltredocs]
-section: Autoría
+section: Guías de usuario
 weight: 30
 permalink: /es/docs/jekyll-basico/
 ---

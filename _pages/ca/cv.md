@@ -7,7 +7,7 @@ profiles: [unaltreselfie]
 feature: cv
 permalink: /ca/cv/
 nav: true
-nav_order: 8
+nav_order: 4
 cv_pdf: /assets/pdf/cv.pdf
 cv_preview: /assets/img/cv-preview.jpg
 ---

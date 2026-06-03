@@ -14,6 +14,7 @@ UNALTREDOCS_PORT ?= 4004
 OPEN_DELAY ?= 25
 VISUAL_PROFILES ?= unaltreselfie unaltreprojecte unaltremanual unaltredocs
 DOC_SCREENSHOTS_DIR ?= assets/img/screenshots
+DOC_SCREENSHOTS ?= home-light-chromium.png project-home-chromium.png manual-home-chromium.png unaltredocs-home-chromium.png
 START_PATH ?= /en/
 LIVERELOAD ?= --livereload
 LIVERELOAD_PORT ?= 35729
@@ -282,6 +283,7 @@ test test-native render-smoke render-smoke-local: local-core-check
 
 screenshots screenshots-all: local-core-check
 	@mkdir -p tmp/render-smoke
+	@rm -f tmp/render-smoke/*.png
 	@set -e; \
 	for profile in $(VISUAL_PROFILES); do \
 	  printf '\n== Visual review: %s ==\n' "$$profile"; \
@@ -292,13 +294,12 @@ screenshots screenshots-all: local-core-check
 docs-screenshots: screenshots
 	@mkdir -p "$(DOC_SCREENSHOTS_DIR)"
 	@set -e; \
-	set -- tmp/render-smoke/*.png; \
-	if test "$$1" = 'tmp/render-smoke/*.png'; then \
-	  printf 'No screenshots found in tmp/render-smoke/.\n'; \
-	  exit 1; \
-	fi; \
-	cp "$$@" "$(DOC_SCREENSHOTS_DIR)/"; \
-	printf 'Copied %s screenshots to %s/\n' "$$#" "$(DOC_SCREENSHOTS_DIR)"
+	rm -f "$(DOC_SCREENSHOTS_DIR)"/*.png; \
+	for screenshot in $(DOC_SCREENSHOTS); do \
+	  test -f "tmp/render-smoke/$$screenshot" || (printf 'Missing tmp/render-smoke/%s\n' "$$screenshot" && exit 1); \
+	  cp "tmp/render-smoke/$$screenshot" "$(DOC_SCREENSHOTS_DIR)/"; \
+	done; \
+	printf 'Copied %s documentation screenshots to %s/\n' "$(words $(DOC_SCREENSHOTS))" "$(DOC_SCREENSHOTS_DIR)"
 
 documentation-screenshots screenshots-docs: docs-screenshots
 

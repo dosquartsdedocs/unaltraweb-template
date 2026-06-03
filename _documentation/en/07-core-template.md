@@ -4,8 +4,8 @@ description: Why reusable behaviour lives in the core and local content lives in
 lang: en
 ref: software_core_template
 profiles: [unaltredocs]
-section: Concepts
-weight: 18
+section: Developers
+weight: 300
 permalink: /en/docs/core-template/
 ---
 

@@ -4,8 +4,8 @@ description: How core defaults, child configuration and profile overlays combine
 lang: en
 ref: software_configuration_profiles
 profiles: [unaltredocs]
-section: Build
-weight: 28
+section: Developers
+weight: 320
 permalink: /en/docs/configuration-profiles/
 ---
 
@@ -19,7 +19,7 @@ permalink: /en/docs/configuration-profiles/
 
 Keep production settings in the child `_config.yml`. Use profile overlays for local comparisons only.
 
-## Techdocs branding
+## unaltredocs Branding
 
 The documentation profile reads its brand assets from `unaltraweb.documentation`:
 

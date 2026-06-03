@@ -4,8 +4,8 @@ description: Executar diversos perfils alhora sense compartir directoris d'eixid
 lang: ca
 ref: software_profile_preview
 profiles: [unaltredocs]
-section: Construcció
-weight: 25
+section: Desenvolupadors
+weight: 310
 permalink: /ca/docs/previsualitzacio-perfils/
 ---
 
@@ -14,12 +14,12 @@ permalink: /ca/docs/previsualitzacio-perfils/
 Cada servidor de perfil escriu una configuració temporal i una destinació separada, així que les previsualitzacions concurrents no se sobreescriuen.
 
 ```bash
-make serve-allprofiles LOCAL_CORE=../unaltraweb
+make serve-allprofiles
 ```
 
 | Perfil | Port | Destinació |
 |---|---|---|
-| personal | 4001 | `tmp/_site.personal` |
-| project | 4002 | `tmp/_site.project` |
-| manual | 4003 | `tmp/_site.manual` |
+| unaltreselfie | 4001 | `tmp/_site.unaltreselfie` |
+| unaltreprojecte | 4002 | `tmp/_site.unaltreprojecte` |
+| unaltremanual | 4003 | `tmp/_site.unaltremanual` |
 | unaltredocs | 4004 | `tmp/_site.unaltredocs` |

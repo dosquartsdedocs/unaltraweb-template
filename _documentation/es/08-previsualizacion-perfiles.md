@@ -4,8 +4,8 @@ description: Ejecutar varios perfiles a la vez sin compartir directorios de sali
 lang: es
 ref: software_profile_preview
 profiles: [unaltredocs]
-section: Construcción
-weight: 25
+section: Desarrolladores
+weight: 310
 permalink: /es/docs/previsualizacion-perfiles/
 ---
 
@@ -14,12 +14,12 @@ permalink: /es/docs/previsualizacion-perfiles/
 Cada servidor de perfil escribe una configuración temporal y un destino separado, así que las previsualizaciones concurrentes no se pisan entre sí.
 
 ```bash
-make serve-allprofiles LOCAL_CORE=../unaltraweb
+make serve-allprofiles
 ```
 
 | Perfil | Puerto | Destino |
 |---|---|---|
-| personal | 4001 | `tmp/_site.personal` |
-| project | 4002 | `tmp/_site.project` |
-| manual | 4003 | `tmp/_site.manual` |
+| unaltreselfie | 4001 | `tmp/_site.unaltreselfie` |
+| unaltreprojecte | 4002 | `tmp/_site.unaltreprojecte` |
+| unaltremanual | 4003 | `tmp/_site.unaltremanual` |
 | unaltredocs | 4004 | `tmp/_site.unaltredocs` |

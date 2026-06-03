@@ -8,6 +8,10 @@ profiles: [unaltreprojecte]
 permalink: /en/conferences/
 nav: true
 nav_order: 3
+hero:
+  image: /assets/img/projects/project-conference-splash.svg
+  alt: Open landscape route connecting project meeting points
+  caption: Project meetings, workshops and shared field routes
 ---
 
 Use this page for conference websites, organised sessions, workshops, calls for papers or event proceedings linked to the project.

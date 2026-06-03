@@ -4,7 +4,7 @@ description: El nucli reutilitzable, el repositori de plantilla i el paper dels 
 lang: ca
 ref: software_getting_started
 profiles: [unaltredocs]
-section: Conceptes
+section: Guies d'usuari
 weight: 10
 permalink: /ca/docs/que-es-unaltraweb/
 ---

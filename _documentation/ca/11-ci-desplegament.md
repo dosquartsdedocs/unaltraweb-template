@@ -4,9 +4,8 @@ description: Les comprovacions automàtiques es mantenen lleugeres i els treball
 lang: ca
 ref: software_ci_deploy
 profiles: [unaltredocs]
-section: Automatització
-subsection: GitHub Actions
-weight: 74
+section: Desenvolupadors
+weight: 350
 permalink: /ca/docs/ci-desplegament/
 ---
 

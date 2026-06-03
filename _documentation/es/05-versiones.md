@@ -5,7 +5,7 @@ lang: es
 ref: software_releases
 profiles: [unaltredocs]
 section: Operaciones
-weight: 85
+weight: 410
 permalink: /es/docs/versiones/
 ---
 

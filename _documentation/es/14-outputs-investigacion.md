@@ -4,8 +4,8 @@ description: Cómo documentar conjuntos de datos, software, informes y productos
 lang: es
 ref: software_research_outputs
 profiles: [unaltredocs]
-section: Autoría
-weight: 50
+section: Estándares
+weight: 210
 permalink: /es/docs/outputs-investigacion/
 ---
 

@@ -9,6 +9,10 @@ permalink: /en/resources/
 nav: true
 nav_order: 6
 dropdown: true
+figure_captions: true
+mermaid:
+  enabled: true
+  zoomable: false
 children:
   - title: Outputs
     permalink: /en/outputs/
@@ -19,6 +23,23 @@ children:
 ---
 
 This landing page groups the reusable material that a project site usually needs after the main narrative is in place.
+
+::: subfigures ab/cd "A two-row subfigure example for project resources"
+![Dataset output]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Dataset output")
+![Map product]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Map product")
+![Repository workflow]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Repository workflow")
+![Reading notes]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Reading notes")
+:::
+
+```mermaid
+sequenceDiagram
+  participant Team
+  participant Repository
+  participant Website
+  Team->>Repository: publish reusable material
+  Repository->>Website: expose resource links
+  Website-->>Team: keep outputs discoverable
+```
 
 | Resource | Use it for |
 |---|---|

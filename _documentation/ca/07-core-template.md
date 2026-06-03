@@ -4,8 +4,8 @@ description: Per què el comportament reutilitzable viu al nucli i el contingut 
 lang: ca
 ref: software_core_template
 profiles: [unaltredocs]
-section: Conceptes
-weight: 18
+section: Desenvolupadors
+weight: 300
 permalink: /ca/docs/nucli-plantilla/
 ---
 

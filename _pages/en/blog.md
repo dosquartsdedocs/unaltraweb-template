@@ -7,7 +7,7 @@ profiles: [unaltreselfie]
 feature: blog
 permalink: /en/blog/
 nav: true
-nav_order: 7
+nav_order: 2
 pagination:
   enabled: true
   locale: en

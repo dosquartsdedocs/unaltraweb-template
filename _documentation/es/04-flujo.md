@@ -4,8 +4,8 @@ description: Cómo las ediciones locales pasan por overlays de perfil, Jekyll y 
 lang: es
 ref: software_workflow
 profiles: [unaltredocs]
-section: Guías
-weight: 70
+section: Desarrolladores
+weight: 330
 permalink: /es/docs/flujo/
 mermaid:
   enabled: true

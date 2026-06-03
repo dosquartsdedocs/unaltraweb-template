@@ -4,8 +4,8 @@ description: Por qué el comportamiento reutilizable vive en el núcleo y el con
 lang: es
 ref: software_core_template
 profiles: [unaltredocs]
-section: Conceptos
-weight: 18
+section: Desarrolladores
+weight: 300
 permalink: /es/docs/nucleo-plantilla/
 ---
 

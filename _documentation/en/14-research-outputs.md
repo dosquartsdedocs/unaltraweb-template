@@ -4,8 +4,8 @@ description: How to document datasets, software, reports and reusable research p
 lang: en
 ref: software_research_outputs
 profiles: [unaltredocs]
-section: Authoring
-weight: 50
+section: Standards
+weight: 210
 permalink: /en/docs/research-outputs/
 ---
 

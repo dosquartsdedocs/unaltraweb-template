@@ -4,9 +4,8 @@ description: Las comprobaciones automáticas se mantienen ligeras y los trabajos
 lang: es
 ref: software_ci_deploy
 profiles: [unaltredocs]
-section: Automatización
-subsection: GitHub Actions
-weight: 74
+section: Desarrolladores
+weight: 350
 permalink: /es/docs/ci-despliegue/
 ---
 

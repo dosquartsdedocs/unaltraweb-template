@@ -4,7 +4,7 @@ description: The minimum Jekyll concepts users need before editing a child repos
 lang: en
 ref: software_jekyll_basics
 profiles: [unaltredocs]
-section: Authoring
+section: User guides
 weight: 30
 permalink: /en/docs/jekyll-basics/
 ---

@@ -8,9 +8,17 @@ keywords: academic website, research, jekyll
 
 author:
   name: John Doe
+  name_es: Juan Nadie
+  name_ca: Joan Ningu
   bio: Fictional researcher placeholder for a personal academic site.
+  bio_es: Perfil investigador ficticio para una web académica personal.
+  bio_ca: Perfil investigador fictici per a una web acadèmica personal.
   affiliation: Example University
+  affiliation_es: Universidad de Ejemplo
+  affiliation_ca: Universitat d'Exemple
   location: Example City
+  location_es: Ciudad de Ejemplo
+  location_ca: Ciutat d'Exemple
   email: researcher@example.org
   orcid: 0000-0002-1825-0097
   google_scholar: demo

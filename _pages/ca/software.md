@@ -13,8 +13,8 @@ hero:
   image: /assets/img/projects/data-product-docs.svg
   alt: Interfície abstracta de documentació tècnica
   caption: Conceptes del nucli, construccions locals, previsualització de perfils i manteniment
+  cta_label: Comença
+  cta_url: /ca/docs/que-es-unaltraweb/
 ---
 
-`unaltredocs` és el perfil de documentació tècnica per a `unaltraweb`. Usa el mateix sistema visual que la resta de la plantilla, però el model de contingut s'assembla més a Read the Docs: índex esquerre, documents de col·lecció ordenats i navegació anterior/següent.
-
-Afig documents a `_documentation` amb metadades `section`, `subsection` opcional i `weight` per ordenar la barra lateral.
+Usa aquest portal per triar el perfil de lloc adequat, entendre el model de contingut reutilitzable i passar de guies per a visitants a notes de manteniment per a desenvolupadors sense barrejar els dos recorreguts.

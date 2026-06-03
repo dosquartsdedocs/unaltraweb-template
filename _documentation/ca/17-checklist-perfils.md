@@ -4,8 +4,8 @@ description: Una matriu basada en metadades sobre el que admet cada perfil prepa
 lang: ca
 ref: software_profile_checklist
 profiles: [unaltredocs]
-section: Conceptes
-weight: 17
+section: Perfils
+weight: 150
 permalink: /ca/docs/checklist-perfils/
 profile_feature_matrix:
   feature_label: Funcionalitat

@@ -4,9 +4,8 @@ description: Com conviuen pàgines traduïdes, canonicals, hreflang i sitemaps.
 lang: ca
 ref: software_multilingual_seo
 profiles: [unaltredocs]
-section: Autoria
-subsection: Model de contingut
-weight: 47
+section: Estàndards
+weight: 230
 permalink: /ca/docs/seo-multilingue/
 ---
 

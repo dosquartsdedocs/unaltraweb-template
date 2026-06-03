@@ -4,8 +4,8 @@ description: Com documentar conjunts de dades, programari, informes i productes 
 lang: ca
 ref: software_research_outputs
 profiles: [unaltredocs]
-section: Autoria
-weight: 50
+section: Estàndards
+weight: 210
 permalink: /ca/docs/outputs-recerca/
 ---
 

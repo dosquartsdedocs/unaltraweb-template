@@ -4,9 +4,8 @@ description: Cómo los repositorios hijo llaman flujos de trabajo reutilizables 
 lang: es
 ref: software_github_actions
 profiles: [unaltredocs]
-section: Automatización
-subsection: GitHub Actions
-weight: 72
+section: Desarrolladores
+weight: 340
 permalink: /es/docs/github-actions/
 ---
 

@@ -4,19 +4,21 @@ description: Familias de sitio preparadas y seleccionadas en tiempo de construcc
 lang: es
 ref: software_site_profiles
 profiles: [unaltredocs]
-section: Conceptos
-weight: 15
+section: Perfiles
+weight: 100
 permalink: /es/docs/perfiles-sitio/
 ---
 
 Los perfiles son familias de sitio de alto nivel, no layouts de Jekyll. El perfil activo se selecciona antes de escribir el sitio y después las páginas y documentos se filtran por su front matter `profiles`.
 
+Cada perfil tiene su propia página porque el modelo de contenido, la navegación y las prioridades visuales son distintas. Esas páginas usan una sola captura inicial por perfil; las capturas más profundas de render-smoke quedan como artefactos de prueba y no como ruido documental.
+
 | Perfil | Uso |
 |---|---|
-| `unaltreselfie` | Sitio personal académico o profesional |
-| `unaltreprojecte` | Proyecto de investigación o infraestructura pública |
-| `unaltremanual` | Manual tipo libro o guía docente |
-| `unaltredocs` | Documentación técnica con índice izquierdo |
+| [`unaltreselfie`]({{ '/es/docs/unaltreselfie/' | relative_url }}) | Sitio personal académico o profesional |
+| [`unaltreprojecte`]({{ '/es/docs/unaltreprojecte/' | relative_url }}) | Proyecto de investigación o infraestructura pública |
+| [`unaltremanual`]({{ '/es/docs/unaltremanual/' | relative_url }}) | Manual tipo libro o guía docente |
+| [`unaltredocs`]({{ '/es/docs/unaltredocs/' | relative_url }}) | Documentación técnica con índice izquierdo |
 
 <h2 id="profile-specific-home">Inicio específico del perfil</h2>
 

@@ -4,8 +4,7 @@ description: How child sites organise content without editing core templates.
 lang: en
 ref: software_data_model
 profiles: [unaltredocs]
-section: Authoring
-subsection: Content model
+section: User guides
 weight: 40
 permalink: /en/docs/content-model/
 ---

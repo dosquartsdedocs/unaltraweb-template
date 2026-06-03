@@ -4,8 +4,8 @@ description: Files and services to review before a child site goes live.
 lang: en
 ref: software_prerequisites
 profiles: [unaltredocs]
-section: Build
-weight: 22
+section: Operations
+weight: 390
 permalink: /en/docs/prerequisites/
 ---
 

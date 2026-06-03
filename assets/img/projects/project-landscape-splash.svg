@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">Open landscape with project study area</title>
+  <desc id="desc">A wide geospatial landscape with mountains, fields, water and a subtle network of observation points.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#9ec8e8"/>
+      <stop offset="0.55" stop-color="#d8ecf2"/>
+      <stop offset="1" stop-color="#f4efe1"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#b8cf91"/>
+      <stop offset="0.5" stop-color="#83aa75"/>
+      <stop offset="1" stop-color="#5e8c72"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#77aac4"/>
+      <stop offset="1" stop-color="#a4cdd5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="720" fill="url(#sky)"/>
+  <circle cx="1295" cy="122" r="58" fill="#f7d779" opacity="0.9"/>
+  <path d="M0 285 C165 218 276 260 430 202 C610 136 758 248 910 188 C1058 130 1190 222 1320 180 C1435 142 1518 158 1600 122 L1600 720 L0 720 Z" fill="#6f8fa5" opacity="0.78"/>
+  <path d="M0 340 C180 282 330 326 485 270 C650 210 780 322 960 250 C1140 178 1294 282 1600 224 L1600 720 L0 720 Z" fill="#8ca982" opacity="0.82"/>
+  <path d="M0 430 C220 370 362 420 560 350 C770 276 935 402 1128 330 C1296 268 1438 322 1600 292 L1600 720 L0 720 Z" fill="url(#field)"/>
+  <path d="M0 574 C152 528 286 596 452 548 C642 494 820 610 1018 548 C1198 492 1376 540 1600 498 L1600 720 L0 720 Z" fill="#d6bb78" opacity="0.68"/>
+  <path d="M0 648 C220 596 408 686 624 622 C836 560 1040 664 1245 610 C1388 574 1490 594 1600 570 L1600 720 L0 720 Z" fill="#746a4f" opacity="0.28"/>
+  <path d="M0 480 C210 450 356 486 516 458 C746 418 908 488 1110 438 C1302 392 1458 428 1600 402" fill="none" stroke="#f3ead7" stroke-width="8" opacity="0.9"/>
+  <path d="M0 512 C214 478 384 520 560 486 C744 450 910 522 1118 470 C1308 422 1456 458 1600 430" fill="none" stroke="#5f7f71" stroke-width="2" opacity="0.48"/>
+  <path d="M58 625 C214 552 330 590 462 522 C628 438 748 478 892 402 C1038 326 1168 390 1328 318" fill="none" stroke="url(#water)" stroke-width="22" stroke-linecap="round" opacity="0.76"/>
+  <g fill="#1f4c5b" opacity="0.8">
+    <circle cx="286" cy="505" r="7"/>
+    <circle cx="562" cy="463" r="7"/>
+    <circle cx="842" cy="480" r="7"/>
+    <circle cx="1135" cy="424" r="7"/>
+    <circle cx="1328" cy="360" r="7"/>
+  </g>
+  <g fill="none" stroke="#1f4c5b" stroke-width="2" opacity="0.38">
+    <path d="M286 505 L562 463 L842 480 L1135 424 L1328 360"/>
+    <path d="M562 463 L705 545 L842 480"/>
+    <path d="M842 480 L998 546 L1135 424"/>
+  </g>
+</svg>

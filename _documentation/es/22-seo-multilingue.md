@@ -4,9 +4,8 @@ description: Cómo conviven páginas traducidas, canonicals, hreflang y sitemaps
 lang: es
 ref: software_multilingual_seo
 profiles: [unaltredocs]
-section: Autoría
-subsection: Modelo de contenido
-weight: 47
+section: Estándares
+weight: 230
 permalink: /es/docs/seo-multilingue/
 ---
 

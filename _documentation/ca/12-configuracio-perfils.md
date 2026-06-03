@@ -4,8 +4,8 @@ description: Com es combinen defaults del nucli, configuració filla i overlays 
 lang: ca
 ref: software_configuration_profiles
 profiles: [unaltredocs]
-section: Construcció
-weight: 28
+section: Desenvolupadors
+weight: 320
 permalink: /ca/docs/configuracio-perfils/
 ---
 

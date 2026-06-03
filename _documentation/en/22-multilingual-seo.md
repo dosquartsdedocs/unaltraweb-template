@@ -4,9 +4,8 @@ description: How translated pages, canonicals, hreflang and sitemaps work togeth
 lang: en
 ref: software_multilingual_seo
 profiles: [unaltredocs]
-section: Authoring
-subsection: Content model
-weight: 47
+section: Standards
+weight: 230
 permalink: /en/docs/multilingual-seo/
 ---
 

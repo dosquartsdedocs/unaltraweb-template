@@ -4,9 +4,8 @@ description: Com els repositoris fills criden fluxos de treball reutilitzables d
 lang: ca
 ref: software_github_actions
 profiles: [unaltredocs]
-section: Automatització
-subsection: GitHub Actions
-weight: 72
+section: Desenvolupadors
+weight: 340
 permalink: /ca/docs/github-actions/
 ---
 

@@ -18,9 +18,9 @@ children:
   - title: Proyectos anteriores
     permalink: /es/proyectos-anteriores/
 hero:
-  image: /assets/img/projects/unaltraweb-template.svg
-  alt: Diagrama de una plantilla de contenidos conectada al core reutilizable de unaltraweb
-  caption: Contenidos en la plantilla, funcionalidad compartida en el core
+  image: /assets/img/projects/project-landscape-splash.svg
+  alt: Paisaje geoespacial abierto con campos, agua y puntos de observación
+  caption: Área de estudio compartida, resultados del proyecto y observaciones de campo
 ---
 
 El perfil de proyecto está pensado para grupos, proyectos financiados e infraestructuras de investigación donde el proyecto es el objeto principal del sitio.

@@ -5,7 +5,7 @@ lang: en
 ref: software_metrics
 profiles: [unaltredocs]
 section: Operations
-weight: 80
+weight: 400
 permalink: /en/docs/metrics/
 ---
 
@@ -14,6 +14,6 @@ permalink: /en/docs/metrics/
 Normal Jekyll builds stay static. Publication metrics can be refreshed locally or through the manual `Update publication metrics` workflow. Generated Scimago caches and diagnostics stay out of pull requests; versionable outputs are limited to bibliography updates and `_data/metrics.yml`.
 
 ```bash
-make metrics-update LOCAL_CORE=../unaltraweb
-make metrics-check LOCAL_CORE=../unaltraweb
+make metrics-update
+make metrics-check
 ```

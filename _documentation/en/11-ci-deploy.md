@@ -4,9 +4,8 @@ description: Automatic checks stay light while heavier jobs remain manual.
 lang: en
 ref: software_ci_deploy
 profiles: [unaltredocs]
-section: Automation
-subsection: GitHub Actions
-weight: 74
+section: Developers
+weight: 350
 permalink: /en/docs/ci-deploy/
 ---
 

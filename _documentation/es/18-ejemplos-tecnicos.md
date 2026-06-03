@@ -1,11 +1,11 @@
 ---
 title: Ejemplos técnicos
-description: Flujos Mermaid, figuras indexadas y capturas de perfiles en páginas de documentación.
+description: Flujos Mermaid, figuras indexadas y ejemplos técnicos en páginas de documentación.
 lang: es
 ref: software_technical_examples
 profiles: [unaltredocs]
-section: Autoría
-weight: 55
+section: Estándares
+weight: 250
 permalink: /es/docs/ejemplos-tecnicos/
 mermaid:
   enabled: true
@@ -18,14 +18,14 @@ Las páginas de documentación pueden mezclar texto, diagramas, figuras indexada
 flowchart LR
   core[núcleo unaltraweb] --> template[plantilla hija]
   template --> profiles{perfil}
-  profiles --> personal[personal]
-  profiles --> project[project]
-  profiles --> manual[manual]
+  profiles --> unaltreselfie[unaltreselfie]
+  profiles --> unaltreprojecte[unaltreprojecte]
+  profiles --> unaltremanual[unaltremanual]
   profiles --> unaltredocs[unaltredocs]
 ```
 
-![Captura placeholder del perfil manual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Captura indexada placeholder de una página manual.")
+![Figura placeholder del perfil unaltremanual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Figura indexada placeholder de una página unaltremanual.")
 
-![Tarjeta placeholder del perfil project]({{ site.baseurl }}/assets/img/projects/unaltraweb-template.svg "Ilustración indexada placeholder de una página project.")
+![Tarjeta placeholder del perfil unaltreprojecte]({{ site.baseurl }}/assets/img/projects/unaltraweb-template.svg "Ilustración indexada placeholder de una página unaltreprojecte.")
 
 Usa pies de figura cuando una captura o diagrama forma parte del argumento. Deja las imágenes decorativas para el hero o el diseño de tarjetas.

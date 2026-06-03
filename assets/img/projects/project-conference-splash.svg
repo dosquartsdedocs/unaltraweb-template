@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">Conference landscape and meeting route</title>
+  <desc id="desc">A broad landscape with a route connecting meeting points, designed as a splash image for project events.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#b7d3de"/>
+      <stop offset="0.62" stop-color="#edf1e7"/>
+      <stop offset="1" stop-color="#f3e2c1"/>
+    </linearGradient>
+    <linearGradient id="plain" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d6c184"/>
+      <stop offset="0.48" stop-color="#a9bf88"/>
+      <stop offset="1" stop-color="#6f9a8f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="720" fill="url(#sky)"/>
+  <path d="M0 300 C170 250 288 286 440 230 C618 164 760 278 930 215 C1080 160 1190 230 1328 194 C1446 162 1534 174 1600 145 L1600 720 L0 720 Z" fill="#7e8f9b" opacity="0.58"/>
+  <path d="M0 405 C172 340 338 390 528 328 C740 258 888 392 1098 318 C1292 250 1440 318 1600 278 L1600 720 L0 720 Z" fill="url(#plain)"/>
+  <path d="M0 576 C215 525 382 600 576 548 C782 492 955 596 1165 540 C1338 494 1470 526 1600 500 L1600 720 L0 720 Z" fill="#7c6f51" opacity="0.25"/>
+  <path d="M112 560 C252 470 405 505 548 438 C710 362 850 428 1016 350 C1168 278 1305 330 1485 252" fill="none" stroke="#f7f1e6" stroke-width="18" stroke-linecap="round" opacity="0.85"/>
+  <path d="M112 560 C252 470 405 505 548 438 C710 362 850 428 1016 350 C1168 278 1305 330 1485 252" fill="none" stroke="#425c62" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 14" opacity="0.62"/>
+  <g>
+    <g transform="translate(112 560)"><circle r="20" fill="#ffffff" opacity="0.92"/><circle r="7" fill="#2c6272"/></g>
+    <g transform="translate(548 438)"><circle r="20" fill="#ffffff" opacity="0.92"/><circle r="7" fill="#2c6272"/></g>
+    <g transform="translate(1016 350)"><circle r="20" fill="#ffffff" opacity="0.92"/><circle r="7" fill="#2c6272"/></g>
+    <g transform="translate(1485 252)"><circle r="20" fill="#ffffff" opacity="0.92"/><circle r="7" fill="#2c6272"/></g>
+  </g>
+  <g fill="#2c6272" opacity="0.22">
+    <rect x="228" y="592" width="120" height="8"/>
+    <rect x="390" y="608" width="180" height="8"/>
+    <rect x="830" y="590" width="220" height="8"/>
+    <rect x="1160" y="608" width="170" height="8"/>
+  </g>
+</svg>

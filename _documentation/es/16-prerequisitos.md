@@ -4,8 +4,8 @@ description: Ficheros y servicios que revisar antes de publicar un sitio hijo.
 lang: es
 ref: software_prerequisites
 profiles: [unaltredocs]
-section: Construcción
-weight: 22
+section: Operaciones
+weight: 390
 permalink: /es/docs/prerequisitos/
 ---
 

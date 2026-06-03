@@ -18,9 +18,9 @@ children:
   - title: Previous projects
     permalink: /en/previous-projects/
 hero:
-  image: /assets/img/projects/unaltraweb-template.svg
-  alt: Diagram of a thin site template connected to a reusable unaltraweb core
-  caption: Template content, shared core functionality
+  image: /assets/img/projects/project-landscape-splash.svg
+  alt: Open geospatial landscape with fields, water and observation points
+  caption: Shared study area, project outputs and field observations
 ---
 
 The project profile is for research groups, funded projects and public research infrastructures where the project, not an individual author, is the main object of the site.

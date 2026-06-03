@@ -4,8 +4,8 @@ description: Com les edicions locals passen per overlays de perfil, Jekyll i des
 lang: ca
 ref: software_workflow
 profiles: [unaltredocs]
-section: Guies
-weight: 70
+section: Desenvolupadors
+weight: 330
 permalink: /ca/docs/flux/
 mermaid:
   enabled: true

@@ -1,25 +1,27 @@
 ---
 title: Instalar y ejecutar localmente
-description: El flujo mínimo para desarrollar un sitio hijo contra un checkout local del núcleo.
+description: El flujo mínimo para previsualizar un sitio hijo con el núcleo empaquetado.
 lang: es
 ref: software_installation
 profiles: [unaltredocs]
-section: Construcción
+section: Guías de usuario
 weight: 20
 permalink: /es/docs/instalacion/
 ---
 
-La plantilla puede consumir un checkout local del núcleo sin publicar una gema. Este es el bucle normal mientras se cambia `unaltraweb`.
+El flujo normal de un sitio hijo usa la dependencia `unaltraweb` declarada en `Gemfile`. No necesitas un checkout hermano `../unaltraweb` para previsualizar un sitio.
 
 ```bash
-make serve-unaltreselfie LOCAL_CORE=../unaltraweb
-make serve-unaltreprojecte LOCAL_CORE=../unaltraweb
-make serve-unaltremanual LOCAL_CORE=../unaltraweb
-make serve-unaltredocs LOCAL_CORE=../unaltraweb
+make bootstrap
+make serve-unaltreselfie
+make serve-unaltreprojecte
+make serve-unaltremanual
+make serve-unaltredocs
 ```
 
 | Entrada | Significado |
 |---|---|
-| `LOCAL_CORE` | Ruta al checkout local de `unaltraweb` |
 | `SITE_PROFILE` | Perfil seleccionado por el overlay del Makefile |
 | `tmp/_site.<profile>` | Directorio de salida aislado para servidores concurrentes |
+
+Define `LOCAL_CORE=../unaltraweb` solo cuando estés editando activamente el núcleo y quieras que este sitio hijo consuma esos cambios locales antes de actualizar la dependencia de la gema.

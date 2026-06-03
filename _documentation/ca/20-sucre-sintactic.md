@@ -4,9 +4,8 @@ description: Dreceres creatives per a avisos, figures, taules, subfigures i diag
 lang: ca
 ref: software_markdown_syntax_sugar
 profiles: [unaltredocs]
-section: Autoria
-subsection: Autoria creativa
-weight: 56
+section: Estàndards
+weight: 240
 permalink: /ca/docs/sucre-sintactic/
 mermaid:
   enabled: true
@@ -75,20 +74,26 @@ Usa un bloc `table` quan una taula Markdown necessite peu i comptador propi.
 
 ## Composicions amb subfigures
 
-Les subfigures usen un bloc compacte. La cadena de composició usa `/` per a files i `+` per a panells en la mateixa fila.
+Les subfigures usen un bloc compacte. La cadena de composició pot usar files compactes com `abc`, `/` per a files i `+` quan els separadors explícits fan més clara la composició.
 
 ```markdown
-::: subfigures a+b/c "Una composició de tres panells"
+::: subfigures abc "Tres panells en una sola fila"
 ![Interfície](/assets/img/placeholders/manual-screenshot.svg "Interfície")
 ![Mapa](/assets/img/placeholders/manual-map.svg "Mapa")
 ![Diagrama](/assets/img/placeholders/manual-diagram-card.svg "Diagrama")
 :::
 ```
 
-::: subfigures a+b/c "Una composició de tres panells"
+::: subfigures abc "Tres panells en una sola fila"
 ![Interfície]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Interfície")
 ![Mapa]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Mapa")
 ![Diagrama]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Diagrama")
+:::
+
+::: subfigures a+b/c "Composició de dues files amb separadors explícits"
+![Pas u]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Pas u")
+![Pas dos]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Pas dos")
+![Pas tres]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Pas tres")
 :::
 
 ## Blocs Mermaid

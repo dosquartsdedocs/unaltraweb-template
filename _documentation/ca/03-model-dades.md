@@ -4,8 +4,7 @@ description: Com els llocs fills organitzen contingut sense editar plantilles de
 lang: ca
 ref: software_data_model
 profiles: [unaltredocs]
-section: Autoria
-subsection: Model de contingut
+section: Guies d'usuari
 weight: 40
 permalink: /ca/docs/model-contingut/
 ---
