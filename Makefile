@@ -19,6 +19,11 @@ START_PATH ?= /en/
 LIVERELOAD ?= --livereload
 LIVERELOAD_PORT ?= 35729
 LOCAL_CORE ?=
+DIAVISUALS_DIR ?= ../diavisuals
+DIAVISUALS_COMPAT_PROFILE ?= compat/mermaid-11.4.2-plantuml-1.2026.1.env
+DIAGRAM_STYLE_FAMILY ?= benizar
+DIAGRAMS_FIND_DIRS ?= assets/diagrams
+DIAGRAMS_CACHE_DIR ?= tmp/diagrams
 LOCAL_GEMFILE := tmp/Gemfile.local
 DEV_CONFIG := tmp/_config.development.yml
 PROFILE_CONFIG := tmp/_config.profile$(if $(strip $(SITE_PROFILE)),.$(SITE_PROFILE),).yml
@@ -64,7 +69,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -263,6 +268,38 @@ cv-preview-native: python-deps bundle-install
 	  if ! apt-get update -qq >"$$apt_log" 2>&1 || ! DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends poppler-utils >>"$$apt_log" 2>&1; then cat "$$apt_log"; exit 1; fi; \
 	fi; \
 	"$$core_dir/scripts/cv/render_pdf_preview.sh" "$(CV_PDF)" "$(CV_PREVIEW)"
+
+diagrams:
+	@set -e; \
+	diavisuals_dir="$(abspath $(DIAVISUALS_DIR))"; \
+	profile="$$diavisuals_dir/$(DIAVISUALS_COMPAT_PROFILE)"; \
+	test -f "$$diavisuals_dir/tools/style-diagram-source.sh" || (printf 'Set DIAVISUALS_DIR to a diavisuals checkout.\n' >&2; exit 1); \
+	test -f "$$profile" || (printf 'Missing diavisuals compatibility profile: %s\n' "$$profile" >&2; exit 1); \
+	set -a; . "$$profile"; set +a; \
+	image="$${DIAVISUALS_RENDER_IMAGE:?}"; \
+	if ! docker image inspect "$$image" >/dev/null 2>&1; then \
+	  docker build \
+	    -f "$$diavisuals_dir/$${DIAVISUALS_RENDER_DOCKERFILE:?}" \
+	    --build-arg MERMAID_CLI_VERSION="$${MERMAID_CLI_VERSION:?}" \
+	    --build-arg PLANTUML_VERSION="$${PLANTUML_VERSION:?}" \
+	    -t "$$image" \
+	    "$$diavisuals_dir"; \
+	fi; \
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/workspace" -v "$$diavisuals_dir:/diavisuals:ro" -w /workspace "$$image" bash -lc '\
+		set -euo pipefail; \
+		mkdir -p "$(DIAGRAMS_CACHE_DIR)"; \
+		printf '\''{"args":["--no-sandbox","--disable-setuid-sandbox","--disable-dev-shm-usage","--disable-crash-reporter","--disable-crashpad"]}\n'\'' > "$(DIAGRAMS_CACHE_DIR)/puppeteer.json"; \
+		found=0; \
+		while IFS= read -r src; do \
+			found=1; \
+			styled="$(DIAGRAMS_CACHE_DIR)/$${src%.mmd}.styled.mmd"; \
+			out="$$src.svg"; \
+			mkdir -p "$$(dirname "$$styled")"; \
+			printf '\''DIAVISUALS %s -> %s\n'\'' "$$src" "$$out"; \
+			/diavisuals/tools/style-diagram-source.sh mermaid "$(DIAGRAM_STYLE_FAMILY)" "$$src" "$$styled"; \
+			mmdc -i "$$styled" -o "$$out" -c "/diavisuals/styles/mermaid/$(DIAGRAM_STYLE_FAMILY)-mermaid.json" -p "$(DIAGRAMS_CACHE_DIR)/puppeteer.json"; \
+		done < <(find $(DIAGRAMS_FIND_DIRS) -type f -name "*.mmd" | sort); \
+		if test "$$found" -eq 0; then printf '\''No Mermaid sources found.\n'\''; fi'
 
 test test-native render-smoke render-smoke-local: local-core-check
 	@mkdir -p tmp/render-smoke

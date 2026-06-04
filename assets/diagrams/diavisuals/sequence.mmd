@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor Author
+  participant Template
+  participant Diavisuals
+  participant Browser
+  Author->>Template: edit diagram.mmd
+  Template->>Diavisuals: style-diagram-source.sh
+  Diavisuals-->>Template: styled Mermaid source
+  Template->>Template: render diagram.mmd.svg
+  Browser-->>Author: displays styled SVG figure

@@ -10,9 +10,6 @@ nav: true
 nav_order: 6
 dropdown: true
 figure_captions: true
-mermaid:
-  enabled: true
-  zoomable: false
 children:
   - title: Resultados
     permalink: /es/resultados/
@@ -25,21 +22,13 @@ children:
 Esta página agrupa los materiales reutilizables que un sitio de proyecto suele necesitar cuando la narrativa principal ya está definida.
 
 ::: subfigures ab/cd "Un ejemplo de subfiguras en dos filas para recursos de proyecto"
-![Resultado de datos]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Resultado de datos")
-![Producto cartográfico]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Producto cartográfico")
-![Flujo del repositorio]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Flujo del repositorio")
-![Notas de lectura]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Notas de lectura")
+![Imagen de recurso]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Imagen de recurso")
+![Imagen de recurso]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Imagen de recurso")
+![Retrato de recurso]({{ site.baseurl }}/assets/img/placeholders/neutral-portrait.svg "Retrato de recurso"){: width="72%" }
+![Imagen de recurso]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Imagen de recurso")
 :::
 
-```mermaid
-sequenceDiagram
-  participant Equipo
-  participant Repositorio
-  participant Web
-  Equipo->>Repositorio: publica material reutilizable
-  Repositorio->>Web: expone enlaces de recursos
-  Web-->>Equipo: mantiene los resultados localizables
-```
+![Secuencia de recursos de proyecto]({{ site.baseurl }}/assets/diagrams/diavisuals/sequence.mmd "Diagrama de secuencia renderizado desde una fuente `.mmd` con el estilo compartido de diavisuals")
 
 | Recurso | Para qué sirve |
 |---|---|

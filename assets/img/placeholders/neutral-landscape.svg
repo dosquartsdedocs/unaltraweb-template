@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Neutral landscape placeholder</title>
+  <desc id="desc">A neutral gray placeholder image with a landscape aspect ratio.</desc>
+  <rect width="960" height="540" fill="#ffffff"/>
+  <rect x="96" y="72" width="768" height="396" fill="#f3f4f6" stroke="#cbd5e1" stroke-width="4"/>
+  <rect x="164" y="132" width="632" height="276" fill="#e5e7eb" stroke="#d1d5db" stroke-width="3"/>
+  <path d="M214 358l144-126 116 92 80-68 208 162H214z" fill="#d1d5db"/>
+  <circle cx="686" cy="184" r="40" fill="#cbd5e1"/>
+  <text x="480" y="458" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="26" font-weight="700">LANDSCAPE PLACEHOLDER</text>
+</svg>

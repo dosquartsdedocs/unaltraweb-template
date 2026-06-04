@@ -24,7 +24,7 @@ flowchart LR
   profiles --> unaltredocs[unaltredocs]
 ```
 
-![Figura placeholder del perfil unaltremanual]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Figura indexada placeholder d'una pàgina unaltremanual.")
+![Figura placeholder del perfil unaltremanual]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Figura placeholder neutra d'una pàgina unaltremanual.")
 
 ![Targeta placeholder del perfil unaltreprojecte]({{ site.baseurl }}/assets/img/projects/unaltraweb-template.svg "Il·lustració indexada placeholder d'una pàgina unaltreprojecte.")
 

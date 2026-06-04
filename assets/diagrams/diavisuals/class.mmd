@@ -1,0 +1,15 @@
+classDiagram
+  class DiagramSource {
+    +string path
+    +string type
+  }
+  class DiavisualsStyle {
+    +string family
+    +json preset
+  }
+  class RenderedFigure {
+    +string svg
+    +string caption
+  }
+  DiagramSource --> DiavisualsStyle
+  DiavisualsStyle --> RenderedFigure

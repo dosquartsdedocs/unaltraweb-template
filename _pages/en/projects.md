@@ -9,24 +9,16 @@ permalink: /en/projects/
 nav: true
 nav_order: 5
 figure_captions: true
-mermaid:
-  enabled: true
-  zoomable: false
 ---
 
 Use `_projects/` for personal research projects, software, datasets, labs, or long-running initiatives.
 
 ::: subfigures abc "A single-row subfigure example for a personal research page"
-![Project interface]({{ site.baseurl }}/assets/img/placeholders/manual-screenshot.svg "Project interface")
-![Study map]({{ site.baseurl }}/assets/img/placeholders/manual-map.svg "Study map")
-![Method diagram]({{ site.baseurl }}/assets/img/placeholders/manual-diagram-card.svg "Method diagram")
+![Project image]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Project image")
+![Project image]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "Project image")
+![Project portrait]({{ site.baseurl }}/assets/img/placeholders/neutral-portrait.svg "Project portrait"){: width="72%" }
 :::
 
-```mermaid
-flowchart LR
-  idea[Research idea] --> page[Project page]
-  page --> output[Reusable output]
-  output --> publication[Publication]
-```
+![Personal project workflow]({{ site.baseurl }}/assets/diagrams/diavisuals/flowchart.mmd "Flowchart rendered from a `.mmd` source with the shared diavisuals style")
 
 {% include project-grid.liquid %}

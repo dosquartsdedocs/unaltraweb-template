@@ -1,0 +1,5 @@
+erDiagram
+  PROFILE ||--o{ PAGE : renders
+  PAGE ||--o{ FIGURE : contains
+  FIGURE ||--|| MERMAID_SOURCE : references
+  MERMAID_SOURCE }o--|| DIAVISUALS_STYLE : uses

@@ -1,0 +1,10 @@
+flowchart LR
+  author[Author] --> source[Readable .mmd source]
+  source --> preset[diavisuals style helper]
+  preset --> render[Mermaid CLI render]
+  render --> web[unaltraweb figure]
+  web --> profiles{Profiles}
+  profiles --> selfie[unaltreselfie]
+  profiles --> projecte[unaltreprojecte]
+  profiles --> manual[unaltremanual]
+  profiles --> docs[unaltredocs]

@@ -1,0 +1,11 @@
+flowchart TD
+  site[unaltraweb-template/]
+  site --> config[_config.yml]
+  site --> docs[_documentation/]
+  site --> chapters[_chapters/]
+  site --> diagrams[assets/diagrams/]
+  diagrams --> sources[diavisuals/*.mmd]
+  diagrams --> rendered[*.mmd.svg]
+  docs --> syntax[20-markdown-syntax-sugar.md]
+  chapters --> figures[01-figures-diagrams.md]
+  sources --> rendered

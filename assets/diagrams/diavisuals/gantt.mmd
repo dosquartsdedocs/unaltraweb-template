@@ -1,0 +1,11 @@
+gantt
+  title Diagram publishing workflow
+  dateFormat  YYYY-MM-DD
+  axisFormat  %d %b
+  section Source
+  Write Mermaid file       :done, src, 2026-06-01, 1d
+  section Style
+  Apply diavisuals preset  :active, style, after src, 1d
+  section Web
+  Render SVG               :render, after style, 1d
+  Link from profiles       :profiles, after render, 1d

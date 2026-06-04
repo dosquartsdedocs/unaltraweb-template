@@ -1,0 +1,6 @@
+stateDiagram-v2
+  [*] --> Draft
+  Draft --> Styled: make diagrams
+  Styled --> Rendered: mmdc
+  Rendered --> Published: Jekyll build
+  Published --> Draft: edit source

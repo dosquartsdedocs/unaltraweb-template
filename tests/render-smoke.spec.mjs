@@ -140,7 +140,8 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   });
   expect(personalSubfigureLabelStyle.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
   expect(personalSubfigureLabelStyle.height).toBeGreaterThan(18);
-  await expect(page.locator("code.language-mermaid")).toContainText("flowchart LR");
+  await expect(page.locator(".md-figure.mermaid-figure img[src$='diavisuals/flowchart.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-figure.mermaid-figure .md-figcaption")).toContainText("diavisuals style");
 });
 
 test("developer mode exposes the local profile switcher", async ({ page }) => {
@@ -292,7 +293,8 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
   await expect(projectSubfigures.locator(".md-subfigure-row").nth(1)).toHaveAttribute("data-count", "2");
   await expect(projectSubfigures.locator(".md-subfigure-label").last()).toContainText("d");
   await expectFigureCaptionBeforeContent(projectSubfigures.first());
-  await expect(page.locator("code.language-mermaid")).toContainText("sequenceDiagram");
+  await expect(page.locator(".md-figure.mermaid-figure img[src$='diavisuals/sequence.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-figure.mermaid-figure .md-figcaption")).toContainText("diavisuals style");
   await page.screenshot({ path: join(renderOut, `project-resources-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/repositories/"));
@@ -348,28 +350,30 @@ test("project profile renders real project pages", async ({ page }, testInfo) =>
 
   await page.locator(".reading-cover-title", { hasText: "Practical Handbook" }).click();
   await expect(page).toHaveURL(/\/en\/readings\/calibre-rs-3-practical-handbook-of-remote-sensing-second-edition\/?$/);
-  await expect(page.locator(".reading-review")).toContainText("Book");
   await expect(page.locator(".reading-review-nav")).toContainText("Back to readings");
-  await expect(page.locator(".reading-biblio-actions")).toContainText("Bibliographic record");
+  await expect(page.locator(".reading-biblio-actions")).not.toContainText("Bibliographic record");
+  await expect(page.locator(".reading-biblio-actions .cite")).toContainText("CITE");
+  await expect(page.locator(".reading-biblio-actions .bibtex")).toContainText("BIB");
   await page.screenshot({ path: join(renderOut, `project-reading-detail-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/readings/calibre-rs-9-image-processing-and-gis-for-remote-sensing-techniques-and-applications/"));
   await expect(page.locator(".reading-review")).toContainText("Image Processing and GIS for Remote Sensing");
   await expect(page.locator(".reading-review")).toContainText("5/5");
-  await page.locator(".reading-biblio-actions .abstract").click();
-  const abstractReadingPanel = page.locator(".reading-biblio-panel.abstract");
-  await expect(abstractReadingPanel).toHaveClass(/open/);
-  await expect(abstractReadingPanel).toContainText("ISBN");
-  await expect(abstractReadingPanel).toContainText("9781118724187");
-  await expect(abstractReadingPanel.locator("[data-reading-biblio-close]")).toBeVisible();
-  const abstractPanelPosition = await abstractReadingPanel.evaluate((panel) => getComputedStyle(panel).position);
-  expect(abstractPanelPosition).toBe("fixed");
+  await page.locator(".reading-biblio-actions .cite").click();
+  const citeReadingPanel = page.locator(".reading-biblio-panel.cite");
+  await expect(citeReadingPanel).toHaveClass(/open/);
+  await expect(citeReadingPanel).toContainText("Image Processing and GIS for Remote Sensing");
+  await expect(citeReadingPanel).toContainText("ISBN 9781118724187");
+  await expect(citeReadingPanel.locator("[data-copy-target]")).toContainText("Copy");
+  await expect(citeReadingPanel.locator("[data-reading-biblio-close]")).toBeVisible();
+  const citePanelPosition = await citeReadingPanel.evaluate((panel) => getComputedStyle(panel).position);
+  expect(citePanelPosition).toBe("fixed");
   await page.mouse.click(5, 120);
-  await expect(abstractReadingPanel).not.toHaveClass(/open/);
-  await page.locator(".reading-biblio-actions .abstract").click();
+  await expect(citeReadingPanel).not.toHaveClass(/open/);
+  await page.locator(".reading-biblio-actions .cite").click();
   await page.locator(".reading-biblio-actions .bibtex").click();
-  await expect(page.locator(".reading-biblio-panel.bibtex")).toContainText("How to cite");
   await expect(page.locator(".reading-biblio-panel.bibtex")).toContainText("@book");
+  await expect(page.locator(".reading-biblio-panel.bibtex [data-copy-target]")).toContainText("Copy");
   await page.keyboard.press("Escape");
   await expect(page.locator(".reading-biblio-panel.bibtex")).not.toHaveClass(/open/);
 });
@@ -556,26 +560,32 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".language-haskell.highlighter-rouge")).toContainText("manhattan");
   await expect(page.locator(".manual-references .manual-reference")).toContainText("Goodchild");
   await expect(page.locator(".manual-references .manual-reference--with-preview")).toHaveCount(0);
-  await expect(page.locator(".manual-references .manual-reference-links .cite")).toHaveCount(0);
+  await expect.poll(async () => page.locator(".manual-references .manual-reference-links .cite").count()).toBeGreaterThan(0);
   await page.screenshot({ path: join(renderOut, `manual-code-fences-${testInfo.project.name}.png`), fullPage: true });
 
   await page.goto(siteUrl("/en/chapters/figures-diagrams/"));
-  await expect(page.locator(".md-subfigure-set")).toHaveCount(2);
-  await expect(page.locator(".md-subfigure")).toHaveCount(6);
-  await expect(page.locator(".md-subfigure-set[data-layout='abc'] .md-subfigure-row").first()).toHaveAttribute("data-count", "3");
-  await expect(page.locator(".md-subfigure-set[data-layout='a+b/c'] .md-subfigure-row").first()).toHaveAttribute("data-count", "2");
-  await expect(page.locator(".md-subfigure-set[data-layout='a+b/c'] .md-subfigure-row").nth(1)).toHaveAttribute("data-count", "1");
+  await expect(page.locator(".md-subfigure-set")).toHaveCount(5);
+  await expect(page.locator(".md-subfigure")).toHaveCount(12);
+  await expect(page.locator(".md-subfigure-set[data-layout='a+b+c']")).toHaveCount(2);
+  await expect(page.locator(".md-subfigure-set[data-layout='a/b']")).toHaveCount(3);
+  await expect(page.locator(".md-subfigure-set[data-layout='a+b+c']").first().locator(".md-subfigure-row")).toHaveAttribute("data-count", "3");
+  await expect(page.locator(".md-subfigure-set[data-layout='a/b']").first().locator(".md-subfigure-row").first()).toHaveAttribute("data-count", "1");
+  await expect(page.locator(".md-subfigure-set[data-layout='a/b']").first().locator(".md-subfigure-row").nth(1)).toHaveAttribute("data-count", "1");
+  await expect(page.locator(".md-subfigure-set[data-layout='a+b+c']").nth(1).locator(".md-subfigure[data-panel='b']")).toHaveAttribute("style", /--md-subfigure-width: 68%/);
   await expect(page.locator(".md-subfigure-label").first()).toContainText("a");
-  await expectFigureCaptionBeforeContent(page.locator(".md-subfigure-set[data-layout='abc']").first());
+  await expectFigureCaptionBeforeContent(page.locator(".md-subfigure-set[data-layout='a+b+c']").first());
   const manualSubfigureCaptionBox = await page.locator(".md-subfigure-caption").first().boundingBox();
   const manualSubfigureImageBox = await page.locator(".md-subfigure img").first().boundingBox();
   if (!manualSubfigureCaptionBox || !manualSubfigureImageBox) throw new Error("Manual subfigure caption and image are not measurable");
   expect(manualSubfigureCaptionBox.y).toBeLessThan(manualSubfigureImageBox.y);
   await expect(page.locator(".manual-content h2", { hasText: "Mermaid sources" })).toBeVisible();
   await expect(page.locator(".md-figure.mermaid-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
-  await expect(page.locator(".md-figure.mermaid-figure .md-figcaption")).toContainText("Mermaid source");
+  await expect(page.locator(".md-subfigure img[src$='diavisuals/file-tree.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-subfigure img[src$='diavisuals/timeline.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-figure.mermaid-figure img[src$='diavisuals/quadrant.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".md-figure.mermaid-figure .md-figcaption").first()).toContainText("Mermaid source");
   await expectFigureCaptionBeforeContent(page.locator(".md-figure.mermaid-figure").first());
-  const manualMermaidSurface = await page.locator(".md-figure.mermaid-figure .md-figure-inner").evaluate((node) => getComputedStyle(node).backgroundColor);
+  const manualMermaidSurface = await page.locator(".md-figure.mermaid-figure .md-figure-inner").first().evaluate((node) => getComputedStyle(node).backgroundColor);
   expect(manualMermaidSurface).not.toBe("rgba(0, 0, 0, 0)");
   await page.screenshot({ path: join(renderOut, `manual-figures-diagrams-${testInfo.project.name}.png`), fullPage: true });
   await page.locator(".md-subfigure img").first().click();
@@ -623,11 +633,16 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   expect(Math.abs(mobileFeaturedCoverBox.x + mobileFeaturedCoverBox.width / 2 - (mobileFeaturedCardBox.x + mobileFeaturedCardBox.width / 2))).toBeLessThanOrEqual(4);
   expect(mobileFeaturedBodyBox.y).toBeGreaterThan(mobileFeaturedCoverBox.y + mobileFeaturedCoverBox.height - 1);
   if (originalViewport) await page.setViewportSize(originalViewport);
-  await expect(page.locator(".manual-bibliography .manual-reference-links .cite")).toHaveCount(0);
+  await expect.poll(async () => page.locator(".manual-bibliography .manual-reference-links .cite").count()).toBeGreaterThan(0);
   await expect(page.locator(".manual-chapter")).not.toContainText("How to cite (APA)");
+  await page.locator(".manual-featured-reference .manual-reference-links .cite").first().click();
+  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toHaveClass(/open/);
+  await expect(page.locator(".manual-featured-reference .cite.hidden").first()).toContainText("Practical Handbook");
+  await expect(page.locator(".manual-featured-reference .cite.hidden [data-copy-target]").first()).toContainText("Copy");
   await page.locator(".manual-featured-reference .manual-reference-links .bibtex").first().click();
   await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toHaveClass(/open/);
   await expect(page.locator(".manual-featured-reference .bibtex.hidden").first()).toContainText("@book");
+  await expect(page.locator(".manual-featured-reference .bibtex.hidden [data-copy-target]").first()).toContainText("Copy");
   await expect(page.locator(".manual-other-bibliography .manual-reference")).toHaveCount(9);
   await expect(page.locator(".manual-content")).toContainText("Geographic Information Science and Systems");
   await expect(page.locator(".manual-content")).toContainText("Remote Sensing and Image Interpretation");
@@ -668,7 +683,9 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-reading-review.manual-main")).toHaveCount(1);
   await expect(page.locator(".reading-review")).toContainText("Practical Handbook of Remote Sensing");
   await expect(page.locator(".reading-review-nav")).toContainText("Back to bibliography");
-  await expect(page.locator(".reading-biblio-actions")).toContainText("Bibliographic record");
+  await expect(page.locator(".reading-biblio-actions")).not.toContainText("Bibliographic record");
+  await expect(page.locator(".reading-biblio-actions")).toContainText("CITE");
+  await expect(page.locator(".reading-biblio-actions")).toContainText("BIB");
   await expect(page.locator(".reading-figure .reading-biblio-actions")).toHaveCount(1);
   await expect(page.locator(".reading-main > .reading-biblio-wrap")).toHaveCount(0);
   const detailCoverBox = await page.locator(".reading-figure").boundingBox();
@@ -858,11 +875,17 @@ test("unaltredocs profile renders the documentation collection", async ({ page }
   await expect(page.locator(".documentation-content")).toContainText("Callout shorthand");
   await expect(page.locator(".documentation-content")).toContainText("Subfigure compositions");
   await expect(page.locator(".documentation-content")).toContainText("Mermaid source files as SVG figures");
-  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='abc']")).toHaveCount(1);
-  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a+b/c']")).toHaveCount(1);
-  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='abc'] .md-subfigure-row")).toHaveAttribute("data-count", "3");
+  await expect(page.locator(".documentation-content .md-subfigure-set")).toHaveCount(4);
+  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a+b+c']")).toHaveCount(2);
+  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a/b']")).toHaveCount(2);
+  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a+b+c']").first().locator(".md-subfigure-row")).toHaveAttribute("data-count", "3");
+  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a/b']").first().locator(".md-subfigure-row").first()).toHaveAttribute("data-count", "1");
+  await expect(page.locator(".documentation-content .md-subfigure-set[data-layout='a+b+c']").nth(1).locator(".md-subfigure[data-panel='b']")).toHaveAttribute("style", /--md-subfigure-width: 68%/);
+  await expect(page.locator(".documentation-content .md-subfigure img[src$='diavisuals/flowchart.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".documentation-content .md-subfigure img[src$='diavisuals/file-tree.mmd.svg']")).toHaveCount(1);
+  await expect(page.locator(".documentation-content .md-figure.mermaid-figure img[src$='diavisuals/quadrant.mmd.svg']")).toHaveCount(1);
   await expect(page.locator(".documentation-content .md-subfigure-label").first()).toContainText("a");
-  await expectFigureCaptionBeforeContent(page.locator(".documentation-content .md-subfigure-set[data-layout='abc']").first());
+  await expectFigureCaptionBeforeContent(page.locator(".documentation-content .md-subfigure-set[data-layout='a+b+c']").first());
   await page.screenshot({ path: join(renderOut, `unaltredocs-markdown-syntax-sugar-${testInfo.project.name}.png`), fullPage: true });
 
   const profileDocs = [
