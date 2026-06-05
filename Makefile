@@ -33,7 +33,7 @@ LOCAL_BUNDLE_PATH ?= tmp/bundle_path
 PYTHONUSERBASE ?= tmp/python_user
 PIP_CACHE_DIR ?= tmp/pip_cache
 PIP_STAMP := $(PYTHONUSERBASE)/.requirements.sha256
-DOCKER_IMAGE ?= amirpourmand/al-folio:v0.16.1
+DOCKER_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb:main
 PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright:v1.56.1-noble
 CONTAINER ?= unaltraweb-template-jekyll-dev
 CV_PDF ?= assets/pdf/cv.pdf
@@ -97,8 +97,6 @@ profile-config:
 	  if test "$$profile" = "unaltremanual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
 	  if test "$$profile" = "unaltredocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
 	  printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
-	  if test "$$profile" = "unaltreprojecte"; then printf '%s\n' 'copyright_holder: Project team' >> "$(PROFILE_CONFIG)"; fi; \
-	  if test "$$profile" = "unaltredocs"; then printf '%s\n' 'copyright_holder: unaltredocs team' >> "$(PROFILE_CONFIG)"; fi; \
 	  if test "$$profile" = "unaltreprojecte"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
 	  if test "$$profile" = "unaltremanual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
 	else \

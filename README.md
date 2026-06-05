@@ -2,6 +2,24 @@
 
 Starter repository for academic, research project, manual and documentation websites based on [`dosquartsdedocs/unaltraweb`](https://github.com/dosquartsdedocs/unaltraweb).
 
+## Quick start
+
+Use this repository as a GitHub template, choose one site profile in `_config.yml`, then edit content.
+
+```yaml
+unaltraweb:
+  site_profile: unaltreselfie
+```
+
+Available profiles:
+
+- `unaltreselfie`: personal academic or professional site.
+- `unaltreprojecte`: research project site.
+- `unaltremanual`: manual, course or book-like site.
+- `unaltredocs`: documentation site.
+
+If you only need to edit content, you can work entirely in GitHub. Use the local Docker workflow when you want previews, larger edits, screenshots or tests.
+
 ## Edit this
 
 - `_config.yml`
@@ -23,7 +41,7 @@ The `author` block in `_config.yml` powers pages that use `layout: profile`, suc
 - `docker-compose.yml`
 - `.github/workflows/`
 
-Core layouts, includes, styles, plugins and bibliometric scripts come from `dosquartsdedocs/unaltraweb`.
+Core layouts, includes, styles, plugins and bibliometric scripts come from `dosquartsdedocs/unaltraweb`. The local Docker runtime comes from `ghcr.io/dosquartsdedocs/unaltraweb:main` by default.
 
 ## Custom styles and layouts
 
@@ -43,16 +61,29 @@ Use this template to create a new repository, then edit content directly in GitH
 
 Pushes to `main` build and deploy the site with the reusable workflow from `dosquartsdedocs/unaltraweb`. Dependabot opens pull requests when GitHub Actions or Bundler dependencies can be updated.
 
+This workflow is enough for adding a bibliography entry, editing page text, updating posts, changing project data or making small configuration changes. It does not require Docker, Make or a local development environment.
+
 ## Local workflow
 
+Local editing requires Git, Docker and GNU Make. On Windows, use WSL2 with Docker Desktop and Docker's WSL integration enabled, then run the same commands inside the WSL Linux shell.
+
 ```bash
-make bootstrap
 make serve
 make metrics-update
 make build
 make test
 make down
 ```
+
+`make serve` pulls `ghcr.io/dosquartsdedocs/unaltraweb:main` by default and starts the site locally. The GHCR package must be public before unauthenticated users can pull that image.
+
+When developing the core and template together, use this port convention:
+
+- `unaltraweb`: `http://localhost:4000/unaltraweb/`.
+- `unaltreselfie`: `http://localhost:4001/unaltraweb-template/en/`.
+- `unaltreprojecte`: `http://localhost:4002/unaltraweb-template/en/`.
+- `unaltremanual`: `http://localhost:4003/unaltraweb-template/en/`.
+- `unaltredocs`: `http://localhost:4004/unaltraweb-template/en/`.
 
 Publication metrics can also be updated from GitHub Actions with the manual `Update publication metrics` workflow. It calls the reusable metrics workflow from `dosquartsdedocs/unaltraweb` and opens a pull request by default.
 
@@ -65,7 +96,7 @@ make metrics-update METRICS_ARGS="--strict-external --require-scimago"
 make metrics-scimago-fetch SCIMAGO_INPUT=path/to/scimagojr.csv
 ```
 
-The default local workflow runs through Docker and uses the `unaltraweb` gem declared in `Gemfile`. While developing `unaltraweb` and this template side by side, point `LOCAL_CORE` to the local core checkout. This does not require pushing core changes to GitHub:
+The default local workflow runs through Docker, using `ghcr.io/dosquartsdedocs/unaltraweb:main`, and uses the `unaltraweb` gem declared in `Gemfile`. While developing `unaltraweb` and this template side by side, point `LOCAL_CORE` to the local core checkout. This does not require pushing core changes to GitHub:
 
 ```bash
 make serve LOCAL_CORE=../unaltraweb
@@ -102,7 +133,7 @@ make serve-unaltredocs LOCAL_CORE=../unaltraweb  # http://localhost:4004/unaltra
 make down-profiles
 ```
 
-`make serve-allprofiles LOCAL_CORE=../unaltraweb` starts `unaltreselfie`, `unaltreprojecte`, `unaltremanual` and `unaltredocs` at the same time, then opens only the `unaltreselfie` URL. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
+`make serve-allprofiles LOCAL_CORE=../unaltraweb` starts `unaltreselfie`, `unaltreprojecte`, `unaltremanual` and `unaltredocs` at the same time. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
 
 The `unaltredocs` profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the left documentation index without editing navigation templates.
 

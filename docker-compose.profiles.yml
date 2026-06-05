@@ -1,7 +1,7 @@
 name: unaltraweb-template-profiles
 
 x-serve-base: &serve-base
-  image: ${DOCKER_IMAGE:-amirpourmand/al-folio:v0.16.1}
+  image: ${DOCKER_IMAGE:-ghcr.io/dosquartsdedocs/unaltraweb:main}
   working_dir: /srv/jekyll
   user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
   environment:
