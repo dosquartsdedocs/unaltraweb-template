@@ -5,6 +5,7 @@ lang: en
 ref: profile_unaltreselfie
 profiles: [unaltredocs]
 section: Profiles
+subsection: Available profiles
 weight: 110
 permalink: /en/docs/unaltreselfie/
 ---

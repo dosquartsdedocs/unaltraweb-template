@@ -5,6 +5,7 @@ lang: en
 ref: profile_unaltreprojecte
 profiles: [unaltredocs]
 section: Profiles
+subsection: Available profiles
 weight: 120
 permalink: /en/docs/unaltreprojecte/
 ---

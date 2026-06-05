@@ -5,6 +5,7 @@ lang: en
 ref: profile_unaltredocs
 profiles: [unaltredocs]
 section: Profiles
+subsection: Available profiles
 weight: 140
 permalink: /en/docs/unaltredocs/
 ---
@@ -16,7 +17,7 @@ Use `unaltredocs` when the site is primarily documentation for a reusable tool, 
 ## What It Emphasizes
 
 - Documentation home page with cards generated from `_documentation/`.
-- Left-hand navigation grouped by section and subsection.
+- Left-hand navigation for primary sections and subsections, plus a secondary table of contents for the active subsection's document stops.
 - Documentation search, previous/next links and reading controls.
 - Technical examples that can mix prose, diagrams, callouts and code.
 

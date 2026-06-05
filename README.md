@@ -135,7 +135,7 @@ make down-profiles
 
 `make serve-allprofiles LOCAL_CORE=../unaltraweb` starts `unaltreselfie`, `unaltreprojecte`, `unaltremanual` and `unaltredocs` at the same time. This is useful as a final visual comparison, but it runs multiple Jekyll servers and can be heavy on smaller machines.
 
-The `unaltredocs` profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the left documentation index without editing navigation templates.
+The `unaltredocs` profile uses the `_documentation` collection. Add documents with `section`, optional `subsection` and `weight` front matter to control the primary sidebar and the active subsection page table of contents without editing navigation templates.
 
 ## Visual review
 

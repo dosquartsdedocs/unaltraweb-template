@@ -5,6 +5,7 @@ lang: en
 ref: software_profile_checklist
 profiles: [unaltredocs]
 section: Profiles
+subsection: Profile checks
 weight: 150
 permalink: /en/docs/profile-checklist/
 profile_feature_matrix:

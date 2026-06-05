@@ -5,6 +5,7 @@ lang: en
 ref: profile_unaltremanual
 profiles: [unaltredocs]
 section: Profiles
+subsection: Available profiles
 weight: 130
 permalink: /en/docs/unaltremanual/
 ---

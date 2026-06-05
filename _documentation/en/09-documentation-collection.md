@@ -9,15 +9,16 @@ weight: 200
 permalink: /en/docs/documentation-collection/
 ---
 
-The unaltredocs sidebar is generated from the `_documentation` collection. Each document belongs to a named `section`; optional `subsection` labels can still group links inside that section when a site needs more detail.
+The unaltredocs navigation is generated from the `_documentation` collection. Each document belongs to a named `section`. The primary sidebar shows those sections as the main metro stops and shows optional `subsection` labels as the second level. Individual document links stay out of the primary sidebar.
 
 <h2 id="documentation-sidebar">Documentation sidebar</h2>
 
-The sidebar renders each `section` as an accordion group and sorts documents by `weight`. The active group opens automatically, while the reader can collapse or expand other groups without changing the content model.
+The primary sidebar sorts sections and subsections by the `weight` of their first document. The secondary table of contents appears on documentation documents when the active section or subsection contains more than one document, and then lists only those document stops.
 
 ```yaml
 title: Install and run locally
 section: User guides
+subsection: Installation
 weight: 20
 profiles: [unaltredocs]
 ```

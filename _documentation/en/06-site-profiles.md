@@ -5,6 +5,7 @@ lang: en
 ref: software_site_profiles
 profiles: [unaltredocs]
 section: Profiles
+subsection: Profile model
 weight: 100
 permalink: /en/docs/site-profiles/
 ---
