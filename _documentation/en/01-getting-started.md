@@ -1,14 +1,20 @@
 ---
-title: What is unaltraweb?
+title: Choose A Template Workflow
 description: The reusable core, the template repository and the role of profiles.
 lang: en
 ref: software_getting_started
-profiles: [unaltredocs]
-section: User guides
+profiles:
+- unaltredocs
+section: Start Here
 weight: 10
-permalink: /en/docs/what-is-unaltraweb/
+permalink: "/en/docs/what-is-unaltraweb/"
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+- template-maintainers
+nav_title: Start Here
 ---
-
 `unaltraweb` is a reusable Jekyll core for academic, project, manual and technical documentation sites. A child repository keeps local content and configuration; the core provides layouts, includes, styles, scripts and workflows.
 
 ## What belongs in the core

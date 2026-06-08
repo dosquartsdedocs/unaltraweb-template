@@ -93,6 +93,15 @@ unaltraweb:
     logo: /assets/img/brand/dosquartsdedocs-logo.svg
     logo_inverse: /assets/img/brand/dosquartsdedocs-logo-white.svg
     logo_sepia: /assets/img/brand/dosquartsdedocs-logo.svg
+    profiles:
+      - id: github-publishers
+        label: GitHub publishers
+      - id: local-editors
+        label: Local editors
+      - id: site-designers
+        label: Site designers
+      - id: template-maintainers
+        label: Template maintainers
   readings:
     badges:
       finished:

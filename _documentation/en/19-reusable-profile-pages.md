@@ -1,14 +1,20 @@
 ---
-title: Reusable profile pages and layouts
-description: Where project team, readings, theses, repository and publication pages get their data.
+title: Reuse Profile Pages And Layouts
+description: Where project team, readings, theses, repository and publication pages
+  get their data.
 lang: en
 ref: software_reusable_profile_pages
-profiles: [unaltredocs]
-section: Standards
-weight: 220
-permalink: /en/docs/reusable-profile-pages/
+profiles:
+- unaltredocs
+documentation_profiles:
+- local-editors
+- site-designers
+- template-maintainers
+section: Design The Site
+weight: 410
+permalink: "/en/docs/reusable-profile-pages/"
+nav_title: Reusable Layouts
 ---
-
 Reusable profile pages are ordinary Markdown files in `_pages/<lang>/`. The page front matter selects the renderer and the content source; the core layout or include does the repeated rendering.
 
 ![Reusable profile pages overview]({{ site.baseurl }}/assets/img/placeholders/reusable-profile-pages.svg "Schematic screenshot of data files feeding reusable profile pages.")

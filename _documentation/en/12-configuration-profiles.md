@@ -1,14 +1,19 @@
 ---
-title: Configuration and profiles
+title: Configure Site Features And Profiles
 description: How core defaults, child configuration and profile overlays combine.
 lang: en
 ref: software_configuration_profiles
-profiles: [unaltredocs]
-section: Developers
-weight: 320
-permalink: /en/docs/configuration-profiles/
+profiles:
+- unaltredocs
+documentation_profiles:
+- local-editors
+- site-designers
+- template-maintainers
+section: Design The Site
+weight: 400
+permalink: "/en/docs/configuration-profiles/"
+nav_title: Configuration
 ---
-
 `unaltraweb` sites are built from layered configuration. The core `_config.yml` provides shared defaults, the child `_config.yml` provides site content and publishing settings, and the Makefile can add a temporary profile overlay for local preview.
 
 | Layer | Typical responsibility |

@@ -1,14 +1,18 @@
 ---
-title: GitHub Actions in child sites
+title: Run GitHub Actions In A Child Site
 description: How child repositories call reusable workflows from the core.
 lang: en
 ref: software_github_actions
-profiles: [unaltredocs]
-section: Developers
-weight: 340
-permalink: /en/docs/github-actions/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- template-maintainers
+section: Publish With GitHub
+weight: 510
+permalink: "/en/docs/github-actions/"
+nav_title: GitHub Actions
 ---
-
 <h2 id="reusable-workflows">Reusable workflows</h2>
 
 Child repositories should keep GitHub Actions thin. The workflow file in the child site usually declares triggers and permissions, then calls a reusable workflow from `dosquartsdedocs/unaltraweb`.

@@ -1,14 +1,17 @@
 ---
-title: Release updates
+title: Apply Release Updates
 description: How child sites can consume newer versions of the core.
 lang: en
 ref: software_releases
-profiles: [unaltredocs]
-section: Operations
-weight: 410
-permalink: /en/docs/releases/
+profiles:
+- unaltredocs
+documentation_profiles:
+- template-maintainers
+section: Maintain The Template
+weight: 710
+permalink: "/en/docs/releases/"
+nav_title: Release Updates
 ---
-
 | Step | Purpose |
 |---|---|
 | Update the core checkout | Test changes locally before publishing |

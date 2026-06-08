@@ -1,14 +1,21 @@
 ---
-title: Prepare a new website
-description: Create a child repository, choose a profile and connect it to the unaltraweb gem.
+title: Prepare A New Website
+description: Create a child repository, choose a profile and connect it to the unaltraweb
+  gem.
 lang: en
 ref: prepare_new_website
-profiles: [unaltredocs]
-section: User guides
-weight: 15
-permalink: /en/docs/prepare-new-website/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+- template-maintainers
+section: Start Here
+weight: 20
+permalink: "/en/docs/prepare-new-website/"
+nav_title: Prepare Website
 ---
-
 Start a new site as a child repository. The child keeps content, configuration and local assets; the shared layouts, styles, plugins and workflows come from the `unaltraweb` gem.
 
 ## 1. Create the repository

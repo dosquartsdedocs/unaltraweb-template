@@ -1,15 +1,21 @@
 ---
-title: unaltremanual profile
-description: Book-like manuals and course handbooks with chapters, sidebar navigation and selected readings.
+title: Demo A Manual Site
+description: Book-like manuals and course handbooks with chapters, sidebar navigation
+  and selected readings.
 lang: en
 ref: profile_unaltremanual
-profiles: [unaltredocs]
-section: Profiles
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+section: Demo Profiles
 subsection: Available profiles
-weight: 130
-permalink: /en/docs/unaltremanual/
+weight: 330
+permalink: "/en/docs/unaltremanual/"
+nav_title: Manual Site
 ---
-
 ![unaltremanual first view]({{ '/assets/img/screenshots/manual-home-chromium.png' | relative_url }} "unaltremanual first view")
 
 Use `unaltremanual` for sequential teaching material: manuals, course handbooks, practical guides and book-like notes. It is meant for reading in order, not for browsing a normal site menu.

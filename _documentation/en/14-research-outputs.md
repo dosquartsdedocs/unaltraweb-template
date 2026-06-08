@@ -1,14 +1,19 @@
 ---
-title: Research outputs and data
+title: Publish Research Outputs And Data
 description: How to document datasets, software, reports and reusable research products.
 lang: en
 ref: software_research_outputs
-profiles: [unaltredocs]
-section: Standards
-weight: 210
-permalink: /en/docs/research-outputs/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+section: Build Content
+weight: 220
+permalink: "/en/docs/research-outputs/"
+nav_title: Research Outputs
 ---
-
 The `unaltredocs` profile can document more than software packages. Use it for datasets, models, dashboards, protocols, public APIs and reproducible project outputs.
 
 <h2 id="project-resources-and-outputs">Project resources and outputs</h2>

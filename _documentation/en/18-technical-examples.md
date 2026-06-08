@@ -1,17 +1,22 @@
 ---
-title: Technical examples
-description: Mermaid workflows, indexed figures and technical examples inside documentation pages.
+title: Use Advanced Technical Examples
+description: Mermaid workflows, indexed figures and technical examples inside documentation
+  pages.
 lang: en
 ref: software_technical_examples
-profiles: [unaltredocs]
-section: Standards
-weight: 250
-permalink: /en/docs/technical-examples/
+profiles:
+- unaltredocs
+section: Design The Site
+weight: 420
+permalink: "/en/docs/technical-examples/"
+documentation_profiles:
+- site-designers
+- template-maintainers
 mermaid:
   enabled: true
   zoomable: false
+nav_title: Technical Examples
 ---
-
 Documentation pages can mix narrative text, diagrams, indexed figures and screenshots. This is useful for package docs, data dictionaries, workflow explanations and release notes.
 
 ```mermaid

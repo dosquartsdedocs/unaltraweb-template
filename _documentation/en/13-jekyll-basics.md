@@ -1,14 +1,19 @@
 ---
-title: Jekyll basics for child sites
+title: Jekyll Basics For Child Sites
 description: The minimum Jekyll concepts users need before editing a child repository.
 lang: en
 ref: software_jekyll_basics
-profiles: [unaltredocs]
-section: User guides
-weight: 30
-permalink: /en/docs/jekyll-basics/
+profiles:
+- unaltredocs
+documentation_profiles:
+- local-editors
+- site-designers
+- template-maintainers
+section: Work Locally
+weight: 120
+permalink: "/en/docs/jekyll-basics/"
+nav_title: Jekyll Basics
 ---
-
 Most users only need a small part of Jekyll to maintain a child site.
 
 | Concept | Use in unaltraweb |

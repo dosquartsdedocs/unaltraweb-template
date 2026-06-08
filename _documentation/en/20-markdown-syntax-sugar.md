@@ -1,17 +1,23 @@
 ---
-title: Markdown syntax sugar
-description: Creative shorthand for callouts, figures, tables, subfigures and Mermaid diagrams.
+title: Write Content With Markdown Extensions
+description: Creative shorthand for callouts, figures, tables, subfigures and Mermaid
+  diagrams.
 lang: en
 ref: software_markdown_syntax_sugar
-profiles: [unaltredocs]
-section: Standards
-weight: 240
-permalink: /en/docs/markdown-syntax-sugar/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+section: Build Content
+weight: 230
+permalink: "/en/docs/markdown-syntax-sugar/"
 mermaid:
   enabled: true
   zoomable: false
+nav_title: Markdown Extensions
 ---
-
 `unaltraweb` keeps authoring close to ordinary Markdown. The extra syntax below is intentionally small: authors write readable text, and the core turns repeated academic patterns into structured HTML.
 
 ## Callout shorthand

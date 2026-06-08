@@ -1,14 +1,19 @@
 ---
-title: Multilingual SEO
+title: Publish Multilingual SEO Metadata
 description: How translated pages, canonicals, hreflang and sitemaps work together.
 lang: en
 ref: software_multilingual_seo
-profiles: [unaltredocs]
-section: Standards
-weight: 230
-permalink: /en/docs/multilingual-seo/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- site-designers
+- template-maintainers
+section: Publish With GitHub
+weight: 520
+permalink: "/en/docs/multilingual-seo/"
+nav_title: Multilingual SEO
 ---
-
 Translated pages should exist as separate URLs. They are not SEO duplicates when each page declares its own language and links to the equivalent pages in the other languages.
 
 ## Front matter contract

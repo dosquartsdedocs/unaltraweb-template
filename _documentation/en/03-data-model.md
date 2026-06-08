@@ -1,14 +1,20 @@
 ---
-title: Pages, collections and navigation
+title: Create Pages, Collections, And Navigation
 description: How child sites organise content without editing core templates.
 lang: en
 ref: software_data_model
-profiles: [unaltredocs]
-section: User guides
-weight: 40
-permalink: /en/docs/content-model/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+- template-maintainers
+section: Build Content
+weight: 210
+permalink: "/en/docs/content-model/"
+nav_title: Pages And Navigation
 ---
-
 Most pages are ordinary Markdown files under `_pages`. Collections hold repeated content such as books, chapters, outputs, theses and documentation pages.
 
 | Front matter | Use |

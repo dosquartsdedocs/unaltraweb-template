@@ -1,14 +1,19 @@
 ---
-title: Install and run locally
-description: The smallest local workflow for previewing a child site with the packaged core.
+title: Install And Run Locally
+description: The smallest local workflow for previewing a child site with the packaged
+  core.
 lang: en
 ref: software_installation
-profiles: [unaltredocs]
-section: User guides
-weight: 20
-permalink: /en/docs/installation/
+profiles:
+- unaltredocs
+section: Work Locally
+weight: 110
+permalink: "/en/docs/installation/"
+documentation_profiles:
+- local-editors
+- template-maintainers
+nav_title: Local Install
 ---
-
 The normal child-site workflow uses the `unaltraweb` dependency declared in `Gemfile`. You do not need a sibling `../unaltraweb` checkout to preview a site.
 
 ```bash

@@ -1,14 +1,19 @@
 ---
-title: Documentation collection
+title: Structure A Documentation Collection
 description: The content model used by the unaltredocs profile.
 lang: en
 ref: software_documentation_collection
-profiles: [unaltredocs]
-section: Standards
-weight: 200
-permalink: /en/docs/documentation-collection/
+profiles:
+- unaltredocs
+section: Build Content
+weight: 240
+permalink: "/en/docs/documentation-collection/"
+documentation_profiles:
+- local-editors
+- site-designers
+- template-maintainers
+nav_title: Documentation Collection
 ---
-
 The unaltredocs navigation is generated from the `_documentation` collection. Each document belongs to a named `section`. The primary sidebar shows those sections as the main metro stops and shows optional `subsection` labels as the second level. Individual document links stay out of the primary sidebar.
 
 <h2 id="documentation-sidebar">Documentation sidebar</h2>
@@ -21,6 +26,7 @@ section: User guides
 subsection: Installation
 weight: 20
 profiles: [unaltredocs]
+documentation_profiles: [local-editors]
 ```
 
-Use `weight` ranges to keep related sections together. For example, `10-99` for user guides, `100-199` for profiles, `200-299` for standards and `300-399` for developer documentation.
+Use `weight` ranges to keep related sections together. This demo uses early weights for start/local/content pages, mid-range weights for profile and design pages, and later weights for publishing and maintenance pages.

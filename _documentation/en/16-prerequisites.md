@@ -1,14 +1,19 @@
 ---
-title: Prerequisites before publishing
+title: Check Prerequisites Before Publishing
 description: Files and services to review before a child site goes live.
 lang: en
 ref: software_prerequisites
-profiles: [unaltredocs]
-section: Operations
-weight: 390
-permalink: /en/docs/prerequisites/
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- template-maintainers
+section: Publish With GitHub
+weight: 500
+permalink: "/en/docs/prerequisites/"
+nav_title: Prerequisites
 ---
-
 Before publishing a child site, check the files that define the build environment and the public deployment path.
 
 | Area | Files to inspect | Why it matters |

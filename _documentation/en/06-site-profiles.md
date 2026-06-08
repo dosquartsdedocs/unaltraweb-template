@@ -1,15 +1,21 @@
 ---
-title: Site profiles
+title: Choose A Site Profile
 description: Prepared website families selected at build time.
 lang: en
 ref: software_site_profiles
-profiles: [unaltredocs]
-section: Profiles
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+- template-maintainers
+section: Demo Profiles
 subsection: Profile model
-weight: 100
-permalink: /en/docs/site-profiles/
+weight: 300
+permalink: "/en/docs/site-profiles/"
+nav_title: Site Profiles
 ---
-
 Profiles are high-level website families, not Jekyll layouts. The active profile is selected before Jekyll writes the site, then pages and documents are filtered by their `profiles` front matter.
 
 Each profile has its own page because the content model, navigation and visual priorities are different. Those pages use one first-view screenshot per profile; deeper render-smoke captures stay as test artifacts instead of becoming documentation noise.

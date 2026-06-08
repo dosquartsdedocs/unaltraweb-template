@@ -1,15 +1,21 @@
 ---
-title: unaltreselfie profile
-description: Personal academic sites with identity, publications, projects, posts, news and readings.
+title: Demo A Personal Site
+description: Personal academic sites with identity, publications, projects, posts,
+  news and readings.
 lang: en
 ref: profile_unaltreselfie
-profiles: [unaltredocs]
-section: Profiles
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+section: Demo Profiles
 subsection: Available profiles
-weight: 110
-permalink: /en/docs/unaltreselfie/
+weight: 310
+permalink: "/en/docs/unaltreselfie/"
+nav_title: Personal Site
 ---
-
 ![unaltreselfie first view]({{ '/assets/img/screenshots/home-light-chromium.png' | relative_url }} "unaltreselfie first view")
 
 Use `unaltreselfie` when the site represents a person: an academic, researcher, professional profile or public portfolio. The home page foregrounds identity, links and selected activity instead of behaving like a project landing page.

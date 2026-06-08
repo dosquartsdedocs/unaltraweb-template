@@ -1,15 +1,21 @@
 ---
-title: unaltreprojecte profile
-description: Research project and public infrastructure sites with teams, outputs, publications and resources.
+title: Demo A Project Site
+description: Research project and public infrastructure sites with teams, outputs,
+  publications and resources.
 lang: en
 ref: profile_unaltreprojecte
-profiles: [unaltredocs]
-section: Profiles
+profiles:
+- unaltredocs
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+section: Demo Profiles
 subsection: Available profiles
-weight: 120
-permalink: /en/docs/unaltreprojecte/
+weight: 320
+permalink: "/en/docs/unaltreprojecte/"
+nav_title: Project Site
 ---
-
 ![unaltreprojecte first view]({{ '/assets/img/screenshots/project-home-chromium.png' | relative_url }} "unaltreprojecte first view")
 
 Use `unaltreprojecte` when the site represents a collective project, funded action, lab line or public research infrastructure. The home page explains the initiative first, then routes visitors to people, outputs and reusable material.

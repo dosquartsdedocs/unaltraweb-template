@@ -1,14 +1,21 @@
 ---
-title: Frequently asked questions
-description: Short answers about profiles, builds, local previews and documentation ownership.
+title: Frequently Asked Questions
+description: Short answers about profiles, builds, local previews and documentation
+  ownership.
 lang: en
 ref: documentation_faq
-profiles: [unaltredocs]
-section: FAQs
-weight: 500
-permalink: /en/docs/faq/
+profiles:
+- unaltredocs
+section: Reference
+weight: 900
+permalink: "/en/docs/faq/"
+documentation_profiles:
+- github-publishers
+- local-editors
+- site-designers
+- template-maintainers
+nav_title: FAQ
 ---
-
 ## Is a profile the same as a layout?
 
 No. A profile is the build-time website family selected for the child site. Layouts are still normal Jekyll layouts used inside that profile.
