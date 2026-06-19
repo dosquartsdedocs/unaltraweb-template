@@ -233,7 +233,9 @@ publish: build
 	  printf 'Dry run: prepared %s in %s and skipped git push.\n' "$(PUBLISH_BRANCH)" "$(PUBLISH_WORKTREE)"; \
 	  ;; \
 	  *) \
-	  git -C "$(PUBLISH_WORKTREE)" push --force "$(PUBLISH_REMOTE)" "HEAD:$(PUBLISH_BRANCH)"; \
+	  git_dir=$$(sed -n 's/^gitdir: //p' "$(PUBLISH_WORKTREE)/.git"); \
+	  case "$$git_dir" in /srv/jekyll/*) git_dir="$${git_dir#/srv/jekyll/}" ;; esac; \
+	  git --git-dir="$$git_dir" --work-tree="$(PUBLISH_WORKTREE)" push --force "$(PUBLISH_REMOTE)" "HEAD:$(PUBLISH_BRANCH)"; \
 	  ;; \
 	esac
 
