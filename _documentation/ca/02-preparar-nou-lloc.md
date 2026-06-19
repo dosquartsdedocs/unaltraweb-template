@@ -15,7 +15,7 @@ Comença un lloc nou com a repositori fill. El fill manté contingut, configurac
 
 La ruta més ràpida és crear un repositori nou des del scaffold inicial `unaltraweb-template`. En GitHub, usa el flux de repositori plantilla o copia la plantilla en un repositori nou, després reanomena el projecte, actualitza `_config.yml` i conserva només les col·leccions de contingut que necessites.
 
-GitHub és el destí de publicació per defecte perquè els workflows reutilitzables de GitHub Actions només s'executen allí. GitLab, Bitbucket o un altre host també poden funcionar, però hauràs d'aportar tu els passos equivalents de CI i desplegament.
+GitHub Pages és el destí de publicació per defecte. Sempre que siga possible, publica localment a la branca generada `gh-pages`; usa el workflow manual de GitHub Actions quan els col·laboradors no puguen publicar des d'una còpia local. GitLab, Bitbucket o un altre host també poden funcionar, però hauràs d'aportar tu el pas de desplegament equivalent.
 
 ## 2. Tria el perfil de lloc
 
@@ -52,3 +52,11 @@ make serve-unaltreselfie
 ```
 
 Canvia el target `serve-*` pel perfil que estigues construint. El Makefile crea overlays temporals de perfil per a la previsualització local; la configuració de producció ha de quedar-se en `_config.yml`.
+
+Quan el lloc estiga llest, publica localment:
+
+```bash
+make publish
+```
+
+Configura GitHub Pages perquè publique des de la branca `gh-pages` i la carpeta `/`. Usa `make publish PUBLISH_DRY_RUN=1` per preparar la branca generada sense pujar-la.

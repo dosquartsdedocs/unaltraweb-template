@@ -21,7 +21,8 @@ Before publishing a child site, check the files that define the build environmen
 | Local development | `Makefile`, `docker-compose.yml`, `docker-compose.profiles.yml` | Documents how contributors serve and compare profiles |
 | Ruby dependencies | `Gemfile`, `Gemfile.lock` | Controls the `unaltraweb` version used by the child site |
 | Site config | `_config.yml` | Defines URL, baseurl, languages, logos, enabled features and profile |
-| GitHub Pages | `.github/workflows/deploy.yml` | Calls the reusable deploy workflow when publishing on GitHub |
+| Local publish | `Makefile`, generated `gh-pages` branch | Publishes with `make publish` without spending Actions minutes |
+| GitHub Pages Actions | `.github/workflows/deploy.yml` | Calls the reusable deploy workflow manually when publishing on GitHub |
 | Metrics | `.github/workflows/metrics-update.yml`, `_data/metrics.yml` | Keeps publication metrics explicit and reviewable |
 
-If the site is not published through GitHub Pages, keep the local Docker and Makefile workflow but replace the deploy wrapper with the host-specific publication step.
+For the preferred GitHub Pages route, configure Pages to deploy from the `gh-pages` branch and `/` folder. If the site is not published through GitHub Pages, keep the local Docker and Makefile workflow but replace the final deploy step with the host-specific publication command.

@@ -15,7 +15,7 @@ Empieza un sitio nuevo como repositorio hijo. El hijo mantiene contenido, config
 
 La ruta más rápida es crear un repositorio nuevo desde el scaffold inicial `unaltraweb-template`. En GitHub, usa el flujo de repositorio plantilla o copia la plantilla en un repositorio nuevo, después renombra el proyecto, actualiza `_config.yml` y conserva solo las colecciones de contenido que necesites.
 
-GitHub es el destino de publicación por defecto porque los workflows reutilizables de GitHub Actions solo se ejecutan allí. GitLab, Bitbucket u otro host también pueden funcionar, pero tendrás que aportar tú los pasos equivalentes de CI y despliegue.
+GitHub Pages es el destino de publicación por defecto. Siempre que sea posible, publica localmente a la rama generada `gh-pages`; usa el workflow manual de GitHub Actions cuando los colaboradores no puedan publicar desde una copia local. GitLab, Bitbucket u otro host también pueden funcionar, pero tendrás que aportar tú el paso de despliegue equivalente.
 
 ## 2. Elige el perfil de sitio
 
@@ -52,3 +52,11 @@ make serve-unaltreselfie
 ```
 
 Cambia el target `serve-*` por el perfil que estés construyendo. El Makefile crea overlays temporales de perfil para la previsualización local; la configuración de producción debe quedarse en `_config.yml`.
+
+Cuando el sitio esté listo, publica localmente:
+
+```bash
+make publish
+```
+
+Configura GitHub Pages para que publique desde la rama `gh-pages` y la carpeta `/`. Usa `make publish PUBLISH_DRY_RUN=1` para preparar la rama generada sin subirla.

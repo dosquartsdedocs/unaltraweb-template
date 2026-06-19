@@ -1,6 +1,6 @@
 ---
 title: CI y despliegue
-description: Las comprobaciones automáticas se mantienen ligeras y los trabajos pesados quedan manuales.
+description: Los despliegues son explícitos para controlar los minutos de GitHub Actions.
 lang: es
 ref: software_ci_deploy
 profiles: [unaltredocs]
@@ -9,6 +9,6 @@ weight: 350
 permalink: /es/docs/ci-despliegue/
 ---
 
-El núcleo mantiene la CI automática centrada en la publicación docs/web y la comprobación local de enlaces. Las métricas de publicaciones y CodeQL están disponibles como flujos de trabajo manuales. Los sitios hijo pueden llamar flujos de trabajo reutilizables del núcleo en lugar de copiar toda la lógica.
+Los sitios hijo deberían publicar localmente con `make publish` siempre que sea posible. Esto compila el sitio en Docker, prepara una rama generada `gh-pages` y la sube con las credenciales git locales.
 
-Así las ediciones comunes siguen siendo rápidas y aún existe una ruta explícita para trabajo caro o dependiente de red.
+GitHub Actions sigue disponible como workflows manuales para equipos que editan solo desde GitHub. Las métricas de publicaciones y CodeQL también son manuales. Así las ediciones comunes siguen siendo rápidas y evitan gastar minutos de Actions en cada push o pull request de dependencias.

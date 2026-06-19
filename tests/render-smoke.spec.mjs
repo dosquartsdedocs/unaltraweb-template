@@ -841,7 +841,7 @@ test("unaltredocs profile renders the documentation collection", async ({ page }
 
   await page.goto(siteUrl("/en/docs/prepare-new-website/"));
   await expect(page.locator(".documentation-page-header h1")).toContainText("Prepare a new website");
-  await expect(page.locator(".documentation-content")).toContainText("GitHub Actions workflows only run there");
+  await expect(page.locator(".documentation-content")).toContainText("Prefer local publishing to the generated");
   await expect(page.locator(".documentation-content")).toContainText("LOCAL_CORE=../unaltraweb");
 
   await page.goto(siteUrl("/en/docs/reusable-profile-pages/"));

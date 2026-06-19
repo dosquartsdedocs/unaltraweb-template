@@ -38,6 +38,11 @@ PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright:v1.56.1-noble
 CONTAINER ?= unaltraweb-template-jekyll-dev
 CV_PDF ?= assets/pdf/cv.pdf
 CV_PREVIEW ?= assets/img/cv-preview.jpg
+PUBLISH_REMOTE ?= origin
+PUBLISH_BRANCH ?= gh-pages
+PUBLISH_SOURCE ?= _site
+PUBLISH_WORKTREE ?= tmp/publish-$(PUBLISH_BRANCH)
+PUBLISH_DRY_RUN ?= 0
 LOCAL_UID ?= $(shell id -u)
 LOCAL_GID ?= $(shell id -g)
 LOCAL_URL := http://localhost:$(PORT)$(BASEURL)$(START_PATH)
@@ -69,7 +74,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -220,6 +225,23 @@ build-native build-local: profile-config python-deps bundle-install
 	active_config="$$core_config,_config.yml"; \
 	if test -n "$(SITE_PROFILE)"; then active_config="$$active_config,$(PROFILE_CONFIG)"; fi; \
 	JEKYLL_ENV=production PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll build --config "$$active_config" --disable-disk-cache
+
+publish: build
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -e PUBLISH_REMOTE="$(PUBLISH_REMOTE)" -e PUBLISH_BRANCH="$(PUBLISH_BRANCH)" -e PUBLISH_SOURCE="$(PUBLISH_SOURCE)" -e PUBLISH_WORKTREE="$(PUBLISH_WORKTREE)" -e PUBLISH_DRY_RUN="$(PUBLISH_DRY_RUN)" -e PUBLISH_PREPARE_ONLY=1 -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make publish-native $(DOCKER_LOCAL_CORE)'
+	@case "$(PUBLISH_DRY_RUN)" in \
+	  1|true|TRUE|yes|YES|y|Y) \
+	  printf 'Dry run: prepared %s in %s and skipped git push.\n' "$(PUBLISH_BRANCH)" "$(PUBLISH_WORKTREE)"; \
+	  ;; \
+	  *) \
+	  git -C "$(PUBLISH_WORKTREE)" push --force "$(PUBLISH_REMOTE)" "HEAD:$(PUBLISH_BRANCH)"; \
+	  ;; \
+	esac
+
+publish-native: bundle-install
+	@set -e; \
+	gemfile="Gemfile"; \
+	if test -n "$(LOCAL_CORE)"; then gemfile="$(LOCAL_GEMFILE)"; core_dir="$(abspath $(LOCAL_CORE))"; else core_dir=$$(BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec ruby -e '$(CORE_DIR_RUBY)'); fi; \
+	PUBLISH_REMOTE="$(PUBLISH_REMOTE)" PUBLISH_BRANCH="$(PUBLISH_BRANCH)" PUBLISH_SOURCE="$(PUBLISH_SOURCE)" PUBLISH_WORKTREE="$(PUBLISH_WORKTREE)" PUBLISH_DRY_RUN="$(PUBLISH_DRY_RUN)" PUBLISH_PREPARE_ONLY="$${PUBLISH_PREPARE_ONLY:-0}" "$$core_dir/scripts/deploy/publish_branch.sh"
 
 metrics-scimago-fetch: local-core-check
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make metrics-scimago-fetch-native $(DOCKER_LOCAL_CORE)'

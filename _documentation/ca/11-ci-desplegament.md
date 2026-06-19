@@ -1,6 +1,6 @@
 ---
 title: CI i desplegament
-description: Les comprovacions automàtiques es mantenen lleugeres i els treballs pesats queden manuals.
+description: Els desplegaments són explícits per controlar els minuts de GitHub Actions.
 lang: ca
 ref: software_ci_deploy
 profiles: [unaltredocs]
@@ -9,6 +9,6 @@ weight: 350
 permalink: /ca/docs/ci-desplegament/
 ---
 
-El nucli manté la CI automàtica centrada en la publicació docs/web i la comprovació local d'enllaços. Les mètriques de publicacions i CodeQL estan disponibles com a fluxos de treball manuals. Els llocs fills poden cridar fluxos de treball reutilitzables del nucli en lloc de copiar tota la lògica.
+Els llocs fills haurien de publicar localment amb `make publish` sempre que siga possible. Això compila el lloc en Docker, prepara una branca generada `gh-pages` i la puja amb les credencials git locals.
 
-Així les edicions comunes continuen sent ràpides i encara existeix una ruta explícita per a treball car o dependent de xarxa.
+GitHub Actions continua disponible com a workflows manuals per a equips que editen només des de GitHub. Les mètriques de publicacions i CodeQL també són manuals. Així les edicions comunes continuen sent ràpides i eviten gastar minuts d'Actions en cada push o pull request de dependències.

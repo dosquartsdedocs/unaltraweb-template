@@ -1,6 +1,6 @@
 ---
 title: Configure CI And Deploy
-description: Automatic checks stay light while heavier jobs remain manual.
+description: Deploys are explicit so GitHub Actions minutes stay under control.
 lang: en
 ref: software_ci_deploy
 profiles:
@@ -13,6 +13,6 @@ weight: 530
 permalink: "/en/docs/ci-deploy/"
 nav_title: CI And Deploy
 ---
-The core keeps automatic CI focused on docs/web publication and local link checks. Publication metrics and CodeQL are available as manual workflows. Child sites can call reusable workflows from the core rather than copying full workflow logic.
+Child sites should publish locally with `make publish` when possible. This builds the site in Docker, prepares a generated `gh-pages` branch and pushes it with the local git credentials.
 
-This keeps common edits fast while preserving explicit paths for expensive or network-dependent work.
+GitHub Actions remain available as manual workflows for teams that edit only through GitHub. Publication metrics and CodeQL are also manual. This keeps common edits fast and avoids spending Actions minutes on every push or dependency pull request.

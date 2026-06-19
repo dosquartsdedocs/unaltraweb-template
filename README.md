@@ -59,7 +59,7 @@ Use this template to create a new repository, then edit content directly in GitH
 - `_data/` contains structured content such as team members, teachers, metrics and repositories.
 - `_pages/`, `_posts/`, `_projects/`, `_chapters/` and `_bibliography/` contain the editable site content.
 
-Pushes to `main` build and deploy the site with the reusable workflow from `dosquartsdedocs/unaltraweb`. Dependabot opens pull requests when GitHub Actions or Bundler dependencies can be updated.
+Commits to `main` do not deploy automatically. When the site should go live, run the manual deploy workflow from GitHub Actions. Dependabot can open pull requests when GitHub Actions or Bundler dependencies can be updated, but those pull requests do not trigger a deploy by default.
 
 This workflow is enough for adding a bibliography entry, editing page text, updating posts, changing project data or making small configuration changes. It does not require Docker, Make or a local development environment.
 
@@ -71,11 +71,12 @@ Local editing requires Git, Docker and GNU Make. On Windows, use WSL2 with Docke
 make serve
 make metrics-update
 make build
+make publish
 make test
 make down
 ```
 
-`make serve` pulls `ghcr.io/dosquartsdedocs/unaltraweb:main` by default and starts the site locally. The GHCR package must be public before unauthenticated users can pull that image.
+`make serve` pulls `ghcr.io/dosquartsdedocs/unaltraweb:main` by default and starts the site locally. The GHCR package must be public before unauthenticated users can pull that image. The image is only the runtime environment; layouts, styles and plugins come from the `unaltraweb` gem.
 
 When developing the core and template together, use this port convention:
 
@@ -102,6 +103,18 @@ The default local workflow runs through Docker, using `ghcr.io/dosquartsdedocs/u
 make serve LOCAL_CORE=../unaltraweb
 make build LOCAL_CORE=../unaltraweb
 make test LOCAL_CORE=../unaltraweb
+```
+
+Publish locally when possible:
+
+```bash
+make publish
+```
+
+`make publish` requires a clean git working tree, builds the site into `_site`, prepares a generated commit in `tmp/publish-gh-pages`, adds `.nojekyll`, preserves `CNAME` when present and force-pushes the result to `gh-pages`. Configure GitHub Pages to deploy from the `gh-pages` branch and `/` folder. To inspect the generated branch without pushing, run:
+
+```bash
+make publish PUBLISH_DRY_RUN=1
 ```
 
 `make test` serves the site with the local core, runs Playwright in Docker, tests desktop/mobile rendering and the light/sepia/dark theme modes, and writes screenshots to `tmp/render-smoke/`.
@@ -175,4 +188,4 @@ make cv-preview CV_PDF=assets/pdf/cv.pdf CV_PREVIEW=assets/img/cv-preview.jpg
 
 ## GitHub Pages
 
-Small content edits can be done directly in GitHub. Pushes to `main` build and deploy the site through GitHub Pages Actions.
+Small content edits can be done directly in GitHub. Publishing is explicit: use `make publish` locally, or run the manual `Deploy site` workflow when contributors cannot publish from a local checkout.

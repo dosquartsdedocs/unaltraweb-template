@@ -22,7 +22,7 @@ Start a new site as a child repository. The child keeps content, configuration a
 
 The fastest route is to create a new repository from the `unaltraweb-template` starter scaffold. On GitHub, use the template repository flow or copy the template into a new repository, then rename the project, update `_config.yml` and keep only the content collections you need.
 
-GitHub is the default hosting target because the reusable GitHub Actions workflows only run there. GitLab, Bitbucket or another host can still work, but you must provide the equivalent CI and deploy steps yourself.
+GitHub Pages is the default hosting target. Prefer local publishing to the generated `gh-pages` branch when possible; use the manual GitHub Actions deploy workflow when contributors cannot publish from a local checkout. GitLab, Bitbucket or another host can still work, but you must provide the equivalent deploy step yourself.
 
 ## 2. Choose the site profile
 
@@ -59,3 +59,11 @@ make serve-unaltreselfie
 ```
 
 Switch the `serve-*` target to the profile you are building. The Makefile creates temporary profile overlays for local preview; production configuration should stay in `_config.yml`.
+
+When the site is ready, publish locally:
+
+```bash
+make publish
+```
+
+Configure GitHub Pages to deploy from the `gh-pages` branch and `/` folder. Use `make publish PUBLISH_DRY_RUN=1` to prepare the generated branch without pushing it.
