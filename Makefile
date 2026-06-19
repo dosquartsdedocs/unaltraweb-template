@@ -235,7 +235,7 @@ publish: build
 	  *) \
 	  git_dir=$$(sed -n 's/^gitdir: //p' "$(PUBLISH_WORKTREE)/.git"); \
 	  case "$$git_dir" in /srv/jekyll/*) git_dir="$${git_dir#/srv/jekyll/}" ;; esac; \
-	  git --git-dir="$$git_dir" --work-tree="$(PUBLISH_WORKTREE)" push --force "$(PUBLISH_REMOTE)" "HEAD:$(PUBLISH_BRANCH)"; \
+	  git --git-dir="$$git_dir" --work-tree="$(PUBLISH_WORKTREE)" push --force "$(PUBLISH_REMOTE)" "HEAD:refs/heads/$(PUBLISH_BRANCH)"; \
 	  ;; \
 	esac
 
