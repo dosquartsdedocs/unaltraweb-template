@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Methodological guide
 description: Reproducible workflow for data processing and analysis.
 img: assets/img/6.jpg
 importance: 3
 category: documentation
 lang: en
+ref: methodological_guide
 ---
 
 ## Purpose

@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Content before integrations
 date: 2026-05-06 10:00:00 +0000
 lang: en

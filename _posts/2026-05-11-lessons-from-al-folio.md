@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Lessons kept and removed from al-folio
 date: 2026-05-11 10:00:00 +0000
 lang: en

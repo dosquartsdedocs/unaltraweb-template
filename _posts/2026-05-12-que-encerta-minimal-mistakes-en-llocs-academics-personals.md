@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Què encerta Minimal Mistakes en llocs acadèmics personals
 date: 2026-05-12 10:00:00 +0000
 lang: ca

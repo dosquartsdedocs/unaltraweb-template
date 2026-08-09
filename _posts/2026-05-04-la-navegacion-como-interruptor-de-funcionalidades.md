@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: La navegación como interruptor de funcionalidades
 date: 2026-05-04 10:00:00 +0000
 lang: es

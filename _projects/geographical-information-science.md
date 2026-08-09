@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: Geographical Information Science
+lang: en
+ref: geographical_information_science
 description: A research line entry for methods, books, teaching material, or software families.
 importance: 2
 hero: /assets/img/projects/giscience.svg

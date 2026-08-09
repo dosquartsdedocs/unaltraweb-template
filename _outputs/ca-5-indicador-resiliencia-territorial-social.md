@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: "Indicador de resiliència territorial (dimensió social: comunitats)"
 description: "Fitxa demo amb metodologia, càlculs de mostra i llindars d'interpretació."
 img: assets/img/10.jpg
 importance: 5
 category: indicator
 lang: ca
+ref: territorial_resilience_social_indicator
 permalink: /ca/outputs/indicador-resiliencia-territorial-social/
 ---
 

@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Llocs estàtics i manteniment més pausat
 date: 2026-05-09 10:00:00 +0000
 lang: ca

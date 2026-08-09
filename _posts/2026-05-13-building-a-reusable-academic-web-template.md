@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Building a reusable academic web template
 date: 2026-05-13 10:00:00 +0000
 lang: en

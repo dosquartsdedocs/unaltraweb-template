@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Provar el lloc renderitzat
 date: 2026-05-03 10:00:00 +0000
 lang: ca

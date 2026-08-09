@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Guía metodológica
 description: Flujo reproducible para el procesamiento y análisis de datos.
 img: assets/img/6.jpg
 importance: 3
 category: documentation
 lang: es
+ref: methodological_guide
 permalink: /es/outputs/guia-metodologica/
 ---
 

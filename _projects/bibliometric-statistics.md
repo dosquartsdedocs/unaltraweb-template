@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: Journal and article statistics
+lang: en
+ref: bibliometric_statistics
 description: Local-first compilation of Scimago quartiles, article-level metrics, and bibliography summaries.
 importance: 6
 hero: /assets/img/projects/bibliometric-statistics.svg

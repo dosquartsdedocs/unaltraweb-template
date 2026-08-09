@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Qué corresponde a un repositorio de plantilla
 date: 2026-05-08 10:00:00 +0000
 lang: es

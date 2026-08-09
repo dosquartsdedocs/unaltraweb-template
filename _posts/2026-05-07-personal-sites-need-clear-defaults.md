@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Personal sites need clear defaults
 date: 2026-05-07 10:00:00 +0000
 lang: en

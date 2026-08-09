@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Conjunt de dades geoespacials obert
 description: Dataset harmonitzat del projecte llest per a reutilització i citació.
 img: assets/img/9.jpg
 importance: 1
 category: data
 lang: ca
+ref: open_geospatial_dataset
 permalink: /ca/outputs/conjunt-dades-geoespacials/
 ---
 

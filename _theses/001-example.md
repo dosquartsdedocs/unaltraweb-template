@@ -1,4 +1,6 @@
 ---
+title: "Die zentralen Orte in Suddeutschland"
+profiles: [unaltreselfie, unaltreprojecte]
 student: "Walter Christaller"
 status: defended
 order: 1

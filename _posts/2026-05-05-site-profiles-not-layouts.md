@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Site profiles, not layouts
 date: 2026-05-05 10:00:00 +0000
 lang: en

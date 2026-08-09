@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: "Territorial resilience indicator (social dimension: communities)"
 description: "Demo indicator card with methodological sheet, sample calculations, and interpretation thresholds."
 img: assets/img/10.jpg
 importance: 5
 category: indicator
 lang: en
+ref: territorial_resilience_social_indicator
 ---
 
 ## Demo overview

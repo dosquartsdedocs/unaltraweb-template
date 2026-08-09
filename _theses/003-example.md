@@ -1,4 +1,6 @@
 ---
+title: "Agricultural and rural change in Kent (1800-1900)"
+profiles: [unaltreselfie, unaltreprojecte]
 student: "Dana Example"
 status: defended
 order: 3

@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Per què el contingut demo ha de ser evident
 date: 2026-05-02 10:00:00 +0000
 lang: ca

@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: unaltraweb template
+lang: en
+ref: unaltraweb_template
 description: A thin scaffold that demonstrates how a site can consume the reusable unaltraweb core.
 importance: 3
 github: https://github.com/dosquartsdedocs/unaltraweb-template

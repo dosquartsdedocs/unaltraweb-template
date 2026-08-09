@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: al-folio refactor
+lang: en
+ref: al_folio_refactor
 description: Keeping useful academic website features while removing inherited assumptions and external build-time work.
 importance: 5
 hero: /assets/img/projects/al-folio-refactor.svg

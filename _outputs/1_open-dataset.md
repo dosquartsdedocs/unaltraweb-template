@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Open geospatial dataset
 description: Harmonized project dataset ready for reuse and citation.
 img: assets/img/9.jpg
 importance: 1
 category: data
 lang: en
+ref: open_geospatial_dataset
 ---
 
 ## What it includes

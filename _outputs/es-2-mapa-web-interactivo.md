@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Mapa web interactivo
 description: Visor cartográfico para explorar indicadores del proyecto.
 img: assets/img/4.jpg
 importance: 2
 category: tool
 lang: es
+ref: interactive_web_map
 github: https://github.com/example/project-web-map
 permalink: /es/outputs/mapa-web-interactivo/
 ---

@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Construir una plantilla web acadèmica reutilitzable
 date: 2026-05-13 10:00:00 +0000
 lang: ca

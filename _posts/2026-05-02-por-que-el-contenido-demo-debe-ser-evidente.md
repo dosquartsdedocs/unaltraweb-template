@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Por qué el contenido demo debe ser evidente
 date: 2026-05-02 10:00:00 +0000
 lang: es

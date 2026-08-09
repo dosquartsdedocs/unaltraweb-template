@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Bibliometrics without build-time fetching
 date: 2026-05-10 10:00:00 +0000
 lang: en

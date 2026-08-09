@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: What Minimal Mistakes gets right for personal academic sites
 date: 2026-05-12 10:00:00 +0000
 lang: en

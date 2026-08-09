@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: Minimal Mistakes profile pattern
+lang: en
+ref: minimal_mistakes_profile
 description: A design reference for personal academic pages with a clear sidebar and readable archives.
 importance: 4
 hero: /assets/img/projects/minimal-mistakes-profile.svg

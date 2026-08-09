@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Guia metodològica
 description: Flux reproduïble per al processament i l'anàlisi de dades.
 img: assets/img/6.jpg
 importance: 3
 category: documentation
 lang: ca
+ref: methodological_guide
 permalink: /ca/outputs/guia-metodologica/
 ---
 

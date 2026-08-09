@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Press interview
 date: 2026-05-14 09:00:00+0200
 inline: true
 related_posts: false

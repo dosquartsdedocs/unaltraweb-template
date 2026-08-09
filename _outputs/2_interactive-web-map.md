@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Interactive web map
 description: Browser-based map viewer for exploring project indicators.
 img: assets/img/4.jpg
 importance: 2
 category: tool
 lang: en
+ref: interactive_web_map
 github: https://github.com/example/project-web-map
 ---
 

@@ -1,4 +1,6 @@
 ---
+title: "Innovationsforloppet ur Korologisk Synpunkt"
+profiles: [unaltreselfie, unaltreprojecte]
 student: "Torsten Hagerstrand"
 status: defended
 order: 2

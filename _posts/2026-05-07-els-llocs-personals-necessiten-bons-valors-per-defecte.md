@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Els llocs personals necessiten bons valors per defecte
 date: 2026-05-07 10:00:00 +0000
 lang: ca

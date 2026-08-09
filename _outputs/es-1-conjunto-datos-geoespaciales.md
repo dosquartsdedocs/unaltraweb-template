@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Conjunto de datos geoespaciales abierto
 description: Dataset armonizado del proyecto listo para reutilización y cita.
 img: assets/img/9.jpg
 importance: 1
 category: data
 lang: es
+ref: open_geospatial_dataset
 permalink: /es/outputs/conjunto-datos-geoespaciales/
 ---
 

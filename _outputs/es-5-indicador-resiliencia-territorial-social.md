@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: "Indicador de resiliencia territorial (dimensión social: comunidades)"
 description: "Ficha demo con metodología, cálculos de ejemplo y umbrales de interpretación."
 img: assets/img/10.jpg
 importance: 5
 category: indicator
 lang: es
+ref: territorial_resilience_social_indicator
 permalink: /es/outputs/indicador-resiliencia-territorial-social/
 ---
 

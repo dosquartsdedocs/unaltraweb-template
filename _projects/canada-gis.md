@@ -1,6 +1,9 @@
 ---
 layout: project
+profiles: [unaltreselfie, unaltreprojecte]
 title: Canada Geographic Information System
+lang: en
+ref: canada_gis
 description: A classic example of a long-running public geospatial infrastructure project.
 importance: 1
 hero: /assets/img/projects/canada-gis.svg

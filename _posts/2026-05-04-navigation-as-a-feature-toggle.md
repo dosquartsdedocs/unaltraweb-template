@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Navigation as a feature toggle
 date: 2026-05-04 10:00:00 +0000
 lang: en

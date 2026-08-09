@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Qué acierta Minimal Mistakes en sitios académicos personales
 date: 2026-05-12 10:00:00 +0000
 lang: es

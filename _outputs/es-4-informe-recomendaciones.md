@@ -1,11 +1,13 @@
 ---
 layout: page
+profiles: [unaltreprojecte]
 title: Informe de recomendaciones
 description: Resumen accionable para decisores y agentes del territorio.
 img: assets/img/2.jpg
 importance: 4
 category: dissemination
 lang: es
+ref: policy_brief
 permalink: /es/outputs/informe-recomendaciones/
 ---
 

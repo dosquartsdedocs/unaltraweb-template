@@ -1,5 +1,6 @@
 ---
 layout: post
+profiles: [unaltreselfie]
 title: Los sitios personales necesitan buenos valores por defecto
 date: 2026-05-07 10:00:00 +0000
 lang: es
