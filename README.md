@@ -47,6 +47,18 @@ make manual-compute-check
 
 Review and commit the source, generated Markdown, figures under `assets/img/generated/`, and `.unaltraweb/computations.lock.json` together. Configuration, including local or CI image selection, lives in `.unaltraweb/computations.yml`. See the core [unaltremanual](https://dosquartsdedocs.github.io/unaltraweb/profiles/unaltremanual/) and [computation image](https://dosquartsdedocs.github.io/unaltraweb/docker-image/) references.
 
+### Selector-based web captures
+
+Use `assets/**/*.capture.yml` recipes for reproducible screenshots of local previews. Recipes declare the route, viewport, theme, waits, source dependencies, and CSS selectors used to place vector annotations:
+
+```bash
+make web-capture-status
+make web-capture-render WEB_CAPTURE_SITE_PROFILE=unaltremanual
+make web-capture-check
+```
+
+Commit each recipe with its untouched `.capture.png`, generated self-contained `.capture.svg`, and `.unaltraweb/web-captures.lock.json`. Save small hand corrections as `.capture.edited.svg`; web and PDF prefer that override, while freshness checks reject it after the underlying PNG changes.
+
 ## Do not usually edit this
 
 - `Gemfile`

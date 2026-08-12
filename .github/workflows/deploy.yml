@@ -14,3 +14,4 @@ jobs:
     with:
       install-python-requirements: false
       check-computations: true
+      check-web-captures: true

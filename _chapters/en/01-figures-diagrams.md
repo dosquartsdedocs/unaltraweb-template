@@ -28,6 +28,18 @@ The figure plugin wraps Markdown images in a semantic `figure` element and adds 
 
 ![Neutral placeholder]({{ site.baseurl }}/assets/img/placeholders/neutral-landscape.svg "A reusable landscape placeholder rendered as a numbered figure")
 
+### Selector-Based Web Captures
+
+A `.capture.yml` recipe records the local page path, viewport, theme, waits, and CSS selectors used for annotations. The authoring command keeps the original PNG and generates a self-contained SVG with editable vector layers. The web and PDF both resolve the recipe to `*.capture.edited.svg` when a reviewed manual edit exists, otherwise to `*.capture.svg`.
+
+```markdown
+![Manual navigation](/assets/captures/manual-navigation.capture.yml "Selector-based annotations on a manual chapter")
+```
+
+![Annotated manual navigation]({{ site.baseurl }}/assets/captures/manual-navigation.capture.yml "Selector-based annotations on a manual chapter")
+
+Run `make web-capture-render WEB_CAPTURE_SITE_PROFILE=unaltremanual` after changing the page, recipe, or declared inputs. Commit the `.capture.yml`, original `.capture.png`, generated `.capture.svg`, and `.unaltraweb/web-captures.lock.json` together. Save hand edits as `.capture.edited.svg`; the renderer never overwrites that file.
+
 ## Subfigure compositions
 
 Use a compact patchwork-style block when several Markdown images need to read as one figure. `a+b+c` places panels in one row, `/` starts a new row, and image attributes such as `width` or `height` tune a specific panel.
