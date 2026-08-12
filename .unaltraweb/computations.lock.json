@@ -15,29 +15,29 @@
         },
         {
           "path": ".unaltraweb/computations.yml",
-          "sha256": "cf9102276ed0378f8e89a008dc2eb568e4e750621104e8f555090c078284e265"
+          "sha256": "51d3ee601c4ad1a330c9d3188a16569a81748e950f67fd02a007d1663c45effc"
         }
       ],
       "engine": "python",
       "figures": "assets/img/generated/en/manual-computed-python",
-      "fingerprint": "c2af685bb409de1ed19b235cd17242ffebb89be62ccfa1441f3f63a36cf16236",
+      "fingerprint": "042b103b1ec81816a458b2d24d684bcb537bf88d078b51d493790f70609c14ae",
       "image": {
         "engine": "python",
         "environment": "local",
-        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-python:main",
+        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-python@sha256:18cb269811bd4005800382da25a480ec2bca7eac8d0501ad1ef36bad1c0f8cd9",
         "source": "environment:COMPUTE_PYTHON_IMAGE"
       },
       "image_identity": {
         "available": "true",
-        "digest": "",
-        "id": "sha256:6510734299b09b09ccb70d517b479013bbc1d9eb2c45c37d89ccacb558896e5a"
+        "digest": "ghcr.io/dosquartsdedocs/unaltraweb-compute-python@sha256:18cb269811bd4005800382da25a480ec2bca7eac8d0501ad1ef36bad1c0f8cd9",
+        "id": "sha256:039af70322afeea49f34e28f5efa11ab86d091baaf02100a7414bb0104f344bc"
       },
       "output": {
         "path": "_chapters/en/05-computed-python.md",
         "sha256": "f5bbfd0510cbd9dc1fbc9ddadf076ea4fca503703a6b942544f343fcf10c6fe9",
         "size": 1454
       },
-      "rendered_at": "2026-08-12T18:26:29+00:00"
+      "rendered_at": "2026-08-12T19:04:57+00:00"
     },
     "_chapters/en/06-computed-r.R": {
       "assets": [
@@ -54,29 +54,29 @@
         },
         {
           "path": ".unaltraweb/computations.yml",
-          "sha256": "cf9102276ed0378f8e89a008dc2eb568e4e750621104e8f555090c078284e265"
+          "sha256": "51d3ee601c4ad1a330c9d3188a16569a81748e950f67fd02a007d1663c45effc"
         }
       ],
       "engine": "r",
       "figures": "assets/img/generated/en/manual-computed-r",
-      "fingerprint": "1fe2d1b50ea1e94cca9bf2dd6e9732413a852406dc402d01e6a67e548d53afd5",
+      "fingerprint": "f8e4659750dd7d477d7a87f51f63384cc6297e9efce41f9bfa73e2115295bc23",
       "image": {
         "engine": "r",
         "environment": "local",
-        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-r:main",
+        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-r@sha256:928ffb93f221e09e8b929157dee473b838e061915a2eb67224e4124b85f81837",
         "source": "environment:COMPUTE_R_IMAGE"
       },
       "image_identity": {
         "available": "true",
-        "digest": "",
-        "id": "sha256:94a592b55727f7ec1b3834a5952fbe9d8c2a6cea04fdb08e3c3c56173662a756"
+        "digest": "ghcr.io/dosquartsdedocs/unaltraweb-compute-r@sha256:928ffb93f221e09e8b929157dee473b838e061915a2eb67224e4124b85f81837",
+        "id": "sha256:8ef21caa8f33646c4a2301c14e6d0d188d49a9d4aba7f6d8dd3fee3cd5e98d18"
       },
       "output": {
         "path": "_chapters/en/06-computed-r.md",
         "sha256": "39b3a51ec40b514bfb1a0bf5c7fc63ca68b63b73cc54fa465ff78da0aa57623d",
         "size": 1249
       },
-      "rendered_at": "2026-08-12T18:26:34+00:00"
+      "rendered_at": "2026-08-12T19:05:34+00:00"
     }
   },
   "version": 1
