@@ -1,0 +1,46 @@
+---
+layout: manual-chapter
+title: Computed Python example
+description: A versioned chapter generated from executable Python source.
+lang: en
+ref: manual-computed-python
+profiles: [unaltremanual]
+permalink: /en/chapters/computed-python/
+weight: 60
+part: Resources
+unaltraweb_compute:
+  engine: python
+jupyter: python3
+execute:
+  echo: true
+  warning: false
+  error: false
+format:
+  gfm:
+    wrap: none
+---
+
+This chapter demonstrates the executable-source contract. The `.qmd` file is authoritative; its generated Markdown and figure are reviewed and versioned for stable web and PDF builds.
+
+## A reproducible Python figure
+
+The example uses fixed input values and an explicit plotting seed so repeated renders produce the same analytical result.
+
+```{python}
+#| label: fig-python-trend
+#| fig-cap: "Deterministic trend generated with Python"
+#| fig-alt: "A line chart increasing from one to five across five observations"
+
+import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [1, 2, 2, 4, 5]
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.plot(x, y, marker="o", color="#31688e", linewidth=2)
+ax.set(xlabel="Observation", ylabel="Value")
+ax.grid(alpha=0.25)
+plt.show()
+```
+
+The committed figure makes the result inspectable without executing Python during an ordinary Jekyll build.

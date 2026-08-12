@@ -394,6 +394,8 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-sidebar")).toContainText("Contents");
   await expect(page.locator(".manual-sidebar")).toContainText("How this manual works");
   await expect(page.locator(".manual-sidebar")).toContainText("Assessment workflow");
+  await expect(page.locator(".manual-sidebar")).toContainText("Computed Python example");
+  await expect(page.locator(".manual-sidebar")).toContainText("Computed R example");
   await expect(page.locator(".manual-sidebar")).toContainText("Bibliography");
   await expect(page.locator(".manual-reference-link")).toContainText("Bibliography");
   await expect(page.locator(".manual-reference-link .manual-chapter-number--blank")).toBeHidden();
@@ -703,6 +705,25 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figura 1.");
   await expect(page.locator(".md-table-caption .figlabel").first()).toContainText("Taula 1.");
   await page.screenshot({ path: join(renderOut, `manual-ca-chapter-${testInfo.project.name}.png`), fullPage: true });
+});
+
+test("computed manual chapters publish versioned results only", async ({ page }) => {
+  test.skip(activeProfile !== "unaltremanual", "unaltremanual profile only");
+
+  await page.goto(siteUrl("/en/chapters/computed-python/"));
+  await expect(page.locator(".manual-chapter-header h1")).toContainText("Computed Python example");
+  await expect(page.locator(".manual-content pre code")).toContainText("matplotlib");
+  await expectImageLoaded(page.locator(".manual-content img[src*='manual-computed-python']"));
+
+  await page.goto(siteUrl("/en/chapters/computed-r/"));
+  await expect(page.locator(".manual-chapter-header h1")).toContainText("Computed R example");
+  await expect(page.locator(".manual-content pre code")).toContainText("cars$speed");
+  await expectImageLoaded(page.locator(".manual-content img[src*='manual-computed-r']"));
+
+  for (const sourcePath of ["/_chapters/en/05-computed-python.qmd", "/_chapters/en/06-computed-r.R", "/.unaltraweb/computations.yml"]) {
+    const response = await page.request.get(siteUrl(sourcePath));
+    expect(response.status()).toBe(404);
+  }
 });
 
 test("unaltredocs profile renders the documentation collection", async ({ page }, testInfo) => {

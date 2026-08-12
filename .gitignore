@@ -4,6 +4,10 @@ _site
 .jekyll-cache
 .jekyll-metadata
 .sass-cache
+.quarto/
+**/.quarto/
+**/*.quarto_ipynb
+_chapters/**/.gitignore
 .DS_store
 Gemfile.lock
 node_modules/

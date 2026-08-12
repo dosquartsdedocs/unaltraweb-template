@@ -24,6 +24,7 @@ If you only need to edit content, you can work entirely in GitHub. Use the local
 
 - `_config.yml`
 - `_pages/`
+- `_chapters/`
 - `_projects/`
 - `_posts/`
 - `_bibliography/papers.bib` and `_bibliography/manual.bib`
@@ -33,6 +34,18 @@ If you only need to edit content, you can work entirely in GitHub. Use the local
 - `assets/pdf/`
 
 The `author` block in `_config.yml` powers pages that use `layout: profile`, such as the localized home pages in `_pages/*/index.md`. The prepared website family is selected with `unaltraweb.site_profile`, and standard sections can be toggled with `unaltraweb.features`.
+
+### Executable manual chapters
+
+Advanced manuals can keep authoritative `.qmd`, `.Rmd`, `.R`, `.py`, or `.ipynb` sources under `_chapters/`. Edit the executable source, not its generated same-stem `.md`, then run:
+
+```bash
+make manual-compute-status
+make manual-compute-render
+make manual-compute-check
+```
+
+Review and commit the source, generated Markdown, figures under `assets/img/generated/`, and `.unaltraweb/computations.lock.json` together. Configuration, including local or CI image selection, lives in `.unaltraweb/computations.yml`. See the core [unaltremanual](https://dosquartsdedocs.github.io/unaltraweb/profiles/unaltremanual/) and [computation image](https://dosquartsdedocs.github.io/unaltraweb/docker-image/) references.
 
 ## Do not usually edit this
 
@@ -65,7 +78,7 @@ This workflow is enough for adding a bibliography entry, editing page text, upda
 
 ## Local workflow
 
-Local editing requires Git, Docker and GNU Make. On Windows, use WSL2 with Docker Desktop and Docker's WSL integration enabled, then run the same commands inside the WSL Linux shell.
+Routine local preview, freshness checks, builds, and tests require Git, Docker, and GNU Make. The computation check runs inside the selected control image, so it does not require host Python. Explicit computation rendering, project image preparation, RStudio, and PDF authoring also require an `unaltraweb` factory checkout; the template fixture expects it at `../unaltraweb`, or pass `COMPUTE_CORE=/path/to/unaltraweb`. On Windows, use WSL2 with Docker Desktop and Docker's WSL integration enabled, then run the same commands inside the WSL Linux shell.
 
 ```bash
 make serve

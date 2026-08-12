@@ -31,6 +31,10 @@ Use `unaltremanual` for sequential teaching material: manuals, course handbooks,
 
 Chapters live in `_chapters/<lang>/` and can use figures, callouts, tables, code fences and local bibliography entries. The bibliography chapter is part of the manual reading flow rather than a generic publications page.
 
+## Executable Examples
+
+`_chapters/en/05-computed-python.qmd` and `_chapters/en/06-computed-r.R` are authoritative executable examples. Their same-stem `.md` files and figures under `assets/img/generated/` are reviewed and committed so web and PDF builds remain static. Edit the executable source, run `make manual-compute-render`, and verify it with `make manual-compute-check`.
+
 ## Enable It
 
 ```yaml

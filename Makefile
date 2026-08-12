@@ -2,6 +2,14 @@ PYTHON ?= python3
 BUNDLE ?= bundle
 METRICS_ARGS ?=
 SCIMAGO_INPUT ?=
+COMPUTE_PYTHON_IMAGE ?=
+COMPUTE_R_IMAGE ?=
+COMPUTE_SOURCE ?=
+COMPUTE_CONFIRM_OVERWRITE ?= 0
+COMPUTE_CORE ?= $(if $(strip $(LOCAL_CORE)),$(LOCAL_CORE),../unaltraweb)
+COMPUTE_CONTROL_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb-compute-python:main
+MANUAL_PDF_LANG ?=
+MANUAL_PDF_PUBLISH_DRY_RUN ?= 1
 PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
@@ -35,6 +43,7 @@ PIP_CACHE_DIR ?= tmp/pip_cache
 PIP_STAMP := $(PYTHONUSERBASE)/.requirements.sha256
 DOCKER_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb:main
 PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright:v1.56.1-noble
+PLAYWRIGHT_ARGS ?=
 CONTAINER ?= unaltraweb-template-jekyll-dev
 CV_PDF ?= assets/pdf/cv.pdf
 CV_PREVIEW ?= assets/img/cv-preview.jpg
@@ -74,7 +83,22 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish
+
+export COMPUTE_PYTHON_IMAGE COMPUTE_R_IMAGE
+
+manual-compute-status manual-compute-check:
+	@if ! docker image inspect "$(COMPUTE_CONTROL_IMAGE)" >/dev/null 2>&1; then docker pull "$(COMPUTE_CONTROL_IMAGE)"; fi
+	@docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 64 --cpus 1 --memory 512m --tmpfs /tmp:rw,noexec,nosuid,size=64m -e HOME=/tmp -e COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" -e COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" -v "$(CURDIR):/project:ro" -w /project --entrypoint python3 "$(COMPUTE_CONTROL_IMAGE)" /opt/unaltraweb/computations/render.py $(patsubst manual-compute-%,%,$@) --project /project $(if $(strip $(COMPUTE_SOURCE)),--source "$(COMPUTE_SOURCE)",)
+
+compute-core-check:
+	@test -f "$(COMPUTE_CORE)/Makefile" || (printf 'Set COMPUTE_CORE to an unaltraweb factory checkout for this authoring operation.\n' >&2; exit 1)
+
+manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio: compute-core-check
+	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)" COMPUTE_CONFIRM_OVERWRITE="$(COMPUTE_CONFIRM_OVERWRITE)"
+
+manual-pdf-status manual-pdf-build manual-pdf-publish: compute-core-check
+	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" MANUAL_PDF_LANG="$(MANUAL_PDF_LANG)" MANUAL_PDF_PUBLISH_DRY_RUN="$(MANUAL_PDF_PUBLISH_DRY_RUN)"
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -169,7 +193,7 @@ profile-compose-local-core: local-core-check
 	  rm -f "$(PROFILE_COMPOSE_LOCAL_CORE_FILE)"; \
 	fi
 
-serve-profile: profile-compose-local-core
+serve-profile: manual-compute-check profile-compose-local-core
 	@case "$(PROFILE)" in \
 	  unaltreselfie) url="$(UNALTRESELFIE_URL)"; service="unaltreselfie" ;; \
 	  unaltreprojecte) url="$(UNALTREPROJECTE_URL)"; service="unaltreprojecte" ;; \
@@ -193,7 +217,7 @@ serve-unaltremanual:
 serve-unaltredocs:
 	$(MAKE) serve-profile PROFILE=unaltredocs
 
-serve-allprofiles: profile-compose-local-core
+serve-allprofiles: manual-compute-check profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
 	@printf 'unaltreselfie:   %s\nunaltreprojecte: %s\nunaltremanual:   %s\nunaltredocs:     %s\n' "$(UNALTRESELFIE_URL)" "$(UNALTREPROJECTE_URL)" "$(UNALTREMANUAL_URL)" "$(UNALTREDOCS_URL)"
 	@printf 'Opening only unaltreselfie; use the developer switcher to move between profiles.\n'
@@ -201,7 +225,7 @@ serve-allprofiles: profile-compose-local-core
 	  xdg-open "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || sensible-browser "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || true) & \
 	docker compose $(PROFILE_COMPOSE_FILES) up unaltreselfie unaltreprojecte unaltremanual unaltredocs
 
-serve: local-core-check
+serve: manual-compute-check local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
 	@(sleep 45; xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || true) & \
 	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)"'
@@ -215,7 +239,7 @@ serve-native serve-local: profile-config dev-config python-deps bundle-install
 	serve_config="$$active_config,$(DEV_CONFIG)"; \
 	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --destination "$(SERVE_DESTINATION)" --disable-disk-cache
 
-build: local-core-check
+build: manual-compute-check local-core-check
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)"'
 
 build-native build-local: profile-config python-deps bundle-install
@@ -323,7 +347,7 @@ diagrams:
 		done < <(find $(DIAGRAMS_FIND_DIRS) -type f -name "*.mmd" | sort); \
 		if test "$$found" -eq 0; then printf '\''No Mermaid sources found.\n'\''; fi'
 
-test test-native render-smoke render-smoke-local: local-core-check
+test test-native render-smoke render-smoke-local: manual-compute-check local-core-check
 	@mkdir -p tmp/render-smoke
 	@set -e; \
 	server_log="tmp/render-smoke/jekyll.log"; \
@@ -338,7 +362,7 @@ test test-native render-smoke render-smoke-local: local-core-check
 	  sleep 2; \
 	done; \
 	if test "$$ready" != "1"; then docker logs $$server_cid >&2 || true; exit 1; fi; \
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host --ipc=host -e BASE_URL="http://127.0.0.1:$(PORT)$(BASEURL)" -e RENDER_OUT="tmp/render-smoke" -e SITE_PROFILE="$(SITE_PROFILE)" -e START_PATH="$(START_PATH)" -v "$(CURDIR):/work" -w /work $(PLAYWRIGHT_IMAGE) bash -lc 'npm install --no-save --no-package-lock @playwright/test@1.56.1 >/tmp/playwright-npm.log && npx playwright test tests/render-smoke.spec.mjs --browser=chromium --output=tmp/render-smoke/test-results'
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host --ipc=host -e BASE_URL="http://127.0.0.1:$(PORT)$(BASEURL)" -e RENDER_OUT="tmp/render-smoke" -e SITE_PROFILE="$(SITE_PROFILE)" -e START_PATH="$(START_PATH)" -v "$(CURDIR):/work" -w /work $(PLAYWRIGHT_IMAGE) bash -lc 'npm install --no-save --no-package-lock @playwright/test@1.56.1 >/tmp/playwright-npm.log && npx playwright test tests/render-smoke.spec.mjs --browser=chromium --output=tmp/render-smoke/test-results $(PLAYWRIGHT_ARGS)'
 
 screenshots screenshots-all: local-core-check
 	@mkdir -p tmp/render-smoke

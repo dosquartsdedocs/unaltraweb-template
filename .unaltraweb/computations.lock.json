@@ -1,0 +1,83 @@
+{
+  "records": {
+    "_chapters/en/05-computed-python.qmd": {
+      "assets": [
+        {
+          "path": "assets/img/generated/en/manual-computed-python/05-computed-python_files/figure-commonmark/fig-python-trend-output-1.png",
+          "sha256": "73a346b36ec871fab70e874df7655240d65a25902296f8d5373f740b27844107",
+          "size": 20336
+        }
+      ],
+      "dependencies": [
+        {
+          "path": "_chapters/en/05-computed-python.qmd",
+          "sha256": "dd6271167191e32920657281b933c1c9bcea7fc0ae99c05cd043d79565179b2f"
+        },
+        {
+          "path": ".unaltraweb/computations.yml",
+          "sha256": "cf9102276ed0378f8e89a008dc2eb568e4e750621104e8f555090c078284e265"
+        }
+      ],
+      "engine": "python",
+      "figures": "assets/img/generated/en/manual-computed-python",
+      "fingerprint": "c2af685bb409de1ed19b235cd17242ffebb89be62ccfa1441f3f63a36cf16236",
+      "image": {
+        "engine": "python",
+        "environment": "local",
+        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-python:main",
+        "source": "environment:COMPUTE_PYTHON_IMAGE"
+      },
+      "image_identity": {
+        "available": "true",
+        "digest": "",
+        "id": "sha256:6510734299b09b09ccb70d517b479013bbc1d9eb2c45c37d89ccacb558896e5a"
+      },
+      "output": {
+        "path": "_chapters/en/05-computed-python.md",
+        "sha256": "f5bbfd0510cbd9dc1fbc9ddadf076ea4fca503703a6b942544f343fcf10c6fe9",
+        "size": 1454
+      },
+      "rendered_at": "2026-08-12T18:26:29+00:00"
+    },
+    "_chapters/en/06-computed-r.R": {
+      "assets": [
+        {
+          "path": "assets/img/generated/en/manual-computed-r/06-computed-r_files/figure-commonmark/fig-r-stopping-distance-1.png",
+          "sha256": "8a43d4c2e7dbf5695d383ae73244dd4cc5c441b23e9bbd48122621ff4d65f988",
+          "size": 28562
+        }
+      ],
+      "dependencies": [
+        {
+          "path": "_chapters/en/06-computed-r.R",
+          "sha256": "8c2705d9949e29bc168121d0cc09a24d95d1fd0bc8a45d94643377888b1bcf77"
+        },
+        {
+          "path": ".unaltraweb/computations.yml",
+          "sha256": "cf9102276ed0378f8e89a008dc2eb568e4e750621104e8f555090c078284e265"
+        }
+      ],
+      "engine": "r",
+      "figures": "assets/img/generated/en/manual-computed-r",
+      "fingerprint": "1fe2d1b50ea1e94cca9bf2dd6e9732413a852406dc402d01e6a67e548d53afd5",
+      "image": {
+        "engine": "r",
+        "environment": "local",
+        "image": "ghcr.io/dosquartsdedocs/unaltraweb-compute-r:main",
+        "source": "environment:COMPUTE_R_IMAGE"
+      },
+      "image_identity": {
+        "available": "true",
+        "digest": "",
+        "id": "sha256:94a592b55727f7ec1b3834a5952fbe9d8c2a6cea04fdb08e3c3c56173662a756"
+      },
+      "output": {
+        "path": "_chapters/en/06-computed-r.md",
+        "sha256": "39b3a51ec40b514bfb1a0bf5c7fc63ca68b63b73cc54fa465ff78da0aa57623d",
+        "size": 1249
+      },
+      "rendered_at": "2026-08-12T18:26:34+00:00"
+    }
+  },
+  "version": 1
+}

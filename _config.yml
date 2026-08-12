@@ -88,6 +88,9 @@ unaltraweb:
     cover_image: /assets/img/manual-cover-cat.png
     logo: /assets/img/brand/dosquartsdedocs-logo.svg
     logo_inverse: /assets/img/brand/dosquartsdedocs-logo-white.svg
+    pdf:
+      enabled: true
+      languages: [en]
   documentation:
     collection: documentation
     logo: /assets/img/brand/dosquartsdedocs-logo.svg

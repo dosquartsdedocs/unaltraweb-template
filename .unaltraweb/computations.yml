@@ -1,0 +1,10 @@
+version: 1
+enabled: true
+source_roots:
+  - _chapters
+generated_assets_root: assets/img/generated
+engines:
+  python:
+    image: ghcr.io/dosquartsdedocs/unaltraweb-compute-python:main
+  r:
+    image: ghcr.io/dosquartsdedocs/unaltraweb-compute-r:main
