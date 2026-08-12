@@ -14,6 +14,8 @@ PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
 SITE_PROFILE ?=
+DEVELOPER_MODE ?= $(if $(filter unaltraweb-template,$(notdir $(CURDIR))),true,false)
+PROFILE_DEMO_TITLES ?= $(if $(filter unaltraweb-template,$(notdir $(CURDIR))),1,0)
 PROFILE ?= unaltreselfie
 UNALTRESELFIE_PORT ?= 4001
 UNALTREPROJECTE_PORT ?= 4002
@@ -119,13 +121,17 @@ profile-config:
 	@mkdir -p tmp
 	@if test -n "$(SITE_PROFILE)"; then \
 	  profile="$(SITE_PROFILE)"; \
-	  title="unaltraweb $$profile"; \
-	  description="Demo $$profile website built with unaltraweb."; \
-	  if test "$$profile" = "unaltreselfie"; then title="unaltreselfie"; description="Demo personal academic website built with unaltraweb."; fi; \
-	  if test "$$profile" = "unaltreprojecte"; then title="unaltreprojecte"; description="Demo research project website built with unaltraweb."; fi; \
-	  if test "$$profile" = "unaltremanual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
-	  if test "$$profile" = "unaltredocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
-	  printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
+	  if test "$(PROFILE_DEMO_TITLES)" = "1"; then \
+	    title="unaltraweb $$profile"; \
+	    description="Demo $$profile website built with unaltraweb."; \
+	    if test "$$profile" = "unaltreselfie"; then title="unaltreselfie"; description="Demo personal academic website built with unaltraweb."; fi; \
+	    if test "$$profile" = "unaltreprojecte"; then title="unaltreprojecte"; description="Demo research project website built with unaltraweb."; fi; \
+	    if test "$$profile" = "unaltremanual"; then title="unaltremanual"; description="Demo academic manual built with unaltraweb."; fi; \
+	    if test "$$profile" = "unaltredocs"; then title="unaltredocs"; description="Demo technical documentation website built with unaltraweb."; fi; \
+	    printf '%s\n' 'title: '"$$title" 'description: >' '  '"$$description" 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
+	  else \
+	    printf '%s\n' 'unaltraweb:' '  site_profile: '"$$profile" > "$(PROFILE_CONFIG)"; \
+	  fi; \
 	  if test "$$profile" = "unaltreprojecte"; then printf '%s\n' 'pagination:' '  enabled: false' >> "$(PROFILE_CONFIG)"; fi; \
 	  if test "$$profile" = "unaltremanual"; then printf '%s\n' 'scholar:' '  style: _bibliography/my-apa-cv-no-access.csl' '  bibliography_template: manual-bib' '  group_by: none' >> "$(PROFILE_CONFIG)"; fi; \
 	else \
@@ -134,7 +140,7 @@ profile-config:
 
 dev-config:
 	@mkdir -p tmp
-	@printf '%s\n' 'developer_mode: true' 'unaltraweb:' '  developer_mode: true' > "$(DEV_CONFIG)"
+	@printf '%s\n' 'developer_mode: $(DEVELOPER_MODE)' 'unaltraweb:' '  developer_mode: $(DEVELOPER_MODE)' > "$(DEV_CONFIG)"
 
 python-deps:
 	@mkdir -p "$(PYTHONUSERBASE)" "$(PIP_CACHE_DIR)"
@@ -228,7 +234,7 @@ serve-allprofiles: manual-compute-check profile-compose-local-core
 serve: manual-compute-check local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
 	@(sleep 45; xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || true) & \
-	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)"'
+	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)" DEVELOPER_MODE="$(DEVELOPER_MODE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
 
 serve-native serve-local: profile-config dev-config python-deps bundle-install
 	@set -e; \
@@ -240,7 +246,7 @@ serve-native serve-local: profile-config dev-config python-deps bundle-install
 	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --destination "$(SERVE_DESTINATION)" --disable-disk-cache
 
 build: manual-compute-check local-core-check
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)"'
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
 
 build-native build-local: profile-config python-deps bundle-install
 	@set -e; \
@@ -331,27 +337,41 @@ diagrams:
 	    -t "$$image" \
 	    "$$diavisuals_dir"; \
 	fi; \
-	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/workspace" -v "$$diavisuals_dir:/diavisuals:ro" -w /workspace "$$image" bash -lc '\
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -e JAVA_TOOL_OPTIONS=-Duser.home=/tmp -v "$(CURDIR):/workspace" -v "$$diavisuals_dir:/diavisuals:ro" -w /workspace "$$image" bash -lc '\
 		set -euo pipefail; \
 		mkdir -p "$(DIAGRAMS_CACHE_DIR)"; \
 		printf '\''{"args":["--no-sandbox","--disable-setuid-sandbox","--disable-dev-shm-usage","--disable-crash-reporter","--disable-crashpad"]}\n'\'' > "$(DIAGRAMS_CACHE_DIR)/puppeteer.json"; \
 		found=0; \
 		while IFS= read -r src; do \
 			found=1; \
-			styled="$(DIAGRAMS_CACHE_DIR)/$${src%.mmd}.styled.mmd"; \
 			out="$$src.svg"; \
-			mkdir -p "$$(dirname "$$styled")"; \
-			printf '\''DIAVISUALS %s -> %s\n'\'' "$$src" "$$out"; \
-			/diavisuals/tools/style-diagram-source.sh mermaid "$(DIAGRAM_STYLE_FAMILY)" "$$src" "$$styled"; \
-			mmdc -i "$$styled" -o "$$out" -c "/diavisuals/styles/mermaid/$(DIAGRAM_STYLE_FAMILY)-mermaid.json" -p "$(DIAGRAMS_CACHE_DIR)/puppeteer.json"; \
-		done < <(find $(DIAGRAMS_FIND_DIRS) -type f -name "*.mmd" | sort); \
-		if test "$$found" -eq 0; then printf '\''No Mermaid sources found.\n'\''; fi'
+			case "$$src" in \
+			  *.mmd|*.mermaid) \
+			    styled="$(DIAGRAMS_CACHE_DIR)/$${src%.*}.styled.mmd"; \
+			    mkdir -p "$$(dirname "$$styled")"; \
+			    printf '\''DIAVISUALS mermaid %s -> %s\n'\'' "$$src" "$$out"; \
+			    /diavisuals/tools/style-diagram-source.sh mermaid "$(DIAGRAM_STYLE_FAMILY)" "$$src" "$$styled"; \
+			    mmdc -i "$$styled" -o "$$out" -c "/diavisuals/styles/mermaid/$(DIAGRAM_STYLE_FAMILY)-mermaid.json" -p "$(DIAGRAMS_CACHE_DIR)/puppeteer.json"; \
+			    ;; \
+			  *.puml|*.plantuml|*.uml) \
+			    styled="$(DIAGRAMS_CACHE_DIR)/$${src%.*}.styled.puml"; \
+			    mkdir -p "$$(dirname "$$styled")" "$$(dirname "$$out")"; \
+			    printf '\''DIAVISUALS plantuml %s -> %s\n'\'' "$$src" "$$out"; \
+			    /diavisuals/tools/style-diagram-source.sh plantuml "$(DIAGRAM_STYLE_FAMILY)" "$$src" "$$styled"; \
+			    plantuml -tsvg -o "/workspace/$$(dirname "$$out")" "$$styled"; \
+			    expected="$$(dirname "$$out")/$$(basename "$${styled%.puml}").svg"; \
+			    test -f "$$expected"; \
+			    if test "$$expected" != "$$out"; then mv "$$expected" "$$out"; fi; \
+			    ;; \
+			esac; \
+		done < <(find $(DIAGRAMS_FIND_DIRS) -type f \( -name "*.mmd" -o -name "*.mermaid" -o -name "*.puml" -o -name "*.plantuml" -o -name "*.uml" \) | sort); \
+		if test "$$found" -eq 0; then printf '\''No Mermaid or PlantUML sources found.\n'\''; fi'
 
 test test-native render-smoke render-smoke-local: manual-compute-check local-core-check
 	@mkdir -p tmp/render-smoke
 	@set -e; \
 	server_log="tmp/render-smoke/jekyll.log"; \
-	server_cid=$$(docker run -d --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) HOST=127.0.0.1 PORT=$(PORT) LIVERELOAD= SITE_PROFILE="$(SITE_PROFILE)"' ); \
+	server_cid=$$(docker run -d --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network host -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) HOST=127.0.0.1 PORT=$(PORT) LIVERELOAD= SITE_PROFILE="$(SITE_PROFILE)" DEVELOPER_MODE="$(DEVELOPER_MODE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"' ); \
 	cleanup() { docker logs $$server_cid > "$$server_log" 2>&1 || true; docker stop $$server_cid >/dev/null 2>&1 || true; docker rm $$server_cid >/dev/null 2>&1 || true; }; \
 	trap cleanup EXIT; \
 	ready=0; \

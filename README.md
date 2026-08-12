@@ -147,7 +147,7 @@ make serve SITE_PROFILE=unaltredocs
 make test SITE_PROFILE=unaltreprojecte
 ```
 
-`make serve` also enables a local developer mode overlay that is not loaded by `make build`. The floating developer switcher reports the real build profile while you browse locally.
+When working directly in the `unaltraweb-template` checkout, `make serve` also enables a local developer mode overlay that is not loaded by `make build`. Child sites keep the floating developer switcher disabled by default; pass `DEVELOPER_MODE=true` only when you need to debug profile rendering.
 
 For faster profile-specific development, the template also provides Docker Compose targets with fixed ports and automatic browser opening:
 
