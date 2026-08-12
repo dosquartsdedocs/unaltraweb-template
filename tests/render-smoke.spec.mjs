@@ -40,7 +40,7 @@ async function expectThemeState(page, theme) {
   const integrationTheme = theme === "dark" ? "dark" : "light";
   const expectedBg = {
     light: ["#fff", "#ffffff"],
-    sepia: ["#f3eacb"],
+    cafe: ["#f3eacb"],
     dark: ["#1c1c1d"],
   }[theme];
 
@@ -108,12 +108,11 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   await expect(page.locator(".profile-post-list time").first()).not.toContainText(/^\d{4}-\d{2}-\d{2}$/);
   await expect(page.locator("footer")).toContainText("Made with");
   await expect(page.locator("footer")).toContainText("unaltraweb");
-  await expect(page.locator("footer")).toContainText("unaltreselfie profile");
-  await expect(page.locator("footer")).toContainText("al-folio");
+  await expect(page.locator("footer")).not.toContainText("al-folio");
   await expect(page.locator("footer")).not.toContainText("Powered by");
   await expect(page.locator("footer")).toContainText(/Last updated: [A-Z][a-z]+ \d{1,2}, \d{4}/);
   await expect(page.locator(".post-title")).toHaveCount(0);
-  await expect(page.locator("#light-toggle-sepia")).toHaveCount(1);
+  await expect(page.locator("#light-toggle-cafe")).toHaveCount(1);
   await expectImageLoaded(page.locator(".profile-card-avatar"));
 
   const desktopColumnCount = await page.locator(".profile-page-grid").evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length);
@@ -121,7 +120,7 @@ test("profile page renders and supports theme modes", async ({ page }, testInfo)
   const selectedPublicationColumnCount = await page.locator(".profile-highlight-publications .bibliography > li > .row").first().evaluate((row) => getComputedStyle(row).gridTemplateColumns.split(" ").length);
   expect(selectedPublicationColumnCount).toBe(2);
 
-  for (const theme of ["light", "sepia", "dark"]) {
+  for (const theme of ["light", "cafe", "dark"]) {
     await page.evaluate((value) => localStorage.setItem("theme", value), theme);
     await page.reload();
     await expectThemeState(page, theme);
@@ -473,9 +472,11 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-content h2 .hd-num").first()).toContainText("1.1");
   await expect(page.locator(".manual-right-rail")).toBeVisible();
   await expect(page.locator(".manual-right-rail")).toContainText("On this chapter");
-  await expect(page.locator(".manual-page-toc")).toContainText("1.1 Reading path");
-  await expect(page.locator(".manual-page-toc-link").first()).toContainText("1.1 Reading path");
-  await expect(page.locator(".manual-page-toc a.active")).toContainText("1.1 Reading path");
+  const firstManualPageTocLink = page.locator(".manual-page-toc-link").first();
+  await expect(firstManualPageTocLink.locator(".manual-page-toc-number")).toHaveText("1.1");
+  await expect(firstManualPageTocLink.locator(".manual-page-toc-title")).toHaveText("Reading path");
+  await expect(firstManualPageTocLink).toHaveAccessibleName("1.1 Reading path");
+  await expect(page.locator(".manual-page-toc a.active")).toHaveAccessibleName("1.1 Reading path");
   const secondaryTocActiveBackground = await page.locator(".manual-right-rail .manual-page-toc a.active").evaluate((node) => getComputedStyle(node).backgroundColor);
   expect(secondaryTocActiveBackground).not.toBe("rgba(0, 0, 0, 0)");
   await expect(page.locator(".md-figcaption .figlabel").first()).toContainText("Figure 1.");
@@ -512,7 +513,7 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   await expect(page.locator(".manual-layout")).not.toHaveClass(/manual-sidebar-collapsed/);
   if (originalChapterViewport) await page.setViewportSize(originalChapterViewport);
   await page.locator(".manual-content h2", { hasText: "Diagram workflow" }).evaluate((node) => node.scrollIntoView({ block: "start" }));
-  await expect(page.locator(".manual-page-toc a.active")).toContainText("1.2 Diagram workflow");
+  await expect(page.locator(".manual-page-toc a.active")).toHaveAccessibleName("1.2 Diagram workflow");
   await page.screenshot({ path: join(renderOut, `manual-chapter-${testInfo.project.name}.png`), fullPage: true });
 
   await page.locator(".manual-navbar-search [data-content-search]").fill("coordinate");
@@ -939,7 +940,8 @@ test("coffee mode uses coffee accents", async ({ page }) => {
   await page.evaluate(() => localStorage.setItem("theme", "sepia"));
   await page.reload();
 
-  await expectThemeState(page, "sepia");
+  await expectThemeState(page, "cafe");
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("theme"))).toBe("cafe");
   await expectCoffeeAccent(page);
   if (isDocsProfile) {
     await expect(page.locator("[data-documentation-theme-label]")).toContainText("Coffee");
@@ -951,7 +953,7 @@ test("theme toggle rotates through explicit modes", async ({ page }) => {
   await page.evaluate(() => localStorage.setItem("theme", "system"));
   await page.reload();
 
-  const expectedSettings = ["light", "sepia", "dark", "system"];
+  const expectedSettings = ["light", "cafe", "dark", "system"];
   for (const expected of expectedSettings) {
     const themeEvent = page.evaluate(() => {
       return new Promise((resolve) => {
