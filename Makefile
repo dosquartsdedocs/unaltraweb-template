@@ -11,6 +11,13 @@ COMPUTE_CORE ?= $(if $(strip $(LOCAL_CORE)),$(LOCAL_CORE),../unaltraweb)
 COMPUTE_CONTROL_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb-compute-python@sha256:18cb269811bd4005800382da25a480ec2bca7eac8d0501ad1ef36bad1c0f8cd9
 MANUAL_PDF_LANG ?=
 MANUAL_PDF_PUBLISH_DRY_RUN ?= 1
+WEB_CAPTURE_SOURCE ?=
+WEB_CAPTURE_CONFIRM_OVERWRITE ?= 0
+WEB_CAPTURE_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb-web-capture:main
+WEB_CAPTURE_CONTROL_IMAGE ?= $(WEB_CAPTURE_IMAGE)
+WEB_CAPTURE_SITE_PROFILE ?= $(SITE_PROFILE)
+WEB_CAPTURE_NETWORK ?= unaltraweb-capture-$(shell id -u)
+WEB_CAPTURE_SERVER ?= unaltraweb-capture-site-$(shell id -u)
 PORT ?= 4000
 HOST ?= 0.0.0.0
 BASEURL ?= /unaltraweb-template
@@ -86,7 +93,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-smoke manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-smoke manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish web-capture-status web-capture-check web-capture-render web-capture-image
 
 export COMPUTE_PYTHON_IMAGE COMPUTE_R_IMAGE
 
@@ -111,6 +118,37 @@ manual-compute-render manual-compute-image-python manual-compute-image-r manual-
 
 manual-pdf-status manual-pdf-build manual-pdf-publish: compute-core-check
 	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" MANUAL_PDF_LANG="$(MANUAL_PDF_LANG)" MANUAL_PDF_PUBLISH_DRY_RUN="$(MANUAL_PDF_PUBLISH_DRY_RUN)"
+
+web-capture-status web-capture-check:
+	@if ! docker image inspect "$(WEB_CAPTURE_CONTROL_IMAGE)" >/dev/null 2>&1; then docker pull "$(WEB_CAPTURE_CONTROL_IMAGE)"; fi
+	@if ! docker image inspect "$(WEB_CAPTURE_IMAGE)" >/dev/null 2>&1; then docker pull "$(WEB_CAPTURE_IMAGE)"; fi
+	@identity=$$(docker image inspect "$(WEB_CAPTURE_IMAGE)" --format '{{.Id}}'); \
+	digest=$$(docker image inspect "$(WEB_CAPTURE_IMAGE)" --format '{{join .RepoDigests ","}}'); \
+	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 64 --cpus 1 --memory 512m --tmpfs /tmp:rw,noexec,nosuid,size=64m -e HOME=/tmp -e WEB_CAPTURE_IMAGE="$(WEB_CAPTURE_IMAGE)" -e UNALTRAWEB_CAPTURE_IMAGE_ID="$$identity" -e UNALTRAWEB_CAPTURE_IMAGE_DIGEST="$$digest" -e UNALTRAWEB_FACTORY_ROOT=/opt/unaltraweb -v "$(CURDIR):/project:ro" -w /project --entrypoint python3 "$(WEB_CAPTURE_CONTROL_IMAGE)" /opt/unaltraweb/scripts/web_captures/render.py $(patsubst web-capture-%,%,$@) --project /project $(if $(strip $(WEB_CAPTURE_SOURCE)),--source "$(WEB_CAPTURE_SOURCE)",)
+
+web-capture-image: compute-core-check
+	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" WEB_CAPTURE_IMAGE="$(WEB_CAPTURE_IMAGE)"
+
+web-capture-render: compute-core-check local-core-check
+	@mkdir -p tmp/web-captures
+	@docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(COMPUTE_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make profile-config dev-config python-deps bundle-install LOCAL_CORE=/srv/unaltraweb SITE_PROFILE="$(WEB_CAPTURE_SITE_PROFILE)" DEVELOPER_MODE=false PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
+	@set -e; \
+	server_log="tmp/web-captures/jekyll.log"; \
+	docker rm -f "$(WEB_CAPTURE_SERVER)" >/dev/null 2>&1 || true; \
+	docker network rm "$(WEB_CAPTURE_NETWORK)" >/dev/null 2>&1 || true; \
+	docker network create --internal "$(WEB_CAPTURE_NETWORK)" >/dev/null; \
+	server_cid=$$(docker run -d --name "$(WEB_CAPTURE_SERVER)" --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp --network "$(WEB_CAPTURE_NETWORK)" -v "$(CURDIR):/srv/jekyll" -v "$(abspath $(COMPUTE_CORE)):/srv/unaltraweb:ro" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native LOCAL_CORE=/srv/unaltraweb HOST=0.0.0.0 PORT=$(PORT) LIVERELOAD= SITE_PROFILE="$(WEB_CAPTURE_SITE_PROFILE)" DEVELOPER_MODE=false PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"' ); \
+	cleanup() { docker logs $$server_cid > "$$server_log" 2>&1 || true; docker stop $$server_cid >/dev/null 2>&1 || true; docker rm $$server_cid >/dev/null 2>&1 || true; docker network rm "$(WEB_CAPTURE_NETWORK)" >/dev/null 2>&1 || true; }; \
+	trap cleanup EXIT; \
+	ready=0; \
+	for attempt in $$(seq 1 120); do \
+	  if docker run --rm --network "$(WEB_CAPTURE_NETWORK)" --entrypoint curl $(DOCKER_IMAGE) -fsS "http://$(WEB_CAPTURE_SERVER):$(PORT)$(BASEURL)$(START_PATH)" >/dev/null 2>&1; then ready=1; break; fi; \
+	  running=$$(docker inspect -f '{{.State.Running}}' $$server_cid 2>/dev/null || true); \
+	  test "$$running" = "true" || break; \
+	  sleep 2; \
+	done; \
+	if test "$$ready" != "1"; then docker logs $$server_cid >&2 || true; exit 1; fi; \
+	$(MAKE) -C "$(COMPUTE_CORE)" web-capture-render PROJECT="$(CURDIR)" WEB_CAPTURE_BASE_URL="http://$(WEB_CAPTURE_SERVER):$(PORT)" WEB_CAPTURE_DOCKER_NETWORK="$(WEB_CAPTURE_NETWORK)" WEB_CAPTURE_SERVICE_HOST="$(WEB_CAPTURE_SERVER)" WEB_CAPTURE_SOURCE="$(WEB_CAPTURE_SOURCE)" WEB_CAPTURE_IMAGE="$(WEB_CAPTURE_IMAGE)" WEB_CAPTURE_CONFIRM_OVERWRITE="$(WEB_CAPTURE_CONFIRM_OVERWRITE)"
 
 bootstrap:
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'bundle install && python3 -m pip install --break-system-packages --user -r requirements.txt'
@@ -209,7 +247,7 @@ profile-compose-local-core: local-core-check
 	  rm -f "$(PROFILE_COMPOSE_LOCAL_CORE_FILE)"; \
 	fi
 
-serve-profile: manual-compute-check profile-compose-local-core
+serve-profile: manual-compute-check web-capture-check profile-compose-local-core
 	@case "$(PROFILE)" in \
 	  unaltreselfie) url="$(UNALTRESELFIE_URL)"; service="unaltreselfie" ;; \
 	  unaltreprojecte) url="$(UNALTREPROJECTE_URL)"; service="unaltreprojecte" ;; \
@@ -233,7 +271,7 @@ serve-unaltremanual:
 serve-unaltredocs:
 	$(MAKE) serve-profile PROFILE=unaltredocs
 
-serve-allprofiles: manual-compute-check profile-compose-local-core
+serve-allprofiles: manual-compute-check web-capture-check profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
 	@printf 'unaltreselfie:   %s\nunaltreprojecte: %s\nunaltremanual:   %s\nunaltredocs:     %s\n' "$(UNALTRESELFIE_URL)" "$(UNALTREPROJECTE_URL)" "$(UNALTREMANUAL_URL)" "$(UNALTREDOCS_URL)"
 	@printf 'Opening only unaltreselfie; use the developer switcher to move between profiles.\n'
@@ -241,7 +279,7 @@ serve-allprofiles: manual-compute-check profile-compose-local-core
 	  xdg-open "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || sensible-browser "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || true) & \
 	docker compose $(PROFILE_COMPOSE_FILES) up unaltreselfie unaltreprojecte unaltremanual unaltredocs
 
-serve: manual-compute-check local-core-check
+serve: manual-compute-check web-capture-check local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
 	@(sleep 45; xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || true) & \
 	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)" DEVELOPER_MODE="$(DEVELOPER_MODE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
@@ -255,7 +293,7 @@ serve-native serve-local: profile-config dev-config python-deps bundle-install
 	serve_config="$$active_config,$(DEV_CONFIG)"; \
 	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --destination "$(SERVE_DESTINATION)" --disable-disk-cache
 
-build: manual-compute-check local-core-check
+build: manual-compute-check web-capture-check local-core-check
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
 
 build-native build-local: profile-config python-deps bundle-install
@@ -377,7 +415,7 @@ diagrams:
 		done < <(find $(DIAGRAMS_FIND_DIRS) -type f \( -name "*.mmd" -o -name "*.mermaid" -o -name "*.puml" -o -name "*.plantuml" -o -name "*.uml" \) | sort); \
 		if test "$$found" -eq 0; then printf '\''No Mermaid or PlantUML sources found.\n'\''; fi'
 
-test test-native render-smoke render-smoke-local: manual-compute-check local-core-check
+test test-native render-smoke render-smoke-local: manual-compute-check web-capture-check local-core-check
 	@mkdir -p tmp/render-smoke
 	@set -e; \
 	server_log="tmp/render-smoke/jekyll.log"; \

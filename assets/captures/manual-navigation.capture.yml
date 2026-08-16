@@ -1,0 +1,55 @@
+version: 1
+path: /unaltraweb-template/en/chapters/orientation/
+viewport:
+  width: 1440
+  height: 900
+  device_scale_factor: 1
+capture:
+  full_page: false
+theme:
+  setting: cafe
+  color_scheme: light
+  expect:
+    selector: html
+    attribute: data-theme
+    equals: cafe
+waits:
+  wait_until: load
+  timeout_ms: 30000
+  fonts: true
+  images: true
+  selectors:
+    - selector: .manual-layout
+      state: visible
+    - selector: .manual-sidebar
+      state: visible
+    - selector: .manual-right-rail
+      state: visible
+inputs:
+  - _chapters/en/00-orientation.md
+  - _config.yml
+annotations:
+  - id: chapter-navigation
+    selector: .manual-sidebar
+    kind: arrow
+    text: Chapter navigation
+    position: top-right
+    offset: [180, 72]
+    padding: 4
+    color: "#9a3412"
+  - id: page-navigation
+    selector: .manual-right-rail
+    kind: outline
+    text: On this chapter
+    position: top-left
+    offset: [-12, 52]
+    padding: 4
+    color: "#1d4ed8"
+  - id: reading-content
+    selector: .manual-content
+    kind: outline
+    text: Reading column
+    position: bottom-right
+    offset: [-36, -24]
+    padding: 8
+    color: "#047857"

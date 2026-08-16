@@ -1,0 +1,41 @@
+{
+  "records": {
+    "assets/captures/manual-navigation.capture.yml": {
+      "browser_version": "141.0.7390.37",
+      "captured_at": "2026-08-12T23:42:59+00:00",
+      "dependencies": [
+        {
+          "path": "assets/captures/manual-navigation.capture.yml",
+          "sha256": "a44b6c3fd44acbb74c11a6470cc8a49d1716e0da5f8d82dd99213190108caecc"
+        },
+        {
+          "path": "_chapters/en/00-orientation.md",
+          "sha256": "bbae6c467e41ec66ec1d97b5cf4a0e3d866dc069d22d086e14755c8280505778"
+        },
+        {
+          "path": "_config.yml",
+          "sha256": "ef55778a28808b13eecec5d52b7e02bbdfca0a1c98371f537088eedd25b08840"
+        }
+      ],
+      "final_path": "/unaltraweb-template/en/chapters/orientation/",
+      "fingerprint": "e083c3cedb55b79aec5492a5e0c602ac8e9bd2fde5b23224f2f0a83c2a2ab37f",
+      "image": "ghcr.io/dosquartsdedocs/unaltraweb-web-capture:main",
+      "image_identity": {
+        "available": "true",
+        "digest": "",
+        "id": "sha256:45e08c9dc83cf9b52483e03f3d119b2e5fd0d06daf6dd091f8846c3475e80011"
+      },
+      "png": {
+        "path": "assets/captures/manual-navigation.capture.png",
+        "sha256": "228ef89414c123e9a9f6987d6d1c1f30f93de77f96e3176d4b53f46946b199fe",
+        "size": 142698
+      },
+      "svg": {
+        "path": "assets/captures/manual-navigation.capture.svg",
+        "sha256": "2dfd15d9963dc4d683a88b0a970d2a42aab02909ebf7fdf98ee14e9e14ce6e4d",
+        "size": 193281
+      }
+    }
+  },
+  "version": 1
+}

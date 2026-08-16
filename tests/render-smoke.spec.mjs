@@ -583,6 +583,11 @@ test("manual profile renders a multilingual handbook", async ({ page }, testInfo
   expect(manualSubfigureCaptionBox.y).toBeLessThan(manualSubfigureImageBox.y);
   await expect(page.locator(".manual-content h2", { hasText: "Mermaid sources" })).toBeVisible();
   await expect(page.locator(".md-figure.mermaid-figure img[src$='manual-flow.mmd.svg']")).toHaveCount(1);
+  await expectImageLoaded(page.locator(".md-figure img[src$='manual-navigation.capture.svg']"));
+  for (const sourcePath of ["/assets/captures/manual-navigation.capture.yml", "/assets/captures/manual-navigation.capture.png"]) {
+    const response = await page.request.get(siteUrl(sourcePath));
+    expect(response.status()).toBe(404);
+  }
   await expect(page.locator(".md-subfigure img[src$='diavisuals/file-tree.mmd.svg']")).toHaveCount(1);
   await expect(page.locator(".md-subfigure img[src$='diavisuals/timeline.mmd.svg']")).toHaveCount(1);
   await expect(page.locator(".md-figure.mermaid-figure img[src$='diavisuals/quadrant.mmd.svg']")).toHaveCount(1);

@@ -54,6 +54,18 @@ For reusable figures that are referenced from hand-written chapters, set `unaltr
 
 Do not run `quarto render` directly on the host for publishable manual sources. If Quarto reports missing Jupyter packages, read-only runtime directories below `/run/user`, or local socket failures, use `make manual-compute-render` instead. For project-specific packages, add a project Dockerfile in `.unaltraweb/computations.yml` and build it with `make manual-compute-image-python` or `make manual-compute-image-r` before rendering.
 
+### Selector-based web captures
+
+Use `assets/**/*.capture.yml` recipes for reproducible screenshots of local previews. Recipes declare the route, viewport, theme, waits, source dependencies, and CSS selectors used to place vector annotations:
+
+```bash
+make web-capture-status
+make web-capture-render WEB_CAPTURE_SITE_PROFILE=unaltremanual
+make web-capture-check
+```
+
+Commit each recipe with its untouched `.capture.png`, generated self-contained `.capture.svg`, and `.unaltraweb/web-captures.lock.json`. Save small hand corrections as `.capture.edited.svg`; web and PDF prefer that override, while freshness checks reject it after the underlying PNG changes.
+
 ## Do not usually edit this
 
 - `Gemfile`
