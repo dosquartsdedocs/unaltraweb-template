@@ -33,7 +33,11 @@ Chapters live in `_chapters/<lang>/` and can use figures, callouts, tables, code
 
 ## Executable Examples
 
-`_chapters/en/05-computed-python.qmd` and `_chapters/en/06-computed-r.R` are authoritative executable examples. Their same-stem `.md` files and figures under `assets/img/generated/` are reviewed and committed so web and PDF builds remain static. Edit the executable source, run `make manual-compute-render`, and verify it with `make manual-compute-check`.
+`_chapters/en/05-computed-python.qmd` and `_chapters/en/06-computed-r.qmd` are authoritative executable examples. Their same-stem `.md` files and figures under `assets/img/generated/` are reviewed and committed so web and PDF builds remain static. Edit the executable source, run `make manual-compute-render`, and verify it with `make manual-compute-check`.
+
+For a Quarto source that only generates reusable SVG/PNG figures, use `unaltraweb_compute.mode: figure` and declare the output files instead of forcing the source into a chapter-shaped generated Markdown file.
+
+Avoid running `quarto render` directly on the host for publishable sources. Use the `manual-compute-*` targets so Jupyter, Quarto, image provenance and no-network execution stay reproducible. If a project needs extra Python or R packages, declare a project compute Dockerfile in `.unaltraweb/computations.yml` and prepare it with `make manual-compute-image-python` or `make manual-compute-image-r`.
 
 ## Enable It
 

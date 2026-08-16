@@ -37,9 +37,9 @@
         "sha256": "f5bbfd0510cbd9dc1fbc9ddadf076ea4fca503703a6b942544f343fcf10c6fe9",
         "size": 1454
       },
-      "rendered_at": "2026-08-12T19:04:57+00:00"
+      "rendered_at": "2026-08-15T22:39:54+00:00"
     },
-    "_chapters/en/06-computed-r.R": {
+    "_chapters/en/06-computed-r.qmd": {
       "assets": [
         {
           "path": "assets/img/generated/en/manual-computed-r/06-computed-r_files/figure-commonmark/fig-r-stopping-distance-1.png",
@@ -49,8 +49,8 @@
       ],
       "dependencies": [
         {
-          "path": "_chapters/en/06-computed-r.R",
-          "sha256": "8c2705d9949e29bc168121d0cc09a24d95d1fd0bc8a45d94643377888b1bcf77"
+          "path": "_chapters/en/06-computed-r.qmd",
+          "sha256": "d9c9a4e27b0f4ade84b08596d7c2f3804476de117ae773bbf93bae147ffee1be"
         },
         {
           "path": ".unaltraweb/computations.yml",
@@ -59,7 +59,7 @@
       ],
       "engine": "r",
       "figures": "assets/img/generated/en/manual-computed-r",
-      "fingerprint": "f8e4659750dd7d477d7a87f51f63384cc6297e9efce41f9bfa73e2115295bc23",
+      "fingerprint": "d6c9d4521610a0007abfa650aa90d51cf04caf0b084a6dc147f550d635ee6576",
       "image": {
         "engine": "r",
         "environment": "local",
@@ -73,10 +73,10 @@
       },
       "output": {
         "path": "_chapters/en/06-computed-r.md",
-        "sha256": "39b3a51ec40b514bfb1a0bf5c7fc63ca68b63b73cc54fa465ff78da0aa57623d",
-        "size": 1249
+        "sha256": "8ffc0b628ec79b881983c071d45899422a4305c0f75418f0a3789a3cd2e7cf31",
+        "size": 1265
       },
-      "rendered_at": "2026-08-12T19:05:34+00:00"
+      "rendered_at": "2026-08-15T22:39:57+00:00"
     }
   },
   "version": 1
