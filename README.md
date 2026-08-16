@@ -43,9 +43,16 @@ Advanced manuals can keep authoritative `.qmd`, `.Rmd`, `.R`, `.py`, or `.ipynb`
 make manual-compute-status
 make manual-compute-render
 make manual-compute-check
+make manual-compute-smoke
 ```
 
 Review and commit the source, generated Markdown, figures under `assets/img/generated/`, and `.unaltraweb/computations.lock.json` together. Configuration, including local or CI image selection, lives in `.unaltraweb/computations.yml`. See the core [unaltremanual](https://dosquartsdedocs.github.io/unaltraweb/profiles/unaltremanual/) and [computation image](https://dosquartsdedocs.github.io/unaltraweb/docker-image/) references.
+
+The template includes one Quarto Python chapter and one Quarto R chapter. `make manual-compute-smoke` validates that both examples are current, that their generated Markdown still points back to the executable sources, and that their generated figures are present.
+
+For reusable figures that are referenced from hand-written chapters, set `unaltraweb_compute.mode: figure` and list the generated SVG/PNG files under `unaltraweb_compute.outputs`.
+
+Do not run `quarto render` directly on the host for publishable manual sources. If Quarto reports missing Jupyter packages, read-only runtime directories below `/run/user`, or local socket failures, use `make manual-compute-render` instead. For project-specific packages, add a project Dockerfile in `.unaltraweb/computations.yml` and build it with `make manual-compute-image-python` or `make manual-compute-image-r` before rendering.
 
 ## Do not usually edit this
 
@@ -78,7 +85,7 @@ This workflow is enough for adding a bibliography entry, editing page text, upda
 
 ## Local workflow
 
-Routine local preview, freshness checks, builds, and tests require Git, Docker, and GNU Make. The computation check runs inside the selected control image, so it does not require host Python. Explicit computation rendering, project image preparation, RStudio, and PDF authoring also require an `unaltraweb` factory checkout; the template fixture expects it at `../unaltraweb`, or pass `COMPUTE_CORE=/path/to/unaltraweb`. On Windows, use WSL2 with Docker Desktop and Docker's WSL integration enabled, then run the same commands inside the WSL Linux shell.
+Routine local preview, freshness checks, builds, and tests require Git, Docker, and GNU Make. When an `unaltraweb` factory checkout is available at `../unaltraweb`, the Makefile uses it automatically as `LOCAL_CORE` and avoids fetching the theme gem from GitHub during Docker builds. You can override this with `LOCAL_CORE=/path/to/unaltraweb`; if no local core is available, the workflow falls back to the Git dependency declared in `Gemfile`. Computation checks also use the local factory through `LOCAL_CORE`/`COMPUTE_CORE` when available; otherwise status/check can run inside the selected control image. Explicit computation rendering, project image preparation, RStudio, and PDF authoring require the factory checkout. On Windows, use WSL2 with Docker Desktop and Docker's WSL integration enabled, then run the same commands inside the WSL Linux shell.
 
 ```bash
 make serve

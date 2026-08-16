@@ -6,6 +6,7 @@ COMPUTE_PYTHON_IMAGE ?=
 COMPUTE_R_IMAGE ?=
 COMPUTE_SOURCE ?=
 COMPUTE_CONFIRM_OVERWRITE ?= 0
+COMPUTE_DOCKER_BUILD_NETWORK ?= default
 COMPUTE_CORE ?= $(if $(strip $(LOCAL_CORE)),$(LOCAL_CORE),../unaltraweb)
 COMPUTE_CONTROL_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb-compute-python@sha256:18cb269811bd4005800382da25a480ec2bca7eac8d0501ad1ef36bad1c0f8cd9
 MANUAL_PDF_LANG ?=
@@ -28,7 +29,7 @@ DOC_SCREENSHOTS ?= home-light-chromium.png project-home-chromium.png manual-home
 START_PATH ?= /en/
 LIVERELOAD ?= --livereload
 LIVERELOAD_PORT ?= 35729
-LOCAL_CORE ?=
+LOCAL_CORE ?= $(if $(wildcard ../unaltraweb/unaltraweb.gemspec),../unaltraweb,)
 DIAVISUALS_DIR ?= ../diavisuals
 DIAVISUALS_COMPAT_PROFILE ?= compat/mermaid-11.4.2-plantuml-1.2026.1.env
 DIAGRAM_STYLE_FAMILY ?= benizar
@@ -85,19 +86,28 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-smoke manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish
 
 export COMPUTE_PYTHON_IMAGE COMPUTE_R_IMAGE
 
 manual-compute-status manual-compute-check:
-	@if ! docker image inspect "$(COMPUTE_CONTROL_IMAGE)" >/dev/null 2>&1; then docker pull "$(COMPUTE_CONTROL_IMAGE)"; fi
-	@docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 64 --cpus 1 --memory 512m --tmpfs /tmp:rw,noexec,nosuid,size=64m -e HOME=/tmp -e COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" -e COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" -v "$(CURDIR):/project:ro" -w /project --entrypoint python3 "$(COMPUTE_CONTROL_IMAGE)" /opt/unaltraweb/computations/render.py $(patsubst manual-compute-%,%,$@) --project /project $(if $(strip $(COMPUTE_SOURCE)),--source "$(COMPUTE_SOURCE)",)
+	@if test -f "$(COMPUTE_CORE)/Makefile"; then \
+	  $(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)"; \
+	else \
+	  if ! docker image inspect "$(COMPUTE_CONTROL_IMAGE)" >/dev/null 2>&1; then docker pull "$(COMPUTE_CONTROL_IMAGE)"; fi; \
+	  docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 64 --cpus 1 --memory 512m --tmpfs /tmp:rw,noexec,nosuid,size=64m -e HOME=/tmp -e COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" -e COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" -v "$(CURDIR):/project:ro" -w /project --entrypoint python3 "$(COMPUTE_CONTROL_IMAGE)" /opt/unaltraweb/computations/render.py $(patsubst manual-compute-%,%,$@) --project /project $(if $(strip $(COMPUTE_SOURCE)),--source "$(COMPUTE_SOURCE)",); \
+	fi
 
 compute-core-check:
 	@test -f "$(COMPUTE_CORE)/Makefile" || (printf 'Set COMPUTE_CORE to an unaltraweb factory checkout for this authoring operation.\n' >&2; exit 1)
 
+manual-compute-smoke: compute-core-check
+	@mkdir -p tmp
+	@$(MAKE) --silent --no-print-directory -C "$(COMPUTE_CORE)" manual-compute-status PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" > tmp/manual-compute-status.json
+	@$(PYTHON) scripts/check_manual_computations.py tmp/manual-compute-status.json
+
 manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio: compute-core-check
-	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)" COMPUTE_CONFIRM_OVERWRITE="$(COMPUTE_CONFIRM_OVERWRITE)"
+	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)" COMPUTE_CONFIRM_OVERWRITE="$(COMPUTE_CONFIRM_OVERWRITE)" COMPUTE_DOCKER_BUILD_NETWORK="$(COMPUTE_DOCKER_BUILD_NETWORK)"
 
 manual-pdf-status manual-pdf-build manual-pdf-publish: compute-core-check
 	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" MANUAL_PDF_LANG="$(MANUAL_PDF_LANG)" MANUAL_PDF_PUBLISH_DRY_RUN="$(MANUAL_PDF_PUBLISH_DRY_RUN)"
