@@ -6,6 +6,7 @@ COMPUTE_PYTHON_IMAGE ?=
 COMPUTE_R_IMAGE ?=
 COMPUTE_SOURCE ?=
 COMPUTE_CONFIRM_OVERWRITE ?= 0
+COMPUTE_STALE_ONLY ?= 0
 COMPUTE_DOCKER_BUILD_NETWORK ?= default
 COMPUTE_CORE ?= $(if $(strip $(LOCAL_CORE)),$(LOCAL_CORE),../unaltraweb)
 COMPUTE_CONTROL_IMAGE ?= ghcr.io/dosquartsdedocs/unaltraweb-compute-python@sha256:18cb269811bd4005800382da25a480ec2bca7eac8d0501ad1ef36bad1c0f8cd9
@@ -93,7 +94,7 @@ DOCKER_CORE_VOLUME = -v "$(abspath $(LOCAL_CORE)):/srv/unaltraweb:ro"
 DOCKER_LOCAL_CORE = LOCAL_CORE=/srv/unaltraweb
 endif
 
-.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-smoke manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish web-capture-status web-capture-check web-capture-render web-capture-image
+.PHONY: bootstrap local-core-check local-gemfile profile-config dev-config python-deps bundle-install open open-url profile-compose-local-core serve serve-native serve-profile serve-unaltreselfie serve-unaltreprojecte serve-unaltremanual serve-unaltredocs serve-allprofiles build build-native publish publish-native test test-native screenshots screenshots-all docs-screenshots documentation-screenshots screenshots-docs down down-profiles metrics-scimago-fetch metrics-scimago-fetch-native metrics-update metrics-update-native metrics-update-all metrics-check metrics-check-native cv-preview cv-preview-native diagrams docker-serve docker-serve-local docker-build docker-build-local docker-down open-local render-smoke render-smoke-local serve-local build-local compute-core-check manual-compute-status manual-compute-check manual-compute-smoke manual-compute-render manual-compute-render-figures manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio manual-pdf-status manual-pdf-build manual-pdf-publish web-capture-status web-capture-check web-capture-render web-capture-image
 
 export COMPUTE_PYTHON_IMAGE COMPUTE_R_IMAGE
 
@@ -114,7 +115,14 @@ manual-compute-smoke: compute-core-check
 	@$(PYTHON) scripts/check_manual_computations.py tmp/manual-compute-status.json
 
 manual-compute-render manual-compute-image-python manual-compute-image-r manual-compute-images manual-compute-rstudio: compute-core-check
-	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)" COMPUTE_CONFIRM_OVERWRITE="$(COMPUTE_CONFIRM_OVERWRITE)" COMPUTE_DOCKER_BUILD_NETWORK="$(COMPUTE_DOCKER_BUILD_NETWORK)"
+	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" COMPUTE_SOURCE="$(COMPUTE_SOURCE)" COMPUTE_CONFIRM_OVERWRITE="$(COMPUTE_CONFIRM_OVERWRITE)" COMPUTE_STALE_ONLY="$(COMPUTE_STALE_ONLY)" COMPUTE_DOCKER_BUILD_NETWORK="$(COMPUTE_DOCKER_BUILD_NETWORK)"
+
+manual-compute-render-figures:
+	@if test -f "$(COMPUTE_CORE)/Makefile"; then \
+	  $(MAKE) manual-compute-render COMPUTE_STALE_ONLY=1; \
+	else \
+	  printf 'Skipping figure render: COMPUTE_CORE not available.\n'; \
+	fi
 
 manual-pdf-status manual-pdf-build manual-pdf-publish: compute-core-check
 	$(MAKE) -C "$(COMPUTE_CORE)" $@ PROJECT="$(CURDIR)" COMPUTE_PYTHON_IMAGE="$(COMPUTE_PYTHON_IMAGE)" COMPUTE_R_IMAGE="$(COMPUTE_R_IMAGE)" MANUAL_PDF_LANG="$(MANUAL_PDF_LANG)" MANUAL_PDF_PUBLISH_DRY_RUN="$(MANUAL_PDF_PUBLISH_DRY_RUN)"
@@ -247,7 +255,7 @@ profile-compose-local-core: local-core-check
 	  rm -f "$(PROFILE_COMPOSE_LOCAL_CORE_FILE)"; \
 	fi
 
-serve-profile: manual-compute-check web-capture-check profile-compose-local-core
+serve-profile: manual-compute-render-figures manual-compute-check web-capture-check profile-compose-local-core
 	@case "$(PROFILE)" in \
 	  unaltreselfie) url="$(UNALTRESELFIE_URL)"; service="unaltreselfie" ;; \
 	  unaltreprojecte) url="$(UNALTREPROJECTE_URL)"; service="unaltreprojecte" ;; \
@@ -271,7 +279,7 @@ serve-unaltremanual:
 serve-unaltredocs:
 	$(MAKE) serve-profile PROFILE=unaltredocs
 
-serve-allprofiles: manual-compute-check web-capture-check profile-compose-local-core
+serve-allprofiles: manual-compute-render-figures manual-compute-check web-capture-check profile-compose-local-core
 	@printf 'Serving all demo profiles. This starts multiple Jekyll servers and can be heavy.\n'
 	@printf 'unaltreselfie:   %s\nunaltreprojecte: %s\nunaltremanual:   %s\nunaltredocs:     %s\n' "$(UNALTRESELFIE_URL)" "$(UNALTREPROJECTE_URL)" "$(UNALTREMANUAL_URL)" "$(UNALTREDOCS_URL)"
 	@printf 'Opening only unaltreselfie; use the developer switcher to move between profiles.\n'
@@ -279,7 +287,7 @@ serve-allprofiles: manual-compute-check web-capture-check profile-compose-local-
 	  xdg-open "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || sensible-browser "$(UNALTRESELFIE_URL)" >/dev/null 2>&1 || true) & \
 	docker compose $(PROFILE_COMPOSE_FILES) up unaltreselfie unaltreprojecte unaltremanual unaltredocs
 
-serve: manual-compute-check web-capture-check local-core-check
+serve: manual-compute-render-figures manual-compute-check web-capture-check local-core-check
 	@printf 'Local URL: %s\n' "$(LOCAL_URL)"
 	@(sleep 45; xdg-open "$(LOCAL_URL)" >/dev/null 2>&1 || true) & \
 	docker run --name "$(CONTAINER)" --rm -it --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp $(DOCKER_PORTS) -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make serve-native $(DOCKER_LOCAL_CORE) PORT=$(PORT) HOST=$(HOST) LIVERELOAD="$(LIVERELOAD)" LIVERELOAD_PORT=$(LIVERELOAD_PORT) SITE_PROFILE="$(SITE_PROFILE)" DEVELOPER_MODE="$(DEVELOPER_MODE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
@@ -293,7 +301,7 @@ serve-native serve-local: profile-config dev-config python-deps bundle-install
 	serve_config="$$active_config,$(DEV_CONFIG)"; \
 	JEKYLL_ENV=development PYTHONUSERBASE="$(abspath $(PYTHONUSERBASE))" PIP_CACHE_DIR="$(abspath $(PIP_CACHE_DIR))" PATH="$(abspath $(PYTHONUSERBASE))/bin:$(PATH)" BUNDLE_GEMFILE="$$gemfile" BUNDLE_APP_CONFIG=$(abspath $(LOCAL_BUNDLE_APP_CONFIG)) BUNDLE_PATH=$(abspath $(LOCAL_BUNDLE_PATH)) $(BUNDLE) exec jekyll serve --config "$$serve_config" --host $(HOST) --port $(PORT) $(SERVE_LIVERELOAD_ARGS) --destination "$(SERVE_DESTINATION)" --disable-disk-cache
 
-build: manual-compute-check web-capture-check local-core-check
+build: manual-compute-render-figures manual-compute-check web-capture-check local-core-check
 	docker run --rm --user "$(LOCAL_UID):$(LOCAL_GID)" -e HOME=/tmp -v "$(CURDIR):/srv/jekyll" $(DOCKER_CORE_VOLUME) -w /srv/jekyll $(DOCKER_IMAGE) bash -lc 'make build-native $(DOCKER_LOCAL_CORE) SITE_PROFILE="$(SITE_PROFILE)" PROFILE_DEMO_TITLES="$(PROFILE_DEMO_TITLES)"'
 
 build-native build-local: profile-config python-deps bundle-install
@@ -415,7 +423,7 @@ diagrams:
 		done < <(find $(DIAGRAMS_FIND_DIRS) -type f \( -name "*.mmd" -o -name "*.mermaid" -o -name "*.puml" -o -name "*.plantuml" -o -name "*.uml" \) | sort); \
 		if test "$$found" -eq 0; then printf '\''No Mermaid or PlantUML sources found.\n'\''; fi'
 
-test test-native render-smoke render-smoke-local: manual-compute-check web-capture-check local-core-check
+test test-native render-smoke render-smoke-local: manual-compute-render-figures manual-compute-check web-capture-check local-core-check
 	@mkdir -p tmp/render-smoke
 	@set -e; \
 	server_log="tmp/render-smoke/jekyll.log"; \
